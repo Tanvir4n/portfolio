@@ -5,7 +5,7 @@ import { collection, addDoc, getDocs } from "@firebase/firestore"; // Perbarui i
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyB-lfUt1adpQ0KYcFFW_oAWTJVfHDOOZy8",
+  apiKey: "",
   authDomain: "portofolio-web-3e8e8.firebaseapp.com",
   projectId: "portofolio-web-3e8e8",
   storageBucket: "portofolio-web-3e8e8.appspot.com",
