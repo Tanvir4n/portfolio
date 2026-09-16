@@ -16,3 +16,12 @@ html[data-theme=dark]{--ink:#f2eee6;--paper:#171717;--acid:#d9f44b;--coral:#ff76
 @media(max-width:800px){.experience-section{display:block;padding-left:22px;padding-right:22px}.experience-heading{margin-bottom:45px}.experience-heading .section-note{max-width:none;margin-top:0}.experience-meta{display:grid;gap:6px;margin-bottom:20px}.experience-detail p{font-size:16px}}
 .activities-section{padding:clamp(60px,9vw,130px) clamp(20px,7vw,110px);display:grid;grid-template-columns:minmax(260px,.8fr) minmax(0,1.2fr);gap:clamp(40px,8vw,120px)}.activities-heading{display:block;margin:0}.activities-heading .section-note{margin-top:30px;max-width:300px}.activities-list{border-top:var(--line)}.activity-entry{display:grid;grid-template-columns:minmax(145px,.38fr) minmax(0,1fr);gap:28px;padding:24px 0;border-bottom:1px solid var(--soft-line)}.activity-entry:last-child{border-bottom:var(--line)}.activity-date{font:500 11px var(--mono);text-transform:uppercase;line-height:1.5;color:var(--coral)}.activity-detail h3{font-size:clamp(20px,2.1vw,28px);line-height:1.08;letter-spacing:-.04em;margin:0}.activity-detail p{margin:9px 0 0;color:var(--muted);font-size:15px}
 @media(max-width:800px){.activities-section{display:block;padding-left:22px;padding-right:22px}.activities-heading{margin-bottom:45px}.activities-heading .section-note{max-width:none;margin-top:0}.activity-entry{grid-template-columns:1fr;gap:8px}.activity-date{font-size:10px}}
+
+.publications-more-wrap{grid-column:1/-1;display:flex;justify-content:center;padding-top:36px}
+.see-more-button{background:var(--paper);color:var(--ink);border:var(--line);box-shadow:4px 4px 0 var(--ink);padding:14px 28px;font:500 12px var(--mono);text-transform:uppercase;letter-spacing:.04em;cursor:pointer;display:inline-flex;align-items:center;gap:12px;transition:transform .2s,box-shadow .2s,background .2s}
+.see-more-button:hover{background:var(--acid);transform:translate(2px,2px);box-shadow:2px 2px 0 var(--ink)}
+.see-more-count{color:var(--coral);font-weight:600}
+.see-more-arrow{font-size:15px;line-height:1}
+html[data-theme=dark] .see-more-button{box-shadow:4px 4px 0 var(--shadow)}
+html[data-theme=dark] .see-more-button:hover{box-shadow:2px 2px 0 var(--shadow);color:#171717}
+@media(max-width:440px){.see-more-button{width:100%;justify-content:center}}
