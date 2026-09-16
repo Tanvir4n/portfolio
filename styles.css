@@ -288,4 +288,70 @@ html[data-theme=dark] .bibtex-button:hover {
   transform: translate(1px, 1px);
 }
 
+/* Diamond Pixel Arrow */
+.pixel-arrow {
+  width: 14px;
+  height: 14px;
+  display: inline-block;
+  vertical-align: -1px;
+  margin-left: 10px;
+  color: #35db20;
+  fill: currentColor;
+  flex-shrink: 0;
+  transition: transform 0.18s cubic-bezier(0.16, 1, 0.3, 1), filter 0.18s ease;
+}
+
+.pixel-arrow-orange {
+  color: var(--coral);
+  margin-left: 0;
+  width: 13px;
+  height: 13px;
+}
+
+.vertical-profile-item .pixel-arrow {
+  margin-left: 0;
+}
+
+.vertical-profile-item:hover .pixel-arrow-orange {
+  transform: translate(2px, -2px);
+  filter: brightness(1.15) drop-shadow(0 0 6px rgba(255, 101, 69, 0.55));
+}
+
+.text-link {
+  display: inline-flex;
+  align-items: center;
+  font: 500 12px var(--mono);
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--ink);
+  padding-bottom: 4px;
+  transition: color 0.18s ease, border-color 0.18s ease;
+}
+
+.text-link:hover .pixel-arrow {
+  transform: translate(3px, -3px);
+  filter: brightness(1.15) drop-shadow(0 0 6px rgba(53, 219, 32, 0.45));
+}
+
+html[data-theme=dark] .text-link {
+  border-bottom-color: var(--soft-line);
+}
+
+html[data-theme=dark] .text-link:hover {
+  border-bottom-color: var(--acid);
+}
+
+html[data-theme=dark] .pixel-arrow {
+  color: #44e82e;
+}
+
+html[data-theme=dark] .pixel-arrow-orange {
+  color: var(--coral);
+}
+
+html[data-theme=dark] .vertical-profile-item:hover .pixel-arrow-orange {
+  color: var(--coral);
+  filter: brightness(1.2) drop-shadow(0 0 7px rgba(255, 118, 89, 0.65));
+}
+
+
 
