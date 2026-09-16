@@ -463,6 +463,41 @@ html[data-theme=dark] .contact-button:focus-visible .pixel-arrow-contact {
   filter: none;
 }
 
+/* Hero See Selected Work Button Pixel Arrow */
+.button-dark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.pixel-arrow-work {
+  color: var(--coral);
+  width: 14px;
+  height: 14px;
+  margin-left: 14px;
+  flex-shrink: 0;
+  display: inline-block;
+  vertical-align: middle;
+  transform: rotate(135deg);
+  transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), filter 0.2s ease, color 0.2s ease;
+}
+
+.button-dark:hover .pixel-arrow-work,
+.button-dark:focus-visible .pixel-arrow-work {
+  transform: translateY(3px) rotate(135deg);
+  filter: brightness(1.2) drop-shadow(0 0 7px rgba(255, 101, 69, 0.7));
+}
+
+html[data-theme=dark] .pixel-arrow-work {
+  color: var(--coral);
+}
+
+html[data-theme=dark] .button-dark:hover .pixel-arrow-work,
+html[data-theme=dark] .button-dark:focus-visible .pixel-arrow-work {
+  color: var(--coral);
+  filter: brightness(1.25) drop-shadow(0 0 8px rgba(255, 118, 89, 0.8));
+}
+
 
 
 
