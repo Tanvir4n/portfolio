@@ -1,0 +1,6 @@
+{
+  "name": "Tanvir Hasan Portfolio",
+  "description": "Tanvir Hasan is a computer science researcher and builder working across AI, cybersecurity, and distributed systems.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
