@@ -38,6 +38,7 @@ const MAX_VISIBLE_PAPERS = 10;
 let isPublicationsExpanded = false;
 const publicationsMoreWrap = document.getElementById('publications-more-wrap');
 const seeMoreButton = document.getElementById('see-more-pub');
+const PIXEL_ARROW_SVG = '<svg class="pixel-arrow pixel-arrow-orange" viewBox="0 0 90 90" aria-hidden="true"><g fill="currentColor" stroke="rgba(255,255,255,0.35)" stroke-width="0.8"><polygon points="10,10 20,20 10,30 0,20"/><polygon points="30,10 40,20 30,30 20,20"/><polygon points="50,10 60,20 50,30 40,20"/><polygon points="70,30 80,40 70,50 60,40"/><polygon points="70,50 80,60 70,70 60,60"/><polygon points="70,70 80,80 70,90 60,80"/><polygon points="80,0 90,10 80,20 70,10"/><polygon points="70,10 80,20 70,30 60,20"/><polygon points="60,20 70,30 60,40 50,30"/><polygon points="50,30 60,40 50,50 40,40"/><polygon points="40,40 50,50 40,60 30,50"/><polygon points="30,50 40,60 30,70 20,60"/><polygon points="20,60 30,70 20,80 10,70"/><polygon points="10,70 20,80 10,90 0,80"/></g></svg>';
 
 const updatePublicationsDisplay = () => {
   const activeBtn = document.querySelector('.filter-button.active');
@@ -68,7 +69,7 @@ const updatePublicationsDisplay = () => {
     if (isPublicationsExpanded) {
       matchingPublications.forEach((pub) => pub.classList.remove('hidden'));
       if (seeMoreButton) {
-        seeMoreButton.innerHTML = 'See less papers <span class="see-more-arrow">↑</span>';
+        seeMoreButton.innerHTML = `See less papers <span class="see-more-arrow">${PIXEL_ARROW_SVG}</span>`;
         seeMoreButton.setAttribute('aria-expanded', 'true');
       }
     } else {
@@ -82,7 +83,7 @@ const updatePublicationsDisplay = () => {
 
       const remaining = totalMatching - MAX_VISIBLE_PAPERS;
       if (seeMoreButton) {
-        seeMoreButton.innerHTML = `See more papers <span class="see-more-count">(${remaining} remaining)</span> <span class="see-more-arrow">↓</span>`;
+        seeMoreButton.innerHTML = `See more papers <span class="see-more-count">(${remaining} remaining)</span> <span class="see-more-arrow">${PIXEL_ARROW_SVG}</span>`;
         seeMoreButton.setAttribute('aria-expanded', 'false');
       }
     }
@@ -201,62 +202,69 @@ const bibtexDatabase = {
   year         = {2026},
   url          = {https://data.mendeley.com/datasets/t66ytdrhf2/1}
 }`,
-  '06': `@article{hasan2026lightbloodnet,
+  '06': `@article{hasan2026dentaldatapaper,
+  author  = {Hasan, Md. Tanvir and others},
+  title   = {A Multi-Clinic Dental Panoramic Radiograph Dataset with Expert Labels for Six Conditions and Healthy Cases},
+  journal = {Data Paper},
+  year    = {2026},
+  note    = {Data Paper}
+}`,
+  '07': `@article{hasan2026lightbloodnet,
   author  = {Hasan, Md. Tanvir and others},
   title   = {Light-BloodNet: An Efficient Attention-Guided Deep Learning Framework with Explainability for Blood Cell Classification},
   journal = {Forthcoming},
   year    = {2026},
   note    = {Accepted}
 }`,
-  '07': `@article{hasan2026braindistill,
+  '08': `@article{hasan2026braindistill,
   author  = {Hasan, Md. Tanvir and others},
   title   = {BrainDistill: Explainable Multi-Scale Knowledge Distillation with Uncertainty-Aware Inference for Efficient Brain Tumor MRI Classification},
   journal = {Forthcoming},
   year    = {2026},
   note    = {Accepted}
 }`,
-  '08': `@article{hasan2026glioma,
+  '09': `@article{hasan2026glioma,
   author  = {Hasan, Md. Tanvir and others},
   title   = {Interpretable Cross-Modal Evidential Learning for Calibrated Few-Shot Glioma Slice Classification},
   journal = {Under review / Q1 journal},
   year    = {2026},
   note    = {Under review}
 }`,
-  '09': `@article{hasan2026pmos,
+  '10': `@article{hasan2026pmos,
   author  = {Hasan, Md. Tanvir and others},
   title   = {DenseViT-PMOSNet: An Interpretable Hybrid CNN–Vision Transformer Framework for Clinical PMOS Classification},
   journal = {Submitted / Under review},
   year    = {2026},
   note    = {Submitted}
 }`,
-  '10': `@article{hasan2026dermavit,
+  '11': `@article{hasan2026dermavit,
   author  = {Hasan, Md. Tanvir and others},
   title   = {DermaViT-XAI: An Empirical Study of Vision Transformers and CNNs for Explainable Multi-Class Skin Disease Classification from Dermatological Images},
   journal = {Submitted / Under review},
   year    = {2026},
   note    = {Submitted}
 }`,
-  '11': `@article{hasan2026cervixnet,
+  '12': `@article{hasan2026cervixnet,
   author  = {Hasan, Md. Tanvir and others},
   title   = {EffiViT-CervixNet: An Explainable Hybrid CNN–Vision Transformer Framework for Cervical Cancer Screening Using Pap-Smear Images},
   journal = {Submitted / Under review},
   year    = {2026},
   note    = {Submitted}
 }`,
-  '12': `@article{hasan2026ricenet,
+  '13': `@article{hasan2026ricenet,
   author  = {Hasan, Md. Tanvir and others},
   title   = {EffiViT-RiceNet: A Hybrid Vision Transformer Framework for Explainable Classification of Rice Leaf Diseases},
   journal = {Submitted / Under review},
   year    = {2026},
   note    = {Submitted}
 }`,
-  '13': `@misc{hasan2026pumamil,
+  '14': `@misc{hasan2026pumamil,
   author       = {Hasan, Md. Tanvir and others},
   title        = {PUMA-MIL: Prototype-Updated Multi-Modal Attention-Based Multiple Instance Learning for Slice-Level Brain Tumor Detection on Multi-Sequence MRI},
   howpublished = {Ongoing investigation},
   year         = {2026}
 }`,
-  '14': `@misc{hasan2026pqcblockchain,
+  '15': `@misc{hasan2026pqcblockchain,
   author       = {Hasan, Md. Tanvir and others},
   title        = {A Secure and Scalable Hybrid Classical–Post-Quantum Cryptographic Framework for Quantum-Resilient Blockchain Systems},
   howpublished = {Ongoing investigation},
