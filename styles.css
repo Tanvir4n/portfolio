@@ -721,6 +721,16 @@ html[data-theme=dark] .gpu-fan-blade-bevel {
   transform: translate3d(calc(var(--cursor-x) * 1.35), calc(var(--cursor-y) * 1.35), 0) rotate(-2deg);
 }
 
+/* Positioned between "Questions" and "worth" directly over the red line (r/t/h of worth): Ongoing (Vibrant Electric Orange #ff6b35) */
+.writing-tag-ongoing {
+  top: 48%;
+  left: 36%;
+  background: #ff6b35;
+  color: #171717;
+  animation-delay: -0.9s;
+  transform: translate3d(calc(var(--cursor-x) * 1.35), calc(var(--cursor-y) * 1.35), 0) rotate(-1.5deg);
+}
+
 /* Below / across "ask" of "asking.": Impact (Bright Cyan / Turquoise #00e5ff) */
 .writing-tag-impact {
   --impact-base: -17px;
@@ -766,6 +776,11 @@ html[data-theme=dark] .gpu-fan-blade-bevel {
   .writing-tag-research {
     top: -8px;
     right: 4%;
+  }
+  .writing-tag-ongoing {
+    top: 48%;
+    left: 36%;
+    right: auto;
   }
   .writing-tag-impact {
     --impact-base: -13px;
