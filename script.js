@@ -2,37 +2,44 @@ const filterButtons = document.querySelectorAll('.filter-button');
 const publications = document.querySelectorAll('.publication');
 const heroTitleWrap = document.querySelector('.hero-title-wrap');
 const heroTags = document.querySelectorAll('.hero-tag');
+const writingTitleWrap = document.querySelector('.writing-title-wrap');
+const writingTags = document.querySelectorAll('.writing-tag');
 
-if (heroTitleWrap && heroTags.length && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+function setupParallaxTags(wrapEl, tags) {
+  if (!wrapEl || !tags.length || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
   let targetX = 0;
   let targetY = 0;
   let currentX = 0;
   let currentY = 0;
 
-  const animateHeroTags = () => {
+  const animate = () => {
     currentX += (targetX - currentX) * 0.08;
     currentY += (targetY - currentY) * 0.08;
-    heroTags.forEach((tag) => {
+    tags.forEach((tag) => {
       const depth = Number(tag.dataset.depth) || 1;
       tag.style.setProperty('--cursor-x', `${currentX * depth}px`);
       tag.style.setProperty('--cursor-y', `${currentY * depth}px`);
     });
-    window.requestAnimationFrame(animateHeroTags);
+    window.requestAnimationFrame(animate);
   };
 
-  heroTitleWrap.addEventListener('pointermove', (event) => {
-    const bounds = heroTitleWrap.getBoundingClientRect();
+  wrapEl.addEventListener('pointermove', (event) => {
+    const bounds = wrapEl.getBoundingClientRect();
     targetX = ((event.clientX - bounds.left) / bounds.width - 0.5) * 18;
     targetY = ((event.clientY - bounds.top) / bounds.height - 0.5) * 14;
   });
 
-  heroTitleWrap.addEventListener('pointerleave', () => {
+  wrapEl.addEventListener('pointerleave', () => {
     targetX = 0;
     targetY = 0;
   });
 
-  animateHeroTags();
+  animate();
 }
+
+setupParallaxTags(heroTitleWrap, heroTags);
+setupParallaxTags(writingTitleWrap, writingTags);
 
 const MAX_VISIBLE_PAPERS = 10;
 let isPublicationsExpanded = false;

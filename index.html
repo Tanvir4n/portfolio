@@ -47,7 +47,7 @@
           <div class="hero-art" aria-label="Abstract portrait illustration">
             <div class="art-label">01 / 04<br />FIELD NOTES</div>
             <div class="sun-shape"></div>
-            <div class="portrait-card">
+            <div class="portrait-card" tabindex="0" role="img" aria-label="Portrait illustration card">
               <div class="portrait-head"></div>
               <div class="portrait-neck"></div>
               <div class="portrait-body"></div>
@@ -73,7 +73,207 @@
           </div>
           <div class="project-grid">
             <article class="project-card project-primary">
-              <div class="project-visual visual-neuralsched"><span>NEURAL<br />SCHED</span><i>01</i><div class="signal signal-a"></div><div class="signal signal-b"></div><div class="signal signal-c"></div></div>
+              <div class="project-visual visual-neuralsched">
+                <span>NEURAL<br />SCHED</span>
+                <i>01</i>
+                <div class="signal signal-a"></div>
+                <div class="signal signal-b"></div>
+                <div class="signal signal-c"></div>
+                <div class="gpu-card" tabindex="0" role="img" aria-label="A100 GPU accelerator card with dual cooling fans and RGB lightbar">
+                  <svg class="gpu-svg" viewBox="0 0 520 260" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <defs>
+                      <pattern id="pcie-gold-pins" width="6" height="22" patternUnits="userSpaceOnUse" y="10">
+                        <rect x="0" y="0" width="3.6" height="20" rx="0.8" fill="#fbbf24" stroke="#d97706" stroke-width="0.5"/>
+                        <rect x="3.6" y="0" width="2.4" height="22" fill="#0d1f14"/>
+                      </pattern>
+                    </defs>
+
+                    <!-- PCIe Gold Connector (Top Edge) -->
+                    <g class="gpu-pcie-connector">
+                      <path d="M 80,34 L 430,34 L 430,12 C 430,10 428,8 426,8 L 84,8 C 82,8 80,10 80,12 Z" fill="#0d1f14" stroke="var(--ink)" stroke-width="2"/>
+                      <rect x="86" y="10" width="34" height="20" fill="url(#pcie-gold-pins)"/>
+                      <rect x="120" y="8" width="10" height="26" fill="#0d1f14"/>
+                      <rect x="130" y="10" width="292" height="20" fill="url(#pcie-gold-pins)"/>
+                    </g>
+
+                    <!-- Bottom RGB Lightbar Mounting & Bar (Flat, Clean) -->
+                    <g class="gpu-lightbar-group">
+                      <rect x="36" y="222" width="440" height="28" rx="7" fill="#131722" stroke="var(--ink)" stroke-width="2"/>
+                      <!-- Segment 1: Sky Blue / Cyan -->
+                      <rect x="40" y="226" width="118" height="20" rx="4" fill="#38bdf8" class="lightbar-cyan"/>
+                      <!-- Segment 2: Violet / Purple -->
+                      <rect x="162" y="226" width="262" height="20" rx="4" fill="#c084fc" class="lightbar-purple"/>
+                      <!-- Segment 3: Neon Green / Acid -->
+                      <rect x="428" y="226" width="36" height="20" rx="4" fill="#4ade80" class="lightbar-green"/>
+                      <!-- Glass Sheen Highlight -->
+                      <path d="M 42,242 L 468,242" stroke="rgba(255,255,255,0.7)" stroke-width="1.2" stroke-linecap="round"/>
+                    </g>
+
+                    <!-- Main GPU Shroud Body -->
+                    <g class="gpu-shroud-group">
+                      <rect x="20" y="34" width="472" height="194" rx="14" fill="#1f2535" stroke="var(--ink)" stroke-width="2.5" class="gpu-shroud-body"/>
+                      <path d="M 28,214 L 484,214" stroke="rgba(255,255,255,0.2)" stroke-width="1.5" stroke-linecap="round"/>
+                      <path d="M 20,72 L 492,72" stroke="rgba(0,0,0,0.45)" stroke-width="1.5"/>
+                      <path d="M 20,73 L 492,73" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+
+                      <!-- Corner Screws -->
+                      <circle cx="34" cy="52" r="3.5" fill="#3e485e" stroke="var(--ink)" stroke-width="1"/>
+                      <circle cx="478" cy="52" r="3.5" fill="#3e485e" stroke="var(--ink)" stroke-width="1"/>
+                      <circle cx="34" cy="210" r="3.5" fill="#3e485e" stroke="var(--ink)" stroke-width="1"/>
+                      <circle cx="478" cy="210" r="3.5" fill="#3e485e" stroke="var(--ink)" stroke-width="1"/>
+                      <line x1="32" y1="52" x2="36" y2="52" stroke="#151822" stroke-width="0.8"/>
+                      <line x1="476" y1="52" x2="480" y2="52" stroke="#151822" stroke-width="0.8"/>
+                      <line x1="32" y1="210" x2="36" y2="210" stroke="#151822" stroke-width="0.8"/>
+                      <line x1="476" y1="210" x2="480" y2="210" stroke="#151822" stroke-width="0.8"/>
+
+                      <!-- Center Badge (A100) -->
+                      <rect x="226" y="168" width="60" height="22" rx="4" fill="#12151f" stroke="#3b445c" stroke-width="1.5"/>
+                      <text x="256" y="183" text-anchor="middle" font-family="var(--mono)" font-size="11" font-weight="700" fill="#f2eee6" letter-spacing="1">A100</text>
+
+                      <!-- Top Inscription (LOCAL AI) -->
+                      <text x="466" y="58" text-anchor="end" font-family="var(--mono)" font-size="10" font-weight="600" fill="rgba(255,255,255,0.75)" letter-spacing="1.5">LOCAL AI</text>
+                    </g>
+
+                    <!-- Left Axial Cooling Fan (Sharper, Precision Sculpted) -->
+                    <g class="gpu-fan-assembly" transform="translate(142, 142)">
+                      <!-- Outer Recessed Housing & Stepped Bezel -->
+                      <circle cx="0" cy="0" r="56" fill="#0d111a" stroke="var(--ink)" stroke-width="2.5"/>
+                      <circle cx="0" cy="0" r="53" fill="none" stroke="#2a3248" stroke-width="1.5"/>
+                      <circle cx="0" cy="0" r="51.5" fill="#141824" stroke="none"/>
+                      <circle cx="0" cy="0" r="50" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+
+                      <!-- 4 Stepped Airflow Guide Stators in Background -->
+                      <g stroke="#1a2030" stroke-width="1.8" opacity="0.7">
+                        <line x1="-50" y1="0" x2="-20" y2="0"/>
+                        <line x1="50" y1="0" x2="20" y2="0"/>
+                        <line x1="0" y1="-50" x2="0" y2="-20"/>
+                        <line x1="0" y1="50" x2="0" y2="20"/>
+                      </g>
+
+                      <!-- Rotating Fan Assembly -->
+                      <g class="gpu-fan-rotator">
+                        <!-- 9 Precision Airfoil Curved Blades with Sharp Beveled Edges -->
+                        <g class="gpu-blades-group">
+                          <g transform="rotate(0)">
+                            <path class="gpu-fan-blade" d="M 1,-16 C 9,-20 22,-30 23.5,-47.5 L 14,-49 C 7,-36 -1,-28 -8,-17 Z"/>
+                            <path class="gpu-fan-blade-bevel" d="M 23.5,-47.5 L 14,-49 C 18,-38 10,-28 1,-16 Z"/>
+                          </g>
+                          <g transform="rotate(40)">
+                            <path class="gpu-fan-blade" d="M 1,-16 C 9,-20 22,-30 23.5,-47.5 L 14,-49 C 7,-36 -1,-28 -8,-17 Z"/>
+                            <path class="gpu-fan-blade-bevel" d="M 23.5,-47.5 L 14,-49 C 18,-38 10,-28 1,-16 Z"/>
+                          </g>
+                          <g transform="rotate(80)">
+                            <path class="gpu-fan-blade" d="M 1,-16 C 9,-20 22,-30 23.5,-47.5 L 14,-49 C 7,-36 -1,-28 -8,-17 Z"/>
+                            <path class="gpu-fan-blade-bevel" d="M 23.5,-47.5 L 14,-49 C 18,-38 10,-28 1,-16 Z"/>
+                          </g>
+                          <g transform="rotate(120)">
+                            <path class="gpu-fan-blade" d="M 1,-16 C 9,-20 22,-30 23.5,-47.5 L 14,-49 C 7,-36 -1,-28 -8,-17 Z"/>
+                            <path class="gpu-fan-blade-bevel" d="M 23.5,-47.5 L 14,-49 C 18,-38 10,-28 1,-16 Z"/>
+                          </g>
+                          <g transform="rotate(160)">
+                            <path class="gpu-fan-blade" d="M 1,-16 C 9,-20 22,-30 23.5,-47.5 L 14,-49 C 7,-36 -1,-28 -8,-17 Z"/>
+                            <path class="gpu-fan-blade-bevel" d="M 23.5,-47.5 L 14,-49 C 18,-38 10,-28 1,-16 Z"/>
+                          </g>
+                          <g transform="rotate(200)">
+                            <path class="gpu-fan-blade" d="M 1,-16 C 9,-20 22,-30 23.5,-47.5 L 14,-49 C 7,-36 -1,-28 -8,-17 Z"/>
+                            <path class="gpu-fan-blade-bevel" d="M 23.5,-47.5 L 14,-49 C 18,-38 10,-28 1,-16 Z"/>
+                          </g>
+                          <g transform="rotate(240)">
+                            <path class="gpu-fan-blade" d="M 1,-16 C 9,-20 22,-30 23.5,-47.5 L 14,-49 C 7,-36 -1,-28 -8,-17 Z"/>
+                            <path class="gpu-fan-blade-bevel" d="M 23.5,-47.5 L 14,-49 C 18,-38 10,-28 1,-16 Z"/>
+                          </g>
+                          <g transform="rotate(280)">
+                            <path class="gpu-fan-blade" d="M 1,-16 C 9,-20 22,-30 23.5,-47.5 L 14,-49 C 7,-36 -1,-28 -8,-17 Z"/>
+                            <path class="gpu-fan-blade-bevel" d="M 23.5,-47.5 L 14,-49 C 18,-38 10,-28 1,-16 Z"/>
+                          </g>
+                          <g transform="rotate(320)">
+                            <path class="gpu-fan-blade" d="M 1,-16 C 9,-20 22,-30 23.5,-47.5 L 14,-49 C 7,-36 -1,-28 -8,-17 Z"/>
+                            <path class="gpu-fan-blade-bevel" d="M 23.5,-47.5 L 14,-49 C 18,-38 10,-28 1,-16 Z"/>
+                          </g>
+                        </g>
+
+                        <!-- Center Precision Hub -->
+                        <circle cx="0" cy="0" r="19" fill="#131724" stroke="var(--ink)" stroke-width="2"/>
+                        <circle cx="0" cy="0" r="16.5" fill="#20273a" stroke="#414d6b" stroke-width="1.2"/>
+                        <circle cx="0" cy="0" r="12" fill="#171d2b" stroke="#313a52" stroke-width="1"/>
+                        <circle cx="0" cy="0" r="8" fill="#2c364e" stroke="none"/>
+                        <!-- Cyan Precision Hub Diamond Accent -->
+                        <polygon points="0,-4.5 4.5,0 0,4.5 -4.5,0" fill="#38bdf8" stroke="rgba(255,255,255,0.6)" stroke-width="0.7"/>
+                        <circle cx="0" cy="0" r="1.5" fill="#0d111a"/>
+                      </g>
+                    </g>
+
+                    <!-- Right Axial Cooling Fan (Sharper, Precision Sculpted) -->
+                    <g class="gpu-fan-assembly" transform="translate(370, 142)">
+                      <!-- Outer Recessed Housing & Stepped Bezel -->
+                      <circle cx="0" cy="0" r="56" fill="#0d111a" stroke="var(--ink)" stroke-width="2.5"/>
+                      <circle cx="0" cy="0" r="53" fill="none" stroke="#2a3248" stroke-width="1.5"/>
+                      <circle cx="0" cy="0" r="51.5" fill="#141824" stroke="none"/>
+                      <circle cx="0" cy="0" r="50" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+
+                      <!-- 4 Stepped Airflow Guide Stators in Background -->
+                      <g stroke="#1a2030" stroke-width="1.8" opacity="0.7">
+                        <line x1="-50" y1="0" x2="-20" y2="0"/>
+                        <line x1="50" y1="0" x2="20" y2="0"/>
+                        <line x1="0" y1="-50" x2="0" y2="-20"/>
+                        <line x1="0" y1="50" x2="0" y2="20"/>
+                      </g>
+
+                      <!-- Rotating Fan Assembly -->
+                      <g class="gpu-fan-rotator">
+                        <!-- 9 Precision Airfoil Curved Blades with Sharp Beveled Edges -->
+                        <g class="gpu-blades-group">
+                          <g transform="rotate(0)">
+                            <path class="gpu-fan-blade" d="M 1,-16 C 9,-20 22,-30 23.5,-47.5 L 14,-49 C 7,-36 -1,-28 -8,-17 Z"/>
+                            <path class="gpu-fan-blade-bevel" d="M 23.5,-47.5 L 14,-49 C 18,-38 10,-28 1,-16 Z"/>
+                          </g>
+                          <g transform="rotate(40)">
+                            <path class="gpu-fan-blade" d="M 1,-16 C 9,-20 22,-30 23.5,-47.5 L 14,-49 C 7,-36 -1,-28 -8,-17 Z"/>
+                            <path class="gpu-fan-blade-bevel" d="M 23.5,-47.5 L 14,-49 C 18,-38 10,-28 1,-16 Z"/>
+                          </g>
+                          <g transform="rotate(80)">
+                            <path class="gpu-fan-blade" d="M 1,-16 C 9,-20 22,-30 23.5,-47.5 L 14,-49 C 7,-36 -1,-28 -8,-17 Z"/>
+                            <path class="gpu-fan-blade-bevel" d="M 23.5,-47.5 L 14,-49 C 18,-38 10,-28 1,-16 Z"/>
+                          </g>
+                          <g transform="rotate(120)">
+                            <path class="gpu-fan-blade" d="M 1,-16 C 9,-20 22,-30 23.5,-47.5 L 14,-49 C 7,-36 -1,-28 -8,-17 Z"/>
+                            <path class="gpu-fan-blade-bevel" d="M 23.5,-47.5 L 14,-49 C 18,-38 10,-28 1,-16 Z"/>
+                          </g>
+                          <g transform="rotate(160)">
+                            <path class="gpu-fan-blade" d="M 1,-16 C 9,-20 22,-30 23.5,-47.5 L 14,-49 C 7,-36 -1,-28 -8,-17 Z"/>
+                            <path class="gpu-fan-blade-bevel" d="M 23.5,-47.5 L 14,-49 C 18,-38 10,-28 1,-16 Z"/>
+                          </g>
+                          <g transform="rotate(200)">
+                            <path class="gpu-fan-blade" d="M 1,-16 C 9,-20 22,-30 23.5,-47.5 L 14,-49 C 7,-36 -1,-28 -8,-17 Z"/>
+                            <path class="gpu-fan-blade-bevel" d="M 23.5,-47.5 L 14,-49 C 18,-38 10,-28 1,-16 Z"/>
+                          </g>
+                          <g transform="rotate(240)">
+                            <path class="gpu-fan-blade" d="M 1,-16 C 9,-20 22,-30 23.5,-47.5 L 14,-49 C 7,-36 -1,-28 -8,-17 Z"/>
+                            <path class="gpu-fan-blade-bevel" d="M 23.5,-47.5 L 14,-49 C 18,-38 10,-28 1,-16 Z"/>
+                          </g>
+                          <g transform="rotate(280)">
+                            <path class="gpu-fan-blade" d="M 1,-16 C 9,-20 22,-30 23.5,-47.5 L 14,-49 C 7,-36 -1,-28 -8,-17 Z"/>
+                            <path class="gpu-fan-blade-bevel" d="M 23.5,-47.5 L 14,-49 C 18,-38 10,-28 1,-16 Z"/>
+                          </g>
+                          <g transform="rotate(320)">
+                            <path class="gpu-fan-blade" d="M 1,-16 C 9,-20 22,-30 23.5,-47.5 L 14,-49 C 7,-36 -1,-28 -8,-17 Z"/>
+                            <path class="gpu-fan-blade-bevel" d="M 23.5,-47.5 L 14,-49 C 18,-38 10,-28 1,-16 Z"/>
+                          </g>
+                        </g>
+
+                        <!-- Center Precision Hub -->
+                        <circle cx="0" cy="0" r="19" fill="#131724" stroke="var(--ink)" stroke-width="2"/>
+                        <circle cx="0" cy="0" r="16.5" fill="#20273a" stroke="#414d6b" stroke-width="1.2"/>
+                        <circle cx="0" cy="0" r="12" fill="#171d2b" stroke="#313a52" stroke-width="1"/>
+                        <circle cx="0" cy="0" r="8" fill="#2c364e" stroke="none"/>
+                        <!-- Violet Precision Hub Diamond Accent -->
+                        <polygon points="0,-4.5 4.5,0 0,4.5 -4.5,0" fill="#c084fc" stroke="rgba(255,255,255,0.6)" stroke-width="0.7"/>
+                        <circle cx="0" cy="0" r="1.5" fill="#0d111a"/>
+                      </g>
+                    </g>
+                  </svg>
+                </div>
+              </div>
               <div class="project-meta"><span>01 / Infra + AI</span><span>2026</span></div>
               <h3>NeuralSched</h3>
               <p>Adaptive deep reinforcement learning for predictive failure detection and carbon-aware GPU job routing.</p>
@@ -134,7 +334,11 @@
                 </div>
               </div>
             </div>
-            <h2>Questions<br /><span>worth asking.</span></h2>
+            <div class="writing-title-wrap">
+              <h2>Questions<br /><span>worth asking.</span></h2>
+              <span class="writing-tag writing-tag-research" data-depth="2.2" aria-hidden="true">Research</span>
+              <span class="writing-tag writing-tag-impact" data-depth="2.2" aria-hidden="true">Impact</span>
+            </div>
             <p class="section-note">Peer-reviewed work and ongoing investigations across vision, explainability, and secure computation.</p>
           </div>
 
