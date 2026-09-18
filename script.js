@@ -276,6 +276,12 @@ const bibtexDatabase = {
   title        = {A Secure and Scalable Hybrid Classical–Post-Quantum Cryptographic Framework for Quantum-Resilient Blockchain Systems},
   howpublished = {Ongoing investigation},
   year         = {2026}
+}`,
+  '16': `@misc{hasan2026stylegan2ada,
+  author       = {Hasan, Md. Tanvir and others},
+  title        = {StyleGAN2-ADA-Driven Synthetic MRI Augmentation for Architecture-Aware Brain Tumor Classification with Hybrid CNN–Vision Transformers},
+  howpublished = {Ongoing investigation},
+  year         = {2026}
 }`
 };
 
