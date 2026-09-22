@@ -885,8 +885,10 @@ html[data-theme=dark] .gpu-fan-blade-bevel {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 15px;
-  height: 11px;
+  width: 14px;
+  height: 14px;
+  transform-origin: center;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .burger-line {
@@ -894,12 +896,16 @@ html[data-theme=dark] .gpu-fan-blade-bevel {
   width: 100%;
   height: 2px;
   background: currentColor;
-  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease;
   transform-origin: center;
 }
 
+.mobile-nav-toggle[aria-expanded="true"] .mobile-nav-burger {
+  transform: rotate(90deg);
+}
+
 .mobile-nav-toggle[aria-expanded="true"] .burger-line:nth-child(1) {
-  transform: translateY(4.5px) rotate(45deg);
+  transform: translateY(6px) rotate(45deg);
 }
 
 .mobile-nav-toggle[aria-expanded="true"] .burger-line:nth-child(2) {
@@ -908,7 +914,7 @@ html[data-theme=dark] .gpu-fan-blade-bevel {
 }
 
 .mobile-nav-toggle[aria-expanded="true"] .burger-line:nth-child(3) {
-  transform: translateY(-4.5px) rotate(-45deg);
+  transform: translateY(-6px) rotate(-45deg);
 }
 
 /* Responsive Mobile Navigation Menu (< 800px) */
@@ -1020,6 +1026,7 @@ html[data-theme=dark] .gpu-fan-blade-bevel {
 
 @media (prefers-reduced-motion: reduce) {
   .burger-line,
+  .mobile-nav-burger,
   .nav-links {
     transition: none !important;
   }
