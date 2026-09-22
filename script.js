@@ -347,3 +347,123 @@ if (copyButton) {
   });
 }
 
+// Gentle fade-in animation for all sections on scroll using Intersection Observer
+const setupSectionFadeObserver = () => {
+  const sections = document.querySelectorAll('section');
+  if (!sections.length) return;
+
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Fallback if IntersectionObserver is not supported or user prefers reduced motion
+  if (!('IntersectionObserver' in window) || prefersReducedMotion) {
+    sections.forEach((section) => {
+      section.classList.add('is-visible');
+    });
+    return;
+  }
+
+  // Initialize all sections with the fade-section base class
+  sections.forEach((section) => {
+    section.classList.add('fade-section');
+  });
+
+  const sectionObserver = new IntersectionObserver(
+    (entries, observer) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    {
+      root: null,
+      threshold: 0.08,
+      rootMargin: '0px 0px -40px 0px',
+    }
+  );
+
+  sections.forEach((section) => {
+    sectionObserver.observe(section);
+  });
+};
+
+setupSectionFadeObserver();
+
+// Responsive mobile navigation menu toggle (< 800px)
+const setupMobileNavigation = () => {
+  const mobileNavToggle = document.getElementById('mobile-nav-toggle');
+  const navLinks = document.getElementById('primary-navigation') || document.querySelector('.nav-links');
+  if (!mobileNavToggle || !navLinks) return;
+
+  const mobileNavText = mobileNavToggle.querySelector('.mobile-nav-text');
+
+  const openMobileMenu = () => {
+    mobileNavToggle.setAttribute('aria-expanded', 'true');
+    mobileNavToggle.setAttribute('aria-label', 'Close navigation menu');
+    navLinks.classList.add('is-open');
+    if (mobileNavText) {
+      mobileNavText.textContent = 'close';
+    }
+  };
+
+  const closeMobileMenu = () => {
+    mobileNavToggle.setAttribute('aria-expanded', 'false');
+    mobileNavToggle.setAttribute('aria-label', 'Open navigation menu');
+    navLinks.classList.remove('is-open');
+    if (mobileNavText) {
+      mobileNavText.textContent = 'menu';
+    }
+  };
+
+  const toggleMobileMenu = (event) => {
+    event.stopPropagation();
+    const isOpen = mobileNavToggle.getAttribute('aria-expanded') === 'true';
+    if (isOpen) {
+      closeMobileMenu();
+    } else {
+      openMobileMenu();
+    }
+  };
+
+  mobileNavToggle.addEventListener('click', toggleMobileMenu);
+
+  // Close when clicking any navigation link
+  const links = navLinks.querySelectorAll('a');
+  links.forEach((link) => {
+    link.addEventListener('click', () => {
+      if (window.innerWidth <= 800) {
+        closeMobileMenu();
+      }
+    });
+  });
+
+  // Close when clicking outside of the header/navigation
+  document.addEventListener('click', (event) => {
+    if (mobileNavToggle.getAttribute('aria-expanded') === 'true') {
+      const isInside = navLinks.contains(event.target) || mobileNavToggle.contains(event.target);
+      if (!isInside) {
+        closeMobileMenu();
+      }
+    }
+  });
+
+  // Close on Escape key press and return focus to the toggle
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && mobileNavToggle.getAttribute('aria-expanded') === 'true') {
+      closeMobileMenu();
+      mobileNavToggle.focus();
+    }
+  });
+
+  // Clean up states when window is resized above 800px
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 800 && mobileNavToggle.getAttribute('aria-expanded') === 'true') {
+      closeMobileMenu();
+    }
+  });
+};
+
+setupMobileNavigation();
+
+

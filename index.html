@@ -15,7 +15,7 @@
     <div class="site-shell">
       <header class="topbar">
         <a class="wordmark" href="#top" aria-label="Tanvir Hasan home">TH<span>.</span></a>
-        <nav class="nav-links" aria-label="Primary navigation">
+        <nav class="nav-links" id="primary-navigation" aria-label="Primary navigation">
           <a href="#work">work <span>01</span></a>
           <a href="#writing">writing <span>02</span></a>
           <a href="#education">education <span>03</span></a>
@@ -24,8 +24,18 @@
           <a href="#activities">activities <span>06</span></a>
           <a href="#about">about <span>07</span></a>
         </nav>
-        <button class="theme-toggle" type="button" aria-label="Switch to dark mode" aria-pressed="false"><span class="theme-icon">☼</span><span class="theme-label">light</span></button>
-        <a class="top-cta" href="mailto:tanvir4n.cse@gmail.com">let's talk <span>↗</span></a>
+        <div class="topbar-actions">
+          <button class="theme-toggle" type="button" aria-label="Switch to dark mode" aria-pressed="false"><span class="theme-icon">☼</span><span class="theme-label">light</span></button>
+          <a class="top-cta" href="mailto:tanvir4n.cse@gmail.com">let's talk <span>↗</span></a>
+          <button class="mobile-nav-toggle" id="mobile-nav-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="primary-navigation">
+            <span class="mobile-nav-burger" aria-hidden="true">
+              <span class="burger-line"></span>
+              <span class="burger-line"></span>
+              <span class="burger-line"></span>
+            </span>
+            <span class="mobile-nav-text">menu</span>
+          </button>
+        </div>
       </header>
 
       <main id="top">
