@@ -353,6 +353,38 @@
             <p class="section-note">Peer-reviewed work and ongoing investigations across vision, explainability, and secure computation.</p>
           </div>
 
+          <!-- Local Search Input -->
+          <div class="publication-search-bar" id="publication-search-bar" role="search">
+            <div class="publication-search-input-wrap">
+              <svg class="search-input-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <circle cx="6.5" cy="6.5" r="4.5" stroke="currentColor" stroke-width="2"/>
+                <path d="M10 10L14.5 14.5" stroke="currentColor" stroke-width="2" stroke-linecap="square"/>
+              </svg>
+              <input
+                type="text"
+                id="publication-search-input"
+                class="publication-search-input"
+                placeholder="Search papers by title or category (e.g. vision, Alzheimer, security, MRI)..."
+                aria-label="Search publications by title or category"
+                autocomplete="off"
+                spellcheck="false"
+              />
+              <button
+                type="button"
+                id="publication-search-clear"
+                class="publication-search-clear"
+                aria-label="Clear search query"
+                title="Clear search"
+                style="display: none;"
+              >
+                ✕
+              </button>
+            </div>
+            <div class="publication-search-meta">
+              <span class="publication-search-count" id="publication-search-count" aria-live="polite">16 papers</span>
+            </div>
+          </div>
+
           <div class="publication-list">
             <button class="filter-button active" data-filter="all">all papers <span>16</span></button>
             <button class="filter-button" data-filter="vision">vision + xAI <span>12</span></button>
@@ -361,6 +393,17 @@
             <button class="filter-button" data-filter="security">security <span>01</span></button>
             <button class="filter-button" data-filter="systems">systems <span>01</span></button>
             <div class="publications">
+              <div class="publications-empty" id="publications-empty" style="display: none;" role="status">
+                <div class="empty-icon-wrap" aria-hidden="true">[ 00 ]</div>
+                <div class="empty-content">
+                  <h4>No matching publications found</h4>
+                  <p class="empty-text">No papers match "<span class="empty-query-target" id="empty-query-target"></span>"<span id="empty-category-note"></span>.</p>
+                  <div class="empty-actions">
+                    <button type="button" class="empty-btn empty-btn-clear" id="empty-clear-btn">Clear search</button>
+                    <button type="button" class="empty-btn empty-btn-all" id="empty-all-btn" style="display: none;">Search all categories</button>
+                  </div>
+                </div>
+              </div>
               <article class="publication" data-category="vision"><span class="pub-number">01</span><div><h3>Comparative Evaluation of Deep CNN Models with Explainable AI for Accurate Breast Tumor Segmentation and Classification in Ultrasound</h3><p>Taylor &amp; Francis Book Chapter / IDAA 2025</p><div class="pub-actions"><button type="button" class="bibtex-button" data-bib-id="01" aria-label="Export BibTeX for Comparative Evaluation of Deep CNN Models"><span class="bibtex-btn-icon" aria-hidden="true">📋</span><span class="bibtex-btn-text">Export BibTeX</span></button></div></div><span class="pub-state published">published</span></article>
               <article class="publication" data-category="systems"><span class="pub-number">02</span><div><h3><a class="publication-link" href="https://www.ijcaonline.org/archives/volume187/number100/a-case-study-conducted-at-diu-in-bangladesh-examines-the-cost-benefit-analysis-and-viability-of-installing-a-net-metering-system-alongside-rooftop-solar-photovoltaics/" target="_blank" rel="noreferrer">A Case Study Conducted At DIU In Bangladesh Examines The Cost-Benefit Analysis And Viability Of Installing A Net Metering System Alongside Rooftop Solar Photovoltaics</a></h3><p>International Journal of Computer Applications</p><div class="pub-actions"><button type="button" class="bibtex-button" data-bib-id="02" aria-label="Export BibTeX for Net Metering System Case Study"><span class="bibtex-btn-icon" aria-hidden="true">📋</span><span class="bibtex-btn-text">Export BibTeX</span></button></div></div><span class="pub-state published">published</span></article>
               <article class="publication" data-category="vision"><span class="pub-number">03</span><div><h3><a class="publication-link" href="https://ieeexplore.ieee.org/document/11491549" target="_blank" rel="noreferrer">Sample-Efficient Fine-Grained Classification of Cactus Species Using Hybrid Vision Transformers and Knowledge Distillation</a></h3><p>IEEE / ICCIT 2025</p><div class="pub-actions"><button type="button" class="bibtex-button" data-bib-id="03" aria-label="Export BibTeX for Cactus Species Classification"><span class="bibtex-btn-icon" aria-hidden="true">📋</span><span class="bibtex-btn-text">Export BibTeX</span></button></div></div><span class="pub-state published">published</span></article>
@@ -513,6 +556,12 @@
       </main>
       <footer class="footer"><span>© 2026 Md. Tanvir Hasan</span><span>Designed for useful trouble.</span><div class="footer-links"><a href="https://github.com/Tanvir4n" target="_blank" rel="noreferrer">GitHub <svg class="pixel-arrow pixel-arrow-black" viewBox="0 0 90 90" aria-hidden="true"><g fill="currentColor" stroke="rgba(255,255,255,0.35)" stroke-width="0.8"><polygon points="10,10 20,20 10,30 0,20"/><polygon points="30,10 40,20 30,30 20,20"/><polygon points="50,10 60,20 50,30 40,20"/><polygon points="70,30 80,40 70,50 60,40"/><polygon points="70,50 80,60 70,70 60,60"/><polygon points="70,70 80,80 70,90 60,80"/><polygon points="80,0 90,10 80,20 70,10"/><polygon points="70,10 80,20 70,30 60,20"/><polygon points="60,20 70,30 60,40 50,30"/><polygon points="50,30 60,40 50,50 40,40"/><polygon points="40,40 50,50 40,60 30,50"/><polygon points="30,50 40,60 30,70 20,60"/><polygon points="20,60 30,70 20,80 10,70"/><polygon points="10,70 20,80 10,90 0,80"/></g></svg></a><a href="https://www.linkedin.com/in/tanvir4n/" target="_blank" rel="noreferrer">LinkedIn <svg class="pixel-arrow pixel-arrow-black" viewBox="0 0 90 90" aria-hidden="true"><g fill="currentColor" stroke="rgba(255,255,255,0.35)" stroke-width="0.8"><polygon points="10,10 20,20 10,30 0,20"/><polygon points="30,10 40,20 30,30 20,20"/><polygon points="50,10 60,20 50,30 40,20"/><polygon points="70,30 80,40 70,50 60,40"/><polygon points="70,50 80,60 70,70 60,60"/><polygon points="70,70 80,80 70,90 60,80"/><polygon points="80,0 90,10 80,20 70,10"/><polygon points="70,10 80,20 70,30 60,20"/><polygon points="60,20 70,30 60,40 50,30"/><polygon points="50,30 60,40 50,50 40,40"/><polygon points="40,40 50,50 40,60 30,50"/><polygon points="30,50 40,60 30,70 20,60"/><polygon points="20,60 30,70 20,80 10,70"/><polygon points="10,70 20,80 10,90 0,80"/></g></svg></a><a href="https://scholar.google.com/citations?user=7cmF4AkAAAAJ&amp;hl=en" target="_blank" rel="noreferrer">Scholar <svg class="pixel-arrow pixel-arrow-black" viewBox="0 0 90 90" aria-hidden="true"><g fill="currentColor" stroke="rgba(255,255,255,0.35)" stroke-width="0.8"><polygon points="10,10 20,20 10,30 0,20"/><polygon points="30,10 40,20 30,30 20,20"/><polygon points="50,10 60,20 50,30 40,20"/><polygon points="70,30 80,40 70,50 60,40"/><polygon points="70,50 80,60 70,70 60,60"/><polygon points="70,70 80,80 70,90 60,80"/><polygon points="80,0 90,10 80,20 70,10"/><polygon points="70,10 80,20 70,30 60,20"/><polygon points="60,20 70,30 60,40 50,30"/><polygon points="50,30 60,40 50,50 40,40"/><polygon points="40,40 50,50 40,60 30,50"/><polygon points="30,50 40,60 30,70 20,60"/><polygon points="20,60 30,70 20,80 10,70"/><polygon points="10,70 20,80 10,90 0,80"/></g></svg></a><a href="https://www.researchgate.net/profile/Md-Tanvir-Hasan-13" target="_blank" rel="noreferrer">ResearchGate <svg class="pixel-arrow pixel-arrow-black" viewBox="0 0 90 90" aria-hidden="true"><g fill="currentColor" stroke="rgba(255,255,255,0.35)" stroke-width="0.8"><polygon points="10,10 20,20 10,30 0,20"/><polygon points="30,10 40,20 30,30 20,20"/><polygon points="50,10 60,20 50,30 40,20"/><polygon points="70,30 80,40 70,50 60,40"/><polygon points="70,50 80,60 70,70 60,60"/><polygon points="70,70 80,80 70,90 60,80"/><polygon points="80,0 90,10 80,20 70,10"/><polygon points="70,10 80,20 70,30 60,20"/><polygon points="60,20 70,30 60,40 50,30"/><polygon points="50,30 60,40 50,50 40,40"/><polygon points="40,40 50,50 40,60 30,50"/><polygon points="30,50 40,60 30,70 20,60"/><polygon points="20,60 30,70 20,80 10,70"/><polygon points="10,70 20,80 10,90 0,80"/></g></svg></a><a href="https://orcid.org/0009-0008-9130-3360" target="_blank" rel="noreferrer">ORCID <svg class="pixel-arrow pixel-arrow-black" viewBox="0 0 90 90" aria-hidden="true"><g fill="currentColor" stroke="rgba(255,255,255,0.35)" stroke-width="0.8"><polygon points="10,10 20,20 10,30 0,20"/><polygon points="30,10 40,20 30,30 20,20"/><polygon points="50,10 60,20 50,30 40,20"/><polygon points="70,30 80,40 70,50 60,40"/><polygon points="70,50 80,60 70,70 60,60"/><polygon points="70,70 80,80 70,90 60,80"/><polygon points="80,0 90,10 80,20 70,10"/><polygon points="70,10 80,20 70,30 60,20"/><polygon points="60,20 70,30 60,40 50,30"/><polygon points="50,30 60,40 50,50 40,40"/><polygon points="40,40 50,50 40,60 30,50"/><polygon points="30,50 40,60 30,70 20,60"/><polygon points="20,60 30,70 20,80 10,70"/><polygon points="10,70 20,80 10,90 0,80"/></g></svg></a></div></footer>
     </div>
+    <button class="scroll-to-top" id="scroll-to-top" type="button" aria-label="Scroll to top of page" title="Back to top">
+      <span class="scroll-to-top-text">top</span>
+      <svg class="scroll-to-top-arrow" width="13" height="13" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+        <path d="M7 13V2M7 2L2 7M7 2L12 7" stroke="currentColor" stroke-width="2.2" stroke-linecap="square" stroke-linejoin="miter"/>
+      </svg>
+    </button>
     <div class="toast" role="status" aria-live="polite">Email copied to clipboard</div>
     <script src="script.js"></script>
   </body>

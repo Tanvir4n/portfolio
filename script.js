@@ -47,14 +47,59 @@ const publicationsMoreWrap = document.getElementById('publications-more-wrap');
 const seeMoreButton = document.getElementById('see-more-pub');
 const PIXEL_ARROW_SVG = '<svg class="pixel-arrow pixel-arrow-orange" viewBox="0 0 90 90" aria-hidden="true"><g fill="currentColor" stroke="rgba(255,255,255,0.35)" stroke-width="0.8"><polygon points="10,10 20,20 10,30 0,20"/><polygon points="30,10 40,20 30,30 20,20"/><polygon points="50,10 60,20 50,30 40,20"/><polygon points="70,30 80,40 70,50 60,40"/><polygon points="70,50 80,60 70,70 60,60"/><polygon points="70,70 80,80 70,90 60,80"/><polygon points="80,0 90,10 80,20 70,10"/><polygon points="70,10 80,20 70,30 60,20"/><polygon points="60,20 70,30 60,40 50,30"/><polygon points="50,30 60,40 50,50 40,40"/><polygon points="40,40 50,50 40,60 30,50"/><polygon points="30,50 40,60 30,70 20,60"/><polygon points="20,60 30,70 20,80 10,70"/><polygon points="10,70 20,80 10,90 0,80"/></g></svg>';
 
+// Local search and filter controls
+const searchInput = document.getElementById('publication-search-input');
+const searchClearBtn = document.getElementById('publication-search-clear');
+const searchCountBadge = document.getElementById('publication-search-count');
+const publicationsEmpty = document.getElementById('publications-empty');
+const emptyQueryTarget = document.getElementById('empty-query-target');
+const emptyCategoryNote = document.getElementById('empty-category-note');
+const emptyClearBtn = document.getElementById('empty-clear-btn');
+const emptyAllBtn = document.getElementById('empty-all-btn');
+
+const categoryKeywordMap = {
+  vision: ['vision', 'xai', 'explainable', 'computer vision', 'cnn', 'vit', 'transformer', 'image', 'ultrasound', 'mri', 'medical', 'brain', 'blood', 'skin', 'pap-smear', 'cervix', 'cervical', 'rice', 'cactus', 'tumor', 'glioma', 'pmos', 'stylegan'],
+  data: ['data', 'data paper', 'data papers', 'dental', 'panoramic'],
+  dataset: ['dataset', 'datasets', 'mendeley', 'mendeley data', 'yolo', 'labels', 'radiograph', 'mopg'],
+  security: ['security', 'cryptography', 'quantum', 'post-quantum', 'blockchain', 'injection', 'pqc', 'keystroke', 'usb'],
+  systems: ['systems', 'solar', 'net metering', 'photovoltaics', 'renewable', 'energy', 'diu', 'cost-benefit']
+};
+
+const checkPaperMatchesSearch = (pub, tokens) => {
+  if (!tokens || tokens.length === 0) return true;
+
+  const title = (pub.querySelector('h3')?.textContent || '').toLowerCase();
+  const venue = (pub.querySelector('p')?.textContent || '').toLowerCase();
+  const state = (pub.querySelector('.pub-state')?.textContent || '').toLowerCase();
+  const cat = (pub.dataset.category || '').toLowerCase();
+  const catSynonyms = categoryKeywordMap[cat] || [];
+  const searchable = `${title} ${venue} ${state} ${cat} ${catSynonyms.join(' ')}`;
+
+  return tokens.every((token) => searchable.includes(token));
+};
+
 const updatePublicationsDisplay = () => {
   const activeBtn = document.querySelector('.filter-button.active');
   const selectedFilter = activeBtn ? activeBtn.dataset.filter : 'all';
+  const query = (searchInput ? searchInput.value : '').trim().toLowerCase();
+  const tokens = query.split(/\s+/).filter(Boolean);
+
+  // Toggle clear button
+  if (searchClearBtn) {
+    searchClearBtn.style.display = query.length > 0 ? 'inline-flex' : 'none';
+  }
 
   const matchingPublications = [];
+  let totalMatchesAcrossAll = 0;
+
   publications.forEach((pub) => {
-    const matches = selectedFilter === 'all' || pub.dataset.category === selectedFilter;
-    if (matches) {
+    const matchesSearch = checkPaperMatchesSearch(pub, tokens);
+    if (matchesSearch) {
+      totalMatchesAcrossAll++;
+    }
+
+    const matchesCategory = selectedFilter === 'all' || pub.dataset.category === selectedFilter;
+    if (matchesCategory && matchesSearch) {
       matchingPublications.push(pub);
     } else {
       pub.classList.add('hidden');
@@ -63,6 +108,52 @@ const updatePublicationsDisplay = () => {
 
   const totalMatching = matchingPublications.length;
 
+  // Update live count badge
+  if (searchCountBadge) {
+    if (tokens.length > 0) {
+      if (selectedFilter !== 'all') {
+        searchCountBadge.textContent = `${totalMatching} in ${selectedFilter}`;
+      } else {
+        searchCountBadge.textContent = `${totalMatching} / ${publications.length} papers`;
+      }
+    } else {
+      if (selectedFilter !== 'all') {
+        const catLabel = activeBtn ? activeBtn.textContent.replace(/\d+$/, '').trim() : selectedFilter;
+        searchCountBadge.textContent = `${totalMatching} ${catLabel}`;
+      } else {
+        searchCountBadge.textContent = `${publications.length} papers`;
+      }
+    }
+  }
+
+  // Handle empty state
+  if (publicationsEmpty) {
+    if (totalMatching === 0) {
+      publicationsEmpty.style.display = 'flex';
+      if (emptyQueryTarget) {
+        emptyQueryTarget.textContent = query || selectedFilter;
+      }
+      if (emptyCategoryNote) {
+        if (selectedFilter !== 'all') {
+          emptyCategoryNote.textContent = ` in category "${selectedFilter}"`;
+        } else {
+          emptyCategoryNote.textContent = '';
+        }
+      }
+      if (emptyAllBtn) {
+        if (selectedFilter !== 'all' && totalMatchesAcrossAll > 0) {
+          emptyAllBtn.style.display = 'inline-flex';
+          emptyAllBtn.textContent = `Search all categories (${totalMatchesAcrossAll} match${totalMatchesAcrossAll === 1 ? '' : 'es'})`;
+        } else {
+          emptyAllBtn.style.display = 'none';
+        }
+      }
+    } else {
+      publicationsEmpty.style.display = 'none';
+    }
+  }
+
+  // Handle pagination / "See more"
   if (totalMatching <= MAX_VISIBLE_PAPERS) {
     matchingPublications.forEach((pub) => pub.classList.remove('hidden'));
     if (publicationsMoreWrap) {
@@ -96,6 +187,49 @@ const updatePublicationsDisplay = () => {
     }
   }
 };
+
+if (searchInput) {
+  searchInput.addEventListener('input', () => {
+    isPublicationsExpanded = false;
+    updatePublicationsDisplay();
+  });
+
+  searchInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      searchInput.value = '';
+      updatePublicationsDisplay();
+    }
+  });
+}
+
+if (searchClearBtn) {
+  searchClearBtn.addEventListener('click', () => {
+    if (searchInput) {
+      searchInput.value = '';
+      searchInput.focus();
+    }
+    updatePublicationsDisplay();
+  });
+}
+
+if (emptyClearBtn) {
+  emptyClearBtn.addEventListener('click', () => {
+    if (searchInput) {
+      searchInput.value = '';
+      searchInput.focus();
+    }
+    updatePublicationsDisplay();
+  });
+}
+
+if (emptyAllBtn) {
+  emptyAllBtn.addEventListener('click', () => {
+    const allBtn = document.querySelector('.filter-button[data-filter="all"]');
+    if (allBtn) {
+      allBtn.click();
+    }
+  });
+}
 
 filterButtons.forEach((button) => {
   button.addEventListener('click', () => {
@@ -465,5 +599,109 @@ const setupMobileNavigation = () => {
 };
 
 setupMobileNavigation();
+
+// Scroll-to-top button handling with dynamic footer clearance
+const setupScrollToTop = () => {
+  const scrollToTopBtn = document.getElementById('scroll-to-top');
+  const heroSection = document.querySelector('.hero');
+  const footer = document.querySelector('footer');
+  if (!scrollToTopBtn || !heroSection) return;
+
+  const updateVisibilityAndClearance = () => {
+    const heroRect = heroSection.getBoundingClientRect();
+    // Appears when the user has scrolled down past the hero section
+    const isPastHero = heroRect.bottom <= 0;
+    if (isPastHero) {
+      scrollToTopBtn.classList.add('is-visible');
+    } else {
+      scrollToTopBtn.classList.remove('is-visible');
+    }
+
+    // Dynamic clearance calculation so button never overlaps footer or contact button
+    const viewportHeight = window.innerHeight;
+    const isMobile = window.innerWidth <= 480;
+    const defaultBottom = isMobile ? 18 : 28;
+    const clearance = 16;
+    let requiredBottom = defaultBottom;
+
+    if (footer) {
+      const footerRect = footer.getBoundingClientRect();
+      const footerTopFromBottom = viewportHeight - footerRect.top;
+      if (footerTopFromBottom > 0) {
+        requiredBottom = Math.max(requiredBottom, footerTopFromBottom + clearance);
+      }
+    }
+
+    // Also avoid overlapping the "START A CONVERSATION" button if it is in view
+    const contactBtn = document.querySelector('.contact-button');
+    if (contactBtn) {
+      const btnRect = contactBtn.getBoundingClientRect();
+      const btnTopFromBottom = viewportHeight - btnRect.top;
+      const btnBottomFromBottom = viewportHeight - btnRect.bottom;
+      const btnRight = btnRect.right;
+      const btnLeft = btnRect.left;
+      const scrollBtnWidth = scrollToTopBtn.offsetWidth || 50;
+      const scrollBtnRightEdge = window.innerWidth - (isMobile ? 14 : 28);
+      const scrollBtnLeftEdge = scrollBtnRightEdge - scrollBtnWidth;
+
+      // Check horizontal collision range
+      const isHorizontallyOverlapping = btnRight >= scrollBtnLeftEdge && btnLeft <= scrollBtnRightEdge;
+      if (isHorizontallyOverlapping && btnTopFromBottom > 0 && btnBottomFromBottom < defaultBottom + 40) {
+        requiredBottom = Math.max(requiredBottom, btnTopFromBottom + clearance);
+      }
+    }
+
+    scrollToTopBtn.style.setProperty('--scroll-btn-bottom', `${Math.round(requiredBottom)}px`);
+  };
+
+  // Smooth scroll back to the top of the page on click
+  scrollToTopBtn.addEventListener('click', () => {
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    window.scrollTo({
+      top: 0,
+      behavior: prefersReducedMotion ? 'auto' : 'smooth',
+    });
+  });
+
+  // IntersectionObserver for efficient viewport monitoring of hero section
+  if ('IntersectionObserver' in window) {
+    const heroObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting && entry.boundingClientRect.top < 0) {
+            scrollToTopBtn.classList.add('is-visible');
+          } else if (entry.isIntersecting || entry.boundingClientRect.top >= 0) {
+            scrollToTopBtn.classList.remove('is-visible');
+          }
+        });
+      },
+      {
+        root: null,
+        threshold: 0,
+      }
+    );
+    heroObserver.observe(heroSection);
+  }
+
+  // Passive scroll listener backed by requestAnimationFrame for rapid responsiveness
+  let scrollTicking = false;
+  const onScroll = () => {
+    if (!scrollTicking) {
+      window.requestAnimationFrame(() => {
+        updateVisibilityAndClearance();
+        scrollTicking = false;
+      });
+      scrollTicking = true;
+    }
+  };
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll, { passive: true });
+
+  // Initial check on page load
+  updateVisibilityAndClearance();
+};
+
+setupScrollToTop();
 
 
