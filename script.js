@@ -239,6 +239,23 @@ filterButtons.forEach((button) => {
   });
 });
 
+document.querySelectorAll('.pub-tag').forEach((tag) => {
+  tag.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const targetFilter = tag.dataset.tagFilter;
+    if (!targetFilter) return;
+
+    const targetBtn = document.querySelector(`.filter-button[data-filter="${targetFilter}"]`);
+    if (targetBtn) {
+      targetBtn.click();
+      const pubSearchBar = document.getElementById('publication-search-bar');
+      if (pubSearchBar) {
+        pubSearchBar.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+    }
+  });
+});
+
 if (seeMoreButton) {
   seeMoreButton.addEventListener('click', () => {
     isPublicationsExpanded = !isPublicationsExpanded;
