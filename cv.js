@@ -312,19 +312,48 @@ const setupMobileNavigation = () => {
 
 setupMobileNavigation();
 
-// Scroll to top button handling
+// Scroll to top button handling with dynamic footer clearance
 const setupScrollToTop = () => {
   const scrollToTopBtn = document.getElementById('scroll-to-top');
+  const footer = document.querySelector('footer');
+  const headerDossier = document.querySelector('.cv-header-dossier') || document.querySelector('.cv-topbar');
   if (!scrollToTopBtn) return;
 
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 400) {
+  const updateVisibilityAndClearance = () => {
+    // Appears when the user has scrolled down past the dossier header or 300px
+    let isPastHeader = false;
+    if (headerDossier) {
+      const headerRect = headerDossier.getBoundingClientRect();
+      isPastHeader = headerRect.bottom <= 60;
+    } else {
+      isPastHeader = window.scrollY > 300;
+    }
+
+    if (isPastHeader) {
       scrollToTopBtn.classList.add('is-visible');
     } else {
       scrollToTopBtn.classList.remove('is-visible');
     }
-  }, { passive: true });
 
+    // Dynamic clearance calculation so button never overlaps footer
+    const viewportHeight = window.innerHeight;
+    const isMobile = window.innerWidth <= 480;
+    const defaultBottom = isMobile ? 18 : 28;
+    const clearance = isMobile ? 14 : 18;
+    let requiredBottom = defaultBottom;
+
+    if (footer) {
+      const footerRect = footer.getBoundingClientRect();
+      const footerTopFromBottom = viewportHeight - footerRect.top;
+      if (footerTopFromBottom > 0) {
+        requiredBottom = Math.max(requiredBottom, footerTopFromBottom + clearance);
+      }
+    }
+
+    scrollToTopBtn.style.setProperty('--scroll-btn-bottom', `${Math.round(requiredBottom)}px`);
+  };
+
+  // Smooth scroll back to the top of the page on click
   scrollToTopBtn.addEventListener('click', () => {
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     window.scrollTo({
@@ -332,6 +361,24 @@ const setupScrollToTop = () => {
       behavior: prefersReducedMotion ? 'auto' : 'smooth',
     });
   });
+
+  // Optimized scroll handler using requestAnimationFrame
+  let scrollTicking = false;
+  const onScroll = () => {
+    if (!scrollTicking) {
+      window.requestAnimationFrame(() => {
+        updateVisibilityAndClearance();
+        scrollTicking = false;
+      });
+      scrollTicking = true;
+    }
+  };
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll, { passive: true });
+
+  // Initial calculation
+  updateVisibilityAndClearance();
 };
 
 setupScrollToTop();
