@@ -1453,7 +1453,7 @@ html[data-theme=dark] .top-cv-strip-desc {
 
 .top-cv-btn i,
 .top-cv-btn span:last-child {
-  color: var(--coral);
+  color: var(--ink);
   font-weight: 700;
   transition: transform 0.2s;
 }
@@ -1508,10 +1508,24 @@ html[data-theme=dark] .eyebrow-cv-link:hover {
 
 /* Hero action button for CV */
 .button-cv {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
   background: var(--acid);
   color: #171717;
   border: var(--line);
   box-shadow: 5px 5px 0 var(--ink);
+}
+
+.pixel-arrow-cv {
+  color: var(--ink);
+  width: 14px;
+  height: 14px;
+  margin-left: 14px;
+  flex-shrink: 0;
+  display: inline-block;
+  vertical-align: middle;
+  transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), color 0.2s ease, filter 0.2s ease;
 }
 
 .button-cv:hover {
@@ -1520,12 +1534,30 @@ html[data-theme=dark] .eyebrow-cv-link:hover {
   box-shadow: 2px 2px 0 var(--ink);
 }
 
+.button-cv:hover .pixel-arrow-cv,
+.button-cv:focus-visible .pixel-arrow-cv {
+  color: #fff;
+  transform: translate(3px, -3px);
+  filter: brightness(1.2) drop-shadow(0 0 6px rgba(255, 255, 255, 0.6));
+}
+
 html[data-theme=dark] .button-cv {
   box-shadow: 5px 5px 0 var(--shadow);
 }
 
 html[data-theme=dark] .button-cv:hover {
   box-shadow: 2px 2px 0 var(--shadow);
+  color: #171717;
+}
+
+html[data-theme=dark] .pixel-arrow-cv {
+  color: #171717;
+}
+
+html[data-theme=dark] .button-cv:hover .pixel-arrow-cv,
+html[data-theme=dark] .button-cv:focus-visible .pixel-arrow-cv {
+  color: #171717;
+  filter: none;
 }
 
 /* ==========================================================================
