@@ -203,11 +203,49 @@ html[data-theme=dark] .dataset,
 html[data-theme=dark] .datapaper {
   color: #38bdf8;
 }
+
+/* Publication Smooth Fade-In Animation on Filtering */
+@keyframes pubFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.publication.pub-animating {
+  animation: pubFadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: calc(var(--pub-anim-index, 0) * 35ms);
+  will-change: opacity, transform;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .publication, .publication:hover {
     transform: none !important;
     transition: none !important;
   }
+  .publication.pub-animating {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+/* Filter buttons tactile transitions */
+.filter-button {
+  transition: color 0.18s ease, border-color 0.18s ease, opacity 0.18s ease;
+}
+.filter-button:hover {
+  color: var(--coral);
+}
+.filter-button.active {
+  color: var(--ink);
+}
+html[data-theme=dark] .filter-button.active {
+  color: var(--paper);
 }
 
 /* Export BibTeX Button Styles */

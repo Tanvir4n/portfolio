@@ -78,7 +78,44 @@ const checkPaperMatchesSearch = (pub, tokens) => {
   return tokens.every((token) => searchable.includes(token));
 };
 
-const updatePublicationsDisplay = () => {
+const applyPublicationFadeIn = (items) => {
+  if (!items || !items.length) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  items.forEach((item, index) => {
+    item.classList.remove('pub-animating');
+    item.style.removeProperty('--pub-anim-index');
+
+    // Force DOM reflow so re-triggering animation works cleanly even if clicked rapidly
+    void item.offsetWidth;
+
+    // Stagger up to 10 items so cascade feels rapid and responsive
+    const staggerIndex = Math.min(index, 10);
+    item.style.setProperty('--pub-anim-index', staggerIndex);
+    item.classList.add('pub-animating');
+
+    let cleaned = false;
+    const cleanUp = () => {
+      if (cleaned) return;
+      cleaned = true;
+      item.classList.remove('pub-animating');
+      item.style.removeProperty('--pub-anim-index');
+      item.removeEventListener('animationend', onEnd);
+    };
+
+    const onEnd = (e) => {
+      if (e.target === item) {
+        cleanUp();
+      }
+    };
+
+    item.addEventListener('animationend', onEnd, { once: true });
+    // Safety cleanup timeout (animation length + stagger + buffer)
+    setTimeout(cleanUp, 380 + staggerIndex * 35 + 80);
+  });
+};
+
+const updatePublicationsDisplay = (animate = false) => {
   const activeBtn = document.querySelector('.filter-button.active');
   const selectedFilter = activeBtn ? activeBtn.dataset.filter : 'all';
   const query = (searchInput ? searchInput.value : '').trim().toLowerCase();
@@ -103,6 +140,8 @@ const updatePublicationsDisplay = () => {
       matchingPublications.push(pub);
     } else {
       pub.classList.add('hidden');
+      pub.classList.remove('pub-animating');
+      pub.style.removeProperty('--pub-anim-index');
     }
   });
 
@@ -153,9 +192,14 @@ const updatePublicationsDisplay = () => {
     }
   }
 
+  const visibleItems = [];
+
   // Handle pagination / "See more"
   if (totalMatching <= MAX_VISIBLE_PAPERS) {
-    matchingPublications.forEach((pub) => pub.classList.remove('hidden'));
+    matchingPublications.forEach((pub) => {
+      pub.classList.remove('hidden');
+      visibleItems.push(pub);
+    });
     if (publicationsMoreWrap) {
       publicationsMoreWrap.style.display = 'none';
     }
@@ -165,7 +209,10 @@ const updatePublicationsDisplay = () => {
     }
 
     if (isPublicationsExpanded) {
-      matchingPublications.forEach((pub) => pub.classList.remove('hidden'));
+      matchingPublications.forEach((pub) => {
+        pub.classList.remove('hidden');
+        visibleItems.push(pub);
+      });
       if (seeMoreButton) {
         seeMoreButton.innerHTML = `See less papers <span class="see-more-arrow">${PIXEL_ARROW_SVG}</span>`;
         seeMoreButton.setAttribute('aria-expanded', 'true');
@@ -174,8 +221,11 @@ const updatePublicationsDisplay = () => {
       matchingPublications.forEach((pub, index) => {
         if (index < MAX_VISIBLE_PAPERS) {
           pub.classList.remove('hidden');
+          visibleItems.push(pub);
         } else {
           pub.classList.add('hidden');
+          pub.classList.remove('pub-animating');
+          pub.style.removeProperty('--pub-anim-index');
         }
       });
 
@@ -185,6 +235,10 @@ const updatePublicationsDisplay = () => {
         seeMoreButton.setAttribute('aria-expanded', 'false');
       }
     }
+  }
+
+  if (animate && visibleItems.length > 0) {
+    applyPublicationFadeIn(visibleItems);
   }
 };
 
@@ -235,7 +289,7 @@ filterButtons.forEach((button) => {
   button.addEventListener('click', () => {
     filterButtons.forEach((item) => item.classList.toggle('active', item === button));
     isPublicationsExpanded = false;
-    updatePublicationsDisplay();
+    updatePublicationsDisplay(true);
   });
 });
 
@@ -259,7 +313,7 @@ document.querySelectorAll('.pub-tag').forEach((tag) => {
 if (seeMoreButton) {
   seeMoreButton.addEventListener('click', () => {
     isPublicationsExpanded = !isPublicationsExpanded;
-    updatePublicationsDisplay();
+    updatePublicationsDisplay(isPublicationsExpanded);
 
     if (!isPublicationsExpanded) {
       const writingSection = document.getElementById('writing');
