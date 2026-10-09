@@ -2993,6 +2993,17 @@ html[data-theme="dark"] .project-award-tag {
   box-shadow: 2.5px 2.5px 0px rgba(0, 0, 0, 0.9);
 }
 
+.champion-award-tag {
+  background: #fde047;
+  color: #18181b;
+  font-weight: 800;
+}
+
+html[data-theme="dark"] .champion-award-tag {
+  background: #facc15;
+  color: #09090b;
+}
+
 .activity-link {
   text-decoration: underline;
   text-underline-offset: 3px;
