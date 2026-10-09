@@ -3320,6 +3320,179 @@ html[data-theme="dark"] .visual-spaceapps {
   background: var(--acid);
 }
 
+/* ==========================================================================
+   NASA Space Apps: Meteor ("Ulka Pindo") & Bright Star Supernova Explosion
+   Trajectory: (352, 0) -> (145, 152) | Light reduces during flight, ends in starburst
+   ========================================================================== */
+.space-meteor-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 4;
+  pointer-events: none;
+  overflow: visible;
+}
+
+.meteor-flight-group {
+  animation: meteorFlight 6.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
+  will-change: transform, opacity, filter;
+}
+
+@keyframes meteorFlight {
+  0%, 4% {
+    transform: translate(352px, 0px);
+    opacity: 0;
+    filter: drop-shadow(0 0 18px rgba(125, 211, 252, 0.95)) brightness(1.8);
+  }
+  5% {
+    transform: translate(352px, 0px);
+    opacity: 1;
+    filter: drop-shadow(0 0 18px rgba(125, 211, 252, 0.95)) brightness(1.8);
+  }
+  10% {
+    transform: translate(295px, 42px);
+    opacity: 0.9;
+    filter: drop-shadow(0 0 13px rgba(125, 211, 252, 0.85)) brightness(1.4);
+  }
+  16% {
+    transform: translate(228px, 91px);
+    opacity: 0.65;
+    filter: drop-shadow(0 0 8px rgba(125, 211, 252, 0.6)) brightness(1.05);
+  }
+  21% {
+    transform: translate(175px, 130px);
+    opacity: 0.35;
+    filter: drop-shadow(0 0 4px rgba(125, 211, 252, 0.35)) brightness(0.75);
+  }
+  24.2% {
+    transform: translate(145px, 152px);
+    opacity: 0.12;
+    filter: drop-shadow(0 0 2px rgba(125, 211, 252, 0.2)) brightness(0.45);
+  }
+  24.8%, 100% {
+    transform: translate(145px, 152px);
+    opacity: 0;
+  }
+}
+
+.star-explosion-anchor {
+  pointer-events: none;
+}
+
+.star-explosion-core {
+  transform-origin: 0 0;
+  animation: starExplosion 6.2s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+  will-change: transform, opacity, filter;
+}
+
+@keyframes starExplosion {
+  0%, 24.5% {
+    opacity: 0;
+    transform: scale(0.01) rotate(0deg);
+  }
+  24.9% {
+    opacity: 0.9;
+    transform: scale(0.28) rotate(6deg);
+    filter: drop-shadow(0 0 7px rgba(255, 255, 255, 0.85)) drop-shadow(0 0 14px rgba(56, 189, 248, 0.45)) brightness(1.35);
+  }
+  27% {
+    opacity: 0.95;
+    transform: scale(1.05) rotate(18deg);
+    filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.75)) drop-shadow(0 0 12px rgba(56, 189, 248, 0.38)) brightness(1.22);
+  }
+  31% {
+    opacity: 0.7;
+    transform: scale(1.22) rotate(26deg);
+    filter: drop-shadow(0 0 4px rgba(125, 211, 252, 0.45)) brightness(1.1);
+  }
+  36% {
+    opacity: 0.25;
+    transform: scale(1.36) rotate(34deg);
+    filter: drop-shadow(0 0 2px rgba(2, 132, 199, 0.25)) brightness(1.0);
+  }
+  40% {
+    opacity: 0;
+    transform: scale(1.48) rotate(40deg);
+  }
+  40.5%, 100% {
+    opacity: 0;
+    transform: scale(0.01);
+  }
+}
+
+.star-shockwave-ring {
+  transform-origin: 0 0;
+  animation: starShockwaveRing 6.2s ease-out infinite;
+}
+
+@keyframes starShockwaveRing {
+  0%, 24.5% {
+    opacity: 0;
+    transform: scale(0.1);
+    stroke: #ffffff;
+    stroke-width: 1.6px;
+  }
+  25% {
+    opacity: 0.75;
+    transform: scale(0.3);
+    stroke: #ffffff;
+    stroke-width: 1.4px;
+  }
+  29% {
+    opacity: 0.45;
+    transform: scale(1.15);
+    stroke: #7dd3fc;
+    stroke-width: 0.9px;
+  }
+  35% {
+    opacity: 0;
+    transform: scale(1.75);
+    stroke: #0284c7;
+    stroke-width: 0.4px;
+  }
+  35.5%, 100% {
+    opacity: 0;
+  }
+}
+
+.stardust-burst {
+  transform-origin: 0 0;
+  animation: stardustBurst 6.2s ease-out infinite;
+}
+
+@keyframes stardustBurst {
+  0%, 24.5% {
+    opacity: 0;
+    transform: scale(0.1);
+  }
+  25% {
+    opacity: 0.8;
+    transform: scale(0.35);
+  }
+  29% {
+    opacity: 0.65;
+    transform: scale(1.05);
+  }
+  35% {
+    opacity: 0;
+    transform: scale(1.6);
+  }
+  35.5%, 100% {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .meteor-flight-group,
+  .star-explosion-core,
+  .star-shockwave-ring,
+  .stardust-burst {
+    animation: none !important;
+    opacity: 0 !important;
+  }
+}
+
 
 
 
