@@ -382,3 +382,125 @@ const setupScrollToTop = () => {
 };
 
 setupScrollToTop();
+
+/* ==========================================================================
+   Cybernetic ScrambleText Effect for CV Stats Row
+   ========================================================================== */
+class CvTextScrambler {
+  constructor(el, chars = '0123456789!#%&*+=?@ABCDEFGHJKLMNPQRSTUVWXYZ_/~<>') {
+    this.el = el;
+    this.chars = chars;
+    this.targetText = el.getAttribute('data-scramble') || el.textContent.trim();
+    this.frame = 0;
+    this.queue = [];
+    this.frameReq = null;
+    this.isScrambling = false;
+  }
+
+  scramble(duration = 24) {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      this.el.textContent = this.targetText;
+      return;
+    }
+
+    cancelAnimationFrame(this.frameReq);
+    this.queue = [];
+    const text = this.targetText;
+
+    for (let i = 0; i < text.length; i++) {
+      const from = this.el.textContent[i] || '';
+      const to = text[i];
+      const start = Math.floor(Math.random() * 5) + Math.floor((i / text.length) * (duration * 0.4));
+      const end = start + Math.floor(Math.random() * 8) + Math.floor((i / text.length) * (duration * 0.6));
+      this.queue.push({ from, to, start, end, char: '' });
+    }
+
+    this.frame = 0;
+    this.isScrambling = true;
+    this.update();
+  }
+
+  update() {
+    let output = '';
+    let complete = 0;
+
+    for (let i = 0; i < this.queue.length; i++) {
+      const item = this.queue[i];
+      if (this.frame >= item.end) {
+        complete++;
+        output += item.to;
+      } else if (this.frame >= item.start) {
+        if (!item.char || Math.random() < 0.32) {
+          item.char = this.chars[Math.floor(Math.random() * this.chars.length)];
+        }
+        output += `<span class="scramble-glyph">${item.char}</span>`;
+      } else {
+        output += item.from || item.to;
+      }
+    }
+
+    this.el.innerHTML = output;
+
+    if (complete === this.queue.length) {
+      this.el.textContent = this.targetText;
+      this.isScrambling = false;
+    } else {
+      this.frame++;
+      this.frameReq = requestAnimationFrame(() => this.update());
+    }
+  }
+}
+
+function setupCvStatsScramble() {
+  const statItems = document.querySelectorAll('.cv-stats-row .cv-stat-item');
+  if (!statItems.length) return;
+
+  const scramblers = [];
+
+  statItems.forEach((container, idx) => {
+    const valEl = container.querySelector('.cv-stat-val');
+    if (!valEl) return;
+
+    if (!valEl.hasAttribute('data-scramble')) {
+      valEl.setAttribute('data-scramble', valEl.textContent.trim());
+    }
+
+    const scrambler = new CvTextScrambler(valEl);
+    scramblers.push({ scrambler, container, idx });
+
+    container.addEventListener('mouseenter', () => {
+      scrambler.scramble(20);
+    });
+
+    container.addEventListener('click', () => {
+      scrambler.scramble(22);
+    });
+  });
+
+  if ('IntersectionObserver' in window) {
+    const statsRow = document.querySelector('.cv-stats-row');
+    if (statsRow) {
+      let hasTriggered = false;
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting && !hasTriggered) {
+              hasTriggered = true;
+              scramblers.forEach(({ scrambler }, index) => {
+                setTimeout(() => {
+                  scrambler.scramble(26);
+                }, index * 120);
+              });
+            } else if (!entry.isIntersecting) {
+              hasTriggered = false;
+            }
+          });
+        },
+        { threshold: 0.25 }
+      );
+      observer.observe(statsRow);
+    }
+  }
+}
+
+setupCvStatsScramble();

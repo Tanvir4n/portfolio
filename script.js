@@ -775,4 +775,136 @@ const setupScrollToTop = () => {
 
 setupScrollToTop();
 
+/* ==========================================================================
+   Cybernetic ScrambleText Effect for Stats Band (16+, 03, Champion, 03)
+   ========================================================================== */
+class TextScrambler {
+  constructor(el, chars = '0123456789!#%&*+=?@ABCDEFGHJKLMNPQRSTUVWXYZ_/~<>') {
+    this.el = el;
+    this.chars = chars;
+    this.targetText = el.getAttribute('data-scramble') || el.textContent.trim();
+    this.frame = 0;
+    this.queue = [];
+    this.frameReq = null;
+    this.isScrambling = false;
+  }
+
+  scramble(duration = 24) {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      this.el.textContent = this.targetText;
+      return;
+    }
+
+    cancelAnimationFrame(this.frameReq);
+    this.queue = [];
+    const text = this.targetText;
+
+    for (let i = 0; i < text.length; i++) {
+      const from = this.el.textContent[i] || '';
+      const to = text[i];
+      const start = Math.floor(Math.random() * 5) + Math.floor((i / text.length) * (duration * 0.4));
+      const end = start + Math.floor(Math.random() * 8) + Math.floor((i / text.length) * (duration * 0.6));
+      this.queue.push({ from, to, start, end, char: '' });
+    }
+
+    this.frame = 0;
+    this.isScrambling = true;
+    this.update();
+  }
+
+  update() {
+    let output = '';
+    let complete = 0;
+
+    for (let i = 0; i < this.queue.length; i++) {
+      const item = this.queue[i];
+      if (this.frame >= item.end) {
+        complete++;
+        output += item.to;
+      } else if (this.frame >= item.start) {
+        if (!item.char || Math.random() < 0.32) {
+          item.char = this.chars[Math.floor(Math.random() * this.chars.length)];
+        }
+        output += `<span class="scramble-glyph">${item.char}</span>`;
+      } else {
+        output += item.from || item.to;
+      }
+    }
+
+    this.el.innerHTML = output;
+
+    if (complete === this.queue.length) {
+      this.el.textContent = this.targetText;
+      this.isScrambling = false;
+    } else {
+      this.frame++;
+      this.frameReq = requestAnimationFrame(() => this.update());
+    }
+  }
+}
+
+function setupStatsScramble() {
+  const statBoxes = document.querySelectorAll('.stats-band .stat-box, .stats-band div');
+  if (!statBoxes.length) return;
+
+  const scramblers = [];
+
+  statBoxes.forEach((container, idx) => {
+    const strongEl = container.querySelector('strong');
+    if (!strongEl) return;
+
+    if (!strongEl.hasAttribute('data-scramble')) {
+      strongEl.setAttribute('data-scramble', strongEl.textContent.trim());
+    }
+
+    const scrambler = new TextScrambler(strongEl);
+    scramblers.push({ scrambler, container, idx });
+
+    // Interactive Hover & Click Re-Scramble
+    container.addEventListener('mouseenter', () => {
+      scrambler.scramble(20);
+    });
+
+    container.addEventListener('click', () => {
+      scrambler.scramble(22);
+    });
+
+    container.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        scrambler.scramble(22);
+      }
+    });
+  });
+
+  // Trigger on Viewport Entry via IntersectionObserver
+  if ('IntersectionObserver' in window) {
+    const statsSection = document.querySelector('.stats-band');
+    if (statsSection) {
+      let hasTriggeredEntry = false;
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting && !hasTriggeredEntry) {
+              hasTriggeredEntry = true;
+              scramblers.forEach(({ scrambler }, index) => {
+                setTimeout(() => {
+                  scrambler.scramble(26);
+                }, index * 130);
+              });
+            } else if (!entry.isIntersecting) {
+              // Allow re-triggering when scrolling back into view
+              hasTriggeredEntry = false;
+            }
+          });
+        },
+        { threshold: 0.25 }
+      );
+      observer.observe(statsSection);
+    }
+  }
+}
+
+setupStatsScramble();
+
 
