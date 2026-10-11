@@ -3744,6 +3744,52 @@ html[data-theme="dark"] .visual-spaceapps {
   100% { transform: rotate(-8deg); }
 }
 
+/* Celebrate Action: Arms Rotation & Jumping Animation */
+.astro[data-action="celebrate"] .astro-arm-r { 
+  transform-origin: 103px 93px;
+  transform: rotate(-150deg); 
+}
+.astro[data-action="celebrate"] .astro-arm-l { 
+  transform-origin: 57px 93px;
+  transform: rotate(150deg); 
+}
+
+/* Bounces the whole body up and down */
+.astro[data-action="celebrate"] .astro-body { 
+  transform-origin: 80px 192px;
+  animation: astro-jump 0.9s cubic-bezier(0.33, 0, 0.2, 1) infinite; 
+}
+
+/* Shrinks the ground shadow when in the air */
+.astro[data-action="celebrate"] .astro-shadow { 
+  transform-origin: 80px 192px;
+  animation: astro-jump-shadow 0.9s cubic-bezier(0.33, 0, 0.2, 1) infinite; 
+}
+
+/* Keyframes for the jump cycle */
+@keyframes astro-jump {
+  0%, 100% {
+    transform: translateY(0) scaleY(1);
+  }
+  15% {
+    transform: translateY(0) scaleY(0.95); /* squash before jump */
+  }
+  50% {
+    transform: translateY(-16px) scaleY(1.02); /* peak of jump */
+  }
+}
+
+@keyframes astro-jump-shadow {
+  0%, 100% {
+    transform: scaleX(1);
+    opacity: 0.45;
+  }
+  50% {
+    transform: scaleX(0.65);
+    opacity: 0.18;
+  }
+}
+
 /* Celebrate Stars Sparkle */
 .astro-celebrate-particles {
   animation: astroSparkle 1.1s ease-in-out infinite alternate;
@@ -3928,10 +3974,11 @@ html[data-theme='dark'] .astro-hud-btn:hover {
 /* Deep Space Spacewalker (Astra) in NASA Space Scene (Bottom Right above Earth) */
 .celestial-astronaut-wrap {
   position: absolute;
-  right: 6%;
-  top: 50%;
-  width: 66px;
-  height: 98px;
+  right: 4%;
+  bottom: 16px;
+  top: auto;
+  width: 104px;
+  height: auto;
   z-index: 5;
   cursor: pointer;
   display: flex;
@@ -3997,46 +4044,60 @@ html[data-theme='dark'] .astro-hud-btn:hover {
   100% { opacity: 1; transform: scale(1.25); }
 }
 
-/* Custom In-Space Speech Bubble for Astra inside .space-scene */
+/* Custom In-Space Speech Bubble for Astra inside .space-scene (Well-spaced beside Astra) */
 .celestial-astronaut-wrap .astro-speech-left {
-  right: calc(100% + 10px);
-  top: -4px;
-  width: 140px;
-  font-size: 9px;
+  right: calc(100% + 6px);
+  top: 6px;
+  width: auto;
+  max-width: 126px;
+  min-width: 90px;
+  font-size: 8.5px;
   line-height: 1.35;
-  padding: 4px 8px;
+  padding: 4px 7px;
   background: rgba(15, 23, 42, 0.95);
   color: #f8fafc;
   border: 1.2px solid #38bdf8;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.85), 0 0 10px rgba(56, 189, 248, 0.4);
   backdrop-filter: blur(4px);
   border-radius: 4px;
+  white-space: normal;
 }
 
 .celestial-astronaut-wrap .astro-speech-left .astro-speech-tail {
-  right: -7px;
+  right: -6px;
   top: 14px;
-  border-width: 5px 0 5px 7px;
+  border-width: 4px 0 4px 6px;
   border-color: transparent transparent transparent #38bdf8;
 }
 
 @media (max-width: 480px) {
   .celestial-astronaut-wrap {
-    right: 4%;
-    top: 48%;
-    width: 56px;
-    height: 80px;
+    right: 2%;
+    bottom: 12px;
+    top: auto;
+    width: 82px;
+    height: auto;
+    min-height: 110px;
   }
   .celestial-astronaut-wrap .astro-wrapper {
-    width: 56px !important;
+    width: 82px !important;
   }
   .celestial-astronaut-wrap .astro {
-    width: 56px !important;
-    height: 70px !important;
+    width: 82px !important;
+    height: 102px !important;
   }
   .celestial-astronaut-wrap .astro-speech-left {
-    width: 110px;
-    font-size: 8px;
+    right: calc(100% + 3px);
+    top: 4px;
+    width: auto;
+    max-width: 100px;
+    font-size: 7.5px;
+    padding: 3px 6px;
+  }
+  .celestial-astronaut-wrap .astro-speech-left .astro-speech-tail {
+    right: -5px;
+    top: 12px;
+    border-width: 3.5px 0 3.5px 5px;
   }
 }
 

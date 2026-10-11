@@ -986,8 +986,12 @@
 
                   <!-- Deep Space Astronaut (Astra) Spacewalker in Orbit above Earth (Lower-Right) -->
                   <div class="celestial-astronaut-wrap" id="astronaut-root" tabindex="0" role="button" aria-label="Astronaut Astra spacewalking in orbit above Earth">
-                    <div class="astro-wrapper" style="width: 66px;">
-                      <svg viewBox="0 0 160 200" class="astro w-full overflow-visible" data-action="idle" data-mood="neutral" style="width: 66px; height: 83px;" role="img" aria-label="Astronaut Astra spacewalking in deep space">
+                    <div class="astro-wrapper" style="width: 104px;">
+                      <div class="astro-speech-bubble astro-speech-left" role="status">
+                        <span class="astro-speech-text">Mission successful!</span>
+                        <span class="astro-speech-tail" aria-hidden="true"></span>
+                      </div>
+                      <svg viewBox="0 0 160 200" class="astro w-full overflow-visible" data-action="celebrate" data-mood="happy" style="width: 104px; height: 130px;" role="img" aria-label="Astronaut Astra celebrating mission success">
                         <defs>
                           <linearGradient id="astro-visor-scene" x1="0" y1="0" x2="1" y2="1">
                             <stop offset="0%" stop-color="#1d2742"/>
@@ -999,6 +1003,11 @@
                           </linearGradient>
                         </defs>
                         <ellipse class="astro-shadow" cx="80" cy="192" rx="28" ry="3.5" fill="#000" opacity="0.35"/>
+                        <g class="astro-celebrate-particles" fill="#fef08a">
+                          <circle cx="36" cy="42" r="2.5" />
+                          <circle cx="124" cy="42" r="2.5" />
+                          <polygon points="80,18 82,23 87,24 83,27 84,32 80,29 76,32 77,27 73,24 78,23" fill="#fde047" />
+                        </g>
                         <g class="astro-body">
                           <rect class="astro-backpack" x="50" y="76" width="60" height="58" rx="12" fill="#bdb7ac" stroke="#2f3035" stroke-width="1.4"/>
                           <line x1="58" y1="84" x2="58" y2="124" stroke="#8d887e" stroke-width="1.8" stroke-linecap="round" opacity="0.65"/>
@@ -1016,23 +1025,27 @@
                           <circle class="astro-led astro-led-1" cx="73" cy="103.5" r="2" fill="#f2c879"/>
                           <circle class="astro-led astro-led-2" cx="80" cy="103.5" r="2" fill="#8fb4ea"/>
                           <circle class="astro-led astro-led-3" cx="87" cy="103.5" r="2" fill="#7cc8a0"/>
-                          <g class="astro-arm-l" transform="translate(57, 93)">
-                            <rect x="-7" y="-7" width="14" height="42" rx="7" fill="url(#astro-suit-scene)" stroke="#2f3035" stroke-width="1.4"/>
-                            <circle cx="0" cy="38" r="6.5" fill="#8d887e" stroke="#2f3035" stroke-width="1.4"/>
+                          <g class="astro-arm-l" style="transform-origin: 57px 93px;">
+                            <rect x="50" y="86" width="14" height="42" rx="7" fill="url(#astro-suit-scene)" stroke="#2f3035" stroke-width="1.4"/>
+                            <circle cx="57" cy="131" r="6.5" fill="#8d887e" stroke="#2f3035" stroke-width="1.4"/>
                           </g>
-                          <g class="astro-arm-r" transform="translate(103, 93)">
-                            <rect x="-7" y="-7" width="14" height="42" rx="7" fill="url(#astro-suit-scene)" stroke="#2f3035" stroke-width="1.4"/>
-                            <circle cx="0" cy="38" r="6.5" fill="#8d887e" stroke="#2f3035" stroke-width="1.4"/>
+                          <g class="astro-arm-r" style="transform-origin: 103px 93px;">
+                            <rect x="96" y="86" width="14" height="42" rx="7" fill="url(#astro-suit-scene)" stroke="#2f3035" stroke-width="1.4"/>
+                            <circle cx="103" cy="131" r="6.5" fill="#8d887e" stroke="#2f3035" stroke-width="1.4"/>
                           </g>
                           <g class="astro-head">
                             <circle cx="80" cy="56" r="30" fill="url(#astro-suit-scene)" stroke="#2f3035" stroke-width="1.5"/>
                             <circle cx="62" cy="34" r="2.2" fill="#f2c879" class="astro-lamp"/>
                             <rect x="57" y="40" width="46" height="32" rx="15" fill="url(#astro-visor-scene)" stroke="#2f3035" stroke-width="1.4"/>
+                            <!-- Curved smiling eyes and mouth displayed on the dark visor -->
                             <g class="astro-face" stroke="#f2c879" fill="none" stroke-width="2.2">
-                              <g class="face face-neutral">
-                                <circle cx="71" cy="56" r="2.1" fill="#f2c879" stroke="none"/>
-                                <circle cx="89" cy="56" r="2.1" fill="#f2c879" stroke="none"/>
-                                <path d="M76 64 L84 64"/>
+                              <g class="face face-happy">
+                                <!-- Left eye curve -->
+                                <path d="M67 57 Q71 52 75 57"/>
+                                <!-- Right eye curve -->
+                                <path d="M85 57 Q89 52 93 57"/>
+                                <!-- Smile -->
+                                <path d="M72 62 Q80 69 88 62"/>
                               </g>
                             </g>
                           </g>
@@ -1041,7 +1054,7 @@
                     </div>
                     <div class="celestial-astro-tag">
                       <span class="astro-ping-dot" aria-hidden="true"></span>
-                      <span>ASTRA EVA</span>
+                      <span>ASTRA // CELEBRATE</span>
                     </div>
                   </div>
 

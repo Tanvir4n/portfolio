@@ -24,8 +24,8 @@ export interface AstronautProps {
 }
 
 export const Astronaut: React.FC<AstronautProps> = ({
-  mood = 'neutral',
-  action = 'idle',
+  mood = 'happy',
+  action = 'celebrate',
   size = 160,
   say,
   sayAlign = 'side',
@@ -41,6 +41,53 @@ export const Astronaut: React.FC<AstronautProps> = ({
       style={{ width: `${width}px` }}
       onClick={onClick}
     >
+      {/* Embedded Component Styles */}
+      <style>{`
+        /* Rotates both arms upwards into the air */
+        .astro[data-action="celebrate"] .astro-arm-r { 
+          transform-origin: 103px 93px;
+          transform: rotate(-150deg); 
+        }
+        .astro[data-action="celebrate"] .astro-arm-l { 
+          transform-origin: 57px 93px;
+          transform: rotate(150deg); 
+        }
+
+        /* Bounces the whole body up and down */
+        .astro[data-action="celebrate"] .astro-body { 
+          animation: astro-jump 0.9s cubic-bezier(0.33, 0, 0.2, 1) infinite; 
+        }
+
+        /* Shrinks the ground shadow when in the air */
+        .astro[data-action="celebrate"] .astro-shadow { 
+          animation: astro-jump-shadow 0.9s cubic-bezier(0.33, 0, 0.2, 1) infinite; 
+        }
+
+        /* Keyframes for the jump cycle */
+        @keyframes astro-jump {
+          0%, 100% {
+            transform: translateY(0) scaleY(1);
+          }
+          15% {
+            transform: translateY(0) scaleY(0.95); /* squash before jump */
+          }
+          50% {
+            transform: translateY(-16px) scaleY(1.02); /* peak of jump */
+          }
+        }
+
+        @keyframes astro-jump-shadow {
+          0%, 100% {
+            transform: scaleX(1);
+            opacity: 0.45;
+          }
+          50% {
+            transform: scaleX(0.65);
+            opacity: 0.18;
+          }
+        }
+      `}</style>
+
       {/* Optional Speech Bubble */}
       {say && (
         <div
@@ -92,10 +139,14 @@ export const Astronaut: React.FC<AstronautProps> = ({
           ry="3.6"
           fill="#000"
           opacity="0.45"
+          style={{ transformOrigin: '80px 192px' }}
         />
 
         {/* Floating / Bobbing Body Group */}
-        <g className={`astro-body ${action === 'slump' ? 'astro-body-slump' : ''}`}>
+        <g
+          className={`astro-body ${action === 'slump' ? 'astro-body-slump' : ''}`}
+          style={{ transformOrigin: '80px 192px' }}
+        >
           {/* Backpack (Life Support System) */}
           <rect
             className="astro-backpack"
@@ -202,13 +253,11 @@ export const Astronaut: React.FC<AstronautProps> = ({
           <polygon points="80,85 83,89 87,89 84,92 85,96 80,93 75,96 76,92 73,89 77,89" fill="url(#astro-gold-accent)" opacity="0.85" />
 
           {/* Left Arm: Pivot is Left Shoulder (57, 93) */}
-          <g className={`astro-arm-l astro-arm-l-${action}`}>
-            {action === 'celebrate' ? (
-              <g transform="translate(57, 93) rotate(135)">
-                <rect x="-7" y="-7" width="14" height="42" rx="7" fill="url(#astro-suit)" stroke="#2f3035" strokeWidth="1.4" />
-                <circle cx="0" cy="38" r="6.5" fill="#8d887e" stroke="#2f3035" strokeWidth="1.4" />
-              </g>
-            ) : action === 'walk' ? (
+          <g
+            className={`astro-arm-l astro-arm-l-${action}`}
+            style={{ transformOrigin: '57px 93px' }}
+          >
+            {action === 'walk' ? (
               <g transform="translate(57, 93)">
                 <g>
                   <animateTransform
@@ -236,7 +285,10 @@ export const Astronaut: React.FC<AstronautProps> = ({
           </g>
 
           {/* Right Arm: Pivot is Right Shoulder (103, 93) */}
-          <g className={`astro-arm-r astro-arm-r-${action}`}>
+          <g
+            className={`astro-arm-r astro-arm-r-${action}`}
+            style={{ transformOrigin: '103px 93px' }}
+          >
             {action === 'wave' ? (
               <g transform="translate(103, 93)">
                 <g>
@@ -250,11 +302,6 @@ export const Astronaut: React.FC<AstronautProps> = ({
                   <rect x="-7" y="-7" width="14" height="42" rx="7" fill="url(#astro-suit)" stroke="#2f3035" strokeWidth="1.4" />
                   <circle cx="0" cy="38" r="6.5" fill="#8d887e" stroke="#2f3035" strokeWidth="1.4" />
                 </g>
-              </g>
-            ) : action === 'celebrate' ? (
-              <g transform="translate(103, 93) rotate(-135)">
-                <rect x="-7" y="-7" width="14" height="42" rx="7" fill="url(#astro-suit)" stroke="#2f3035" strokeWidth="1.4" />
-                <circle cx="0" cy="38" r="6.5" fill="#8d887e" stroke="#2f3035" strokeWidth="1.4" />
               </g>
             ) : action === 'scan' ? (
               <g transform="translate(103, 93) rotate(-75)">
@@ -363,10 +410,14 @@ export const Astronaut: React.FC<AstronautProps> = ({
               )}
 
               {mood === 'happy' && (
+                /* Curved smiling eyes and mouth displayed on the dark visor */
                 <g className="face face-happy">
-                  <path d="M68 57 Q71 52 74 57" strokeLinecap="round" />
-                  <path d="M86 57 Q89 52 92 57" strokeLinecap="round" />
-                  <path d="M75 62 Q80 67 85 62" strokeLinecap="round" />
+                  {/* Left eye curve */}
+                  <path d="M67 57 Q71 52 75 57" />
+                  {/* Right eye curve */}
+                  <path d="M85 57 Q89 52 93 57" />
+                  {/* Smile */}
+                  <path d="M72 62 Q80 69 88 62" />
                 </g>
               )}
 
