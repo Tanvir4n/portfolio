@@ -3552,6 +3552,496 @@ html[data-theme="dark"] .visual-spaceapps {
   text-shadow: 0 0 16px rgba(217, 244, 75, 0.45);
 }
 
+/* ==========================================================================
+   Astronaut (Astra) Mascot Component Styles & Animations
+   ========================================================================== */
+
+.astro-wrapper {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  user-select: none;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.astro-wrapper:hover {
+  transform: translateY(-2px);
+}
+
+.astro {
+  overflow: visible;
+  display: block;
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.45));
+}
+
+/* Contact Shadow Pulsing */
+.astro-shadow {
+  transform-origin: 80px 192px;
+  animation: astroShadowPulse 3.4s ease-in-out infinite;
+}
+
+@keyframes astroShadowPulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.45;
+  }
+  50% {
+    transform: scale(0.82);
+    opacity: 0.22;
+  }
+}
+
+/* Body Floating Bob */
+.astro-body {
+  transform-origin: 80px 100px;
+  animation: astroFloat 3.4s ease-in-out infinite;
+}
+
+@keyframes astroFloat {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-7px) rotate(0.8deg);
+  }
+}
+
+.astro-body-slump {
+  transform: translateY(5px) !important;
+  animation: none !important;
+}
+
+/* Head Tilt / Bob */
+.astro-head {
+  transform-origin: 80px 56px;
+  animation: astroHeadBob 4.6s ease-in-out infinite;
+}
+
+@keyframes astroHeadBob {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  30% {
+    transform: rotate(-1.5deg);
+  }
+  70% {
+    transform: rotate(1.5deg);
+  }
+}
+
+.astro-head-slump {
+  transform: rotate(3deg) translateY(3px) !important;
+  animation: none !important;
+}
+
+/* Visor HUD Face Glow & Blinking */
+.astro-face {
+  filter: drop-shadow(0 0 3px rgba(242, 200, 121, 0.75));
+}
+
+.astro-face .face circle:not([stroke="none"]) {
+  animation: astroBlink 4.2s infinite;
+}
+
+@keyframes astroBlink {
+  0%, 94%, 98%, 100% {
+    transform: scaleY(1);
+  }
+  96% {
+    transform: scaleY(0.1);
+  }
+}
+
+/* Chest LED Indicators Blinking */
+.astro-led-1 {
+  animation: astroLedBlink1 1.6s ease-in-out infinite;
+}
+
+.astro-led-2 {
+  animation: astroLedBlink2 2.1s ease-in-out infinite;
+}
+
+.astro-led-3 {
+  animation: astroLedBlink3 1.8s ease-in-out infinite;
+}
+
+@keyframes astroLedBlink1 {
+  0%, 100% { opacity: 1; filter: drop-shadow(0 0 3px #f2c879); }
+  50% { opacity: 0.35; filter: none; }
+}
+
+@keyframes astroLedBlink2 {
+  0%, 100% { opacity: 0.4; filter: none; }
+  50% { opacity: 1; filter: drop-shadow(0 0 3px #8fb4ea); }
+}
+
+@keyframes astroLedBlink3 {
+  0%, 100% { opacity: 1; filter: drop-shadow(0 0 3px #7cc8a0); }
+  50% { opacity: 0.3; filter: none; }
+}
+
+/* Helmet Spotlight Lamp Glow */
+.astro-lamp {
+  filter: drop-shadow(0 0 4px #f2c879);
+  animation: astroLampGlow 2.8s ease-in-out infinite alternate;
+}
+
+@keyframes astroLampGlow {
+  0% { opacity: 0.8; filter: drop-shadow(0 0 2px #f2c879); }
+  100% { opacity: 1; filter: drop-shadow(0 0 6px #fef08a); }
+}
+
+/* Action: Scanner Light Beam Pulse */
+.astro-scan-light {
+  animation: astroScanPulse 1.2s ease-in-out infinite alternate;
+}
+
+@keyframes astroScanPulse {
+  0% { opacity: 0.55; }
+  100% { opacity: 0.95; }
+}
+
+/* Action: Drill Bit Vibration */
+.astro-drill-bit {
+  animation: astroDrillVibe 0.12s linear infinite alternate;
+}
+
+@keyframes astroDrillVibe {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(2px); }
+}
+
+/* Action: Glowing Sample */
+.astro-glowing-sample {
+  animation: astroSampleGlow 1.6s ease-in-out infinite alternate;
+}
+
+@keyframes astroSampleGlow {
+  0% { filter: drop-shadow(0 0 3px #ea580c); }
+  100% { filter: drop-shadow(0 0 8px #fed7aa); }
+}
+
+/* Action: Walk Leg Swing */
+.astro-leg-l-walk {
+  animation: astroWalkL 0.8s ease-in-out infinite alternate;
+  transform-origin: 70px 124px;
+}
+
+.astro-leg-r-walk {
+  animation: astroWalkR 0.8s ease-in-out infinite alternate;
+  transform-origin: 90px 124px;
+}
+
+@keyframes astroWalkL {
+  0% { transform: rotate(-8deg); }
+  100% { transform: rotate(8deg); }
+}
+
+@keyframes astroWalkR {
+  0% { transform: rotate(8deg); }
+  100% { transform: rotate(-8deg); }
+}
+
+/* Celebrate Stars Sparkle */
+.astro-celebrate-particles {
+  animation: astroSparkle 1.1s ease-in-out infinite alternate;
+}
+
+@keyframes astroSparkle {
+  0% { opacity: 0.6; transform: scale(0.9); }
+  100% { opacity: 1; transform: scale(1.1); }
+}
+
+/* Speech Bubble */
+.astro-speech-bubble {
+  position: absolute;
+  top: -46px;
+  background: var(--paper, #fdfbf7);
+  color: var(--ink, #171717);
+  border: 1.5px solid var(--ink, #171717);
+  box-shadow: 2px 2px 0 var(--shadow, #171717);
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-family: var(--mono);
+  font-size: 10.5px;
+  font-weight: 700;
+  line-height: 1.3;
+  white-space: nowrap;
+  max-width: 240px;
+  z-index: 10;
+  pointer-events: none;
+  animation: astroSpeechPop 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+html[data-theme='dark'] .astro-speech-bubble {
+  background: #111216;
+  color: #f0eee8;
+  border-color: #f0eee8;
+  box-shadow: 2px 2px 0 var(--shadow);
+}
+
+.astro-speech-side {
+  left: calc(100% + 8px);
+  top: 10px;
+  white-space: normal;
+  width: 170px;
+}
+
+.astro-speech-left {
+  right: calc(100% + 8px);
+  top: 10px;
+  white-space: normal;
+  width: 170px;
+}
+
+.astro-speech-right {
+  left: calc(100% + 8px);
+  top: 10px;
+  white-space: normal;
+  width: 170px;
+}
+
+.astro-speech-tail {
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-style: solid;
+}
+
+.astro-speech-side .astro-speech-tail,
+.astro-speech-right .astro-speech-tail {
+  left: -7px;
+  top: 20px;
+  border-width: 5px 7px 5px 0;
+  border-color: transparent var(--ink, #171717) transparent transparent;
+}
+
+.astro-speech-left .astro-speech-tail {
+  right: -7px;
+  top: 20px;
+  border-width: 5px 0 5px 7px;
+  border-color: transparent transparent transparent var(--ink, #171717);
+}
+
+/* Card 05 Hero Integration: Astronaut + Title */
+.project-astronaut-hero {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin: 14px 0 10px 0;
+  padding: 10px 14px;
+  background: rgba(2, 6, 23, 0.04);
+  border: 1.5px solid var(--line, #e2e8f0);
+  border-radius: 6px;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+html[data-theme='dark'] .project-astronaut-hero {
+  background: rgba(2, 6, 23, 0.45);
+  border-color: #27272a;
+}
+
+.astronaut-mount-point {
+  flex-shrink: 0;
+}
+
+.astronaut-card-mount {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.astronaut-avatar-wrap {
+  display: flex;
+  justify-content: center;
+}
+
+.astro-hud-strip {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.astro-hud-status {
+  font-family: var(--mono);
+  font-size: 8.5px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: var(--coral, #f97316);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.astro-status-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #22c55e;
+  box-shadow: 0 0 5px #22c55e;
+}
+
+.astro-hud-controls {
+  display: flex;
+  gap: 5px;
+}
+
+.astro-hud-btn {
+  background: var(--paper, #ffffff);
+  border: 1px solid var(--ink, #171717);
+  box-shadow: 1.5px 1.5px 0 var(--shadow, #171717);
+  font-family: var(--mono);
+  font-size: 9px;
+  padding: 2px 6px;
+  cursor: pointer;
+  border-radius: 3px;
+  color: var(--ink, #171717);
+  transition: transform 0.12s ease, background 0.12s ease;
+}
+
+.astro-hud-btn:hover {
+  background: var(--acid, #d9f44b);
+  transform: translate(-1px, -1px);
+}
+
+.astro-hud-btn:active {
+  transform: translate(1px, 1px);
+  box-shadow: 0 0 0;
+}
+
+html[data-theme='dark'] .astro-hud-btn {
+  background: #18181b;
+  color: #f4f4f5;
+  border-color: #52525b;
+  box-shadow: 1.5px 1.5px 0 #000;
+}
+
+html[data-theme='dark'] .astro-hud-btn:hover {
+  background: var(--acid, #d9f44b);
+  color: #000;
+}
+
+/* Deep Space Spacewalker (Astra) in NASA Space Scene (Bottom Right above Earth) */
+.celestial-astronaut-wrap {
+  position: absolute;
+  right: 6%;
+  top: 50%;
+  width: 66px;
+  height: 98px;
+  z-index: 5;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: astraOrbitFloat 6.8s ease-in-out infinite alternate;
+  filter: drop-shadow(0 6px 16px rgba(0, 0, 0, 0.85));
+  transition: transform 0.25s ease, filter 0.25s ease;
+  user-select: none;
+}
+
+@keyframes astraOrbitFloat {
+  0% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-6px) rotate(2deg);
+  }
+  100% {
+    transform: translateY(3px) rotate(-1.5deg);
+  }
+}
+
+.celestial-astronaut-wrap:hover,
+.celestial-astronaut-wrap:focus-visible {
+  filter: drop-shadow(0 0 14px rgba(56, 189, 248, 0.85)) drop-shadow(0 8px 18px rgba(0, 0, 0, 0.9));
+  transform: scale(1.06);
+  outline: none;
+}
+
+.celestial-astro-tag {
+  margin-top: 4px;
+  font-family: var(--mono);
+  font-size: 7.5px;
+  font-weight: 800;
+  color: #bae6fd;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.95);
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid rgba(56, 189, 248, 0.5);
+  padding: 1.5px 6px;
+  border-radius: 3px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  pointer-events: none;
+  white-space: nowrap;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
+}
+
+.astro-ping-dot {
+  width: 4.5px;
+  height: 4.5px;
+  border-radius: 50%;
+  background: #38bdf8;
+  box-shadow: 0 0 4px #38bdf8;
+  animation: pingGlow 1.8s ease-in-out infinite alternate;
+}
+
+@keyframes pingGlow {
+  0% { opacity: 0.35; transform: scale(0.8); }
+  100% { opacity: 1; transform: scale(1.25); }
+}
+
+/* Custom In-Space Speech Bubble for Astra inside .space-scene */
+.celestial-astronaut-wrap .astro-speech-left {
+  right: calc(100% + 10px);
+  top: -4px;
+  width: 140px;
+  font-size: 9px;
+  line-height: 1.35;
+  padding: 4px 8px;
+  background: rgba(15, 23, 42, 0.95);
+  color: #f8fafc;
+  border: 1.2px solid #38bdf8;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.85), 0 0 10px rgba(56, 189, 248, 0.4);
+  backdrop-filter: blur(4px);
+  border-radius: 4px;
+}
+
+.celestial-astronaut-wrap .astro-speech-left .astro-speech-tail {
+  right: -7px;
+  top: 14px;
+  border-width: 5px 0 5px 7px;
+  border-color: transparent transparent transparent #38bdf8;
+}
+
+@media (max-width: 480px) {
+  .celestial-astronaut-wrap {
+    right: 4%;
+    top: 48%;
+    width: 56px;
+    height: 80px;
+  }
+  .celestial-astronaut-wrap .astro-wrapper {
+    width: 56px !important;
+  }
+  .celestial-astronaut-wrap .astro {
+    width: 56px !important;
+    height: 70px !important;
+  }
+  .celestial-astronaut-wrap .astro-speech-left {
+    width: 110px;
+    font-size: 8px;
+  }
+}
+
+
+
 
 
 
