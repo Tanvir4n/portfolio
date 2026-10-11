@@ -3974,7 +3974,7 @@ html[data-theme='dark'] .astro-hud-btn:hover {
 /* Deep Space Spacewalker (Astra) in NASA Space Scene (Bottom Right above Earth) */
 .celestial-astronaut-wrap {
   position: absolute;
-  right: 4%;
+  right: 28px;
   bottom: 16px;
   top: auto;
   width: 104px;
@@ -3984,6 +3984,7 @@ html[data-theme='dark'] .astro-hud-btn:hover {
   display: flex;
   flex-direction: column;
   align-items: center;
+  overflow: visible !important;
   animation: astraOrbitFloat 6.8s ease-in-out infinite alternate;
   filter: drop-shadow(0 6px 16px rgba(0, 0, 0, 0.85));
   transition: transform 0.25s ease, filter 0.25s ease;
@@ -4009,30 +4010,43 @@ html[data-theme='dark'] .astro-hud-btn:hover {
   outline: none;
 }
 
+.celestial-astronaut-interactive {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  overflow: visible !important;
+}
+
 .celestial-astro-tag {
   margin-top: 4px;
   font-family: var(--mono);
-  font-size: 7.5px;
+  font-size: 6.8px;
   font-weight: 800;
   color: #bae6fd;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.03em;
   text-transform: uppercase;
   text-shadow: 0 1px 4px rgba(0, 0, 0, 0.95);
-  background: rgba(15, 23, 42, 0.85);
-  border: 1px solid rgba(56, 189, 248, 0.5);
-  padding: 1.5px 6px;
+  background: rgba(15, 23, 42, 0.92);
+  border: 1px solid rgba(56, 189, 248, 0.6);
+  padding: 1.5px 5px;
   border-radius: 3px;
   display: inline-flex;
   align-items: center;
-  gap: 4px;
+  gap: 3px;
   pointer-events: none;
   white-space: nowrap;
+  width: max-content;
+  max-width: none !important;
+  overflow: visible !important;
+  flex-shrink: 0;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
+  box-sizing: border-box;
 }
 
 .astro-ping-dot {
-  width: 4.5px;
-  height: 4.5px;
+  width: 4px;
+  height: 4px;
   border-radius: 50%;
   background: #38bdf8;
   box-shadow: 0 0 4px #38bdf8;
@@ -4070,14 +4084,14 @@ html[data-theme='dark'] .astro-hud-btn:hover {
   border-color: transparent transparent transparent #38bdf8;
 }
 
-@media (max-width: 480px) {
+@media (max-width: 800px) {
   .celestial-astronaut-wrap {
-    right: 2%;
-    bottom: 12px;
+    right: 24px;
+    bottom: 14px;
     top: auto;
     width: 82px;
     height: auto;
-    min-height: 110px;
+    min-height: 104px;
   }
   .celestial-astronaut-wrap .astro-wrapper {
     width: 82px !important;
@@ -4086,18 +4100,66 @@ html[data-theme='dark'] .astro-hud-btn:hover {
     width: 82px !important;
     height: 102px !important;
   }
+  .celestial-astro-tag {
+    font-size: 5.8px;
+    letter-spacing: 0.02em;
+    padding: 1px 4px;
+    gap: 2.5px;
+    margin-top: 3px;
+    width: max-content;
+    max-width: none !important;
+    overflow: visible !important;
+  }
+  .astro-ping-dot {
+    width: 3.5px;
+    height: 3.5px;
+  }
   .celestial-astronaut-wrap .astro-speech-left {
-    right: calc(100% + 3px);
+    right: calc(100% + 4px);
     top: 4px;
     width: auto;
-    max-width: 100px;
+    max-width: 96px;
     font-size: 7.5px;
-    padding: 3px 6px;
+    padding: 3px 5px;
   }
   .celestial-astronaut-wrap .astro-speech-left .astro-speech-tail {
     right: -5px;
     top: 12px;
     border-width: 3.5px 0 3.5px 5px;
+  }
+}
+
+@media (max-width: 440px) {
+  .celestial-astronaut-wrap {
+    right: 20px;
+    bottom: 12px;
+    width: 76px;
+    min-height: 98px;
+  }
+  .celestial-astronaut-wrap .astro-wrapper {
+    width: 76px !important;
+  }
+  .celestial-astronaut-wrap .astro {
+    width: 76px !important;
+    height: 95px !important;
+  }
+  .celestial-astro-tag {
+    font-size: 5.2px;
+    letter-spacing: 0.015em;
+    padding: 1px 3.5px;
+    gap: 2px;
+    width: max-content;
+    max-width: none !important;
+    overflow: visible !important;
+  }
+  .astro-ping-dot {
+    width: 3px;
+    height: 3px;
+  }
+  .celestial-astronaut-wrap .astro-speech-left {
+    max-width: 88px;
+    font-size: 7px;
+    padding: 2.5px 4.5px;
   }
 }
 
