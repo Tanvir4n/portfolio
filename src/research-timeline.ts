@@ -338,7 +338,6 @@ export class ResearchTimelineComponent {
   private mainGroup!: d3.Selection<SVGGElement, unknown, null, undefined>;
   private zoomBehavior!: d3.ZoomBehavior<SVGSVGElement, unknown>;
   private tooltipEl!: HTMLElement;
-  private inspectorEl: HTMLElement | null = null;
 
   private width = 1100;
   private height = 480;
@@ -371,9 +370,6 @@ export class ResearchTimelineComponent {
     // Create Tooltip DOM
     this.createTooltip();
 
-    // Setup Inspector element if present in DOM
-    this.inspectorEl = document.getElementById('timeline-inspector');
-
     // Render Toolbar controls
     this.renderToolbar();
 
@@ -385,9 +381,6 @@ export class ResearchTimelineComponent {
 
     // Render Timeline contents
     this.render();
-
-    // Initial inspector update
-    this.updateInspector(RESEARCH_PUBLICATIONS.find((p) => p.id === this.selectedPubId) || RESEARCH_PUBLICATIONS[0]);
 
     // Handle Resize
     this.setupResizeObserver();
@@ -471,7 +464,7 @@ export class ResearchTimelineComponent {
           <button type="button" class="timeline-chip active" data-jump="fit">Overview Fit</button>
         </div>
         <div class="timeline-interaction-hint">
-          <span>⠿ Drag / swipe to pan · Scroll to zoom · Click node to inspect</span>
+          <span>⠿ Drag / swipe to pan · Scroll to zoom · Click node to view paper</span>
         </div>
       </div>
     `;
@@ -1110,9 +1103,6 @@ export class ResearchTimelineComponent {
       .attr('fill', colors.accent)
       .attr('r', 4);
 
-    // Update inspector
-    this.updateInspector(pub);
-
     // Highlight corresponding publication card in Research Log above if present
     this.highlightMainPublicationCard(pub.number);
   }
@@ -1135,105 +1125,6 @@ export class ResearchTimelineComponent {
     });
   }
 
-  private updateInspector(pub: PublicationItem) {
-    if (!this.inspectorEl) {
-      this.inspectorEl = document.getElementById('timeline-inspector');
-    }
-    if (!this.inspectorEl) return;
-
-    const catColor = CATEGORY_COLORS[pub.category] || CATEGORY_COLORS.vision;
-    const statusInfo = STATUS_COLORS[pub.status] || STATUS_COLORS.published;
-
-    this.inspectorEl.innerHTML = `
-      <div class="inspector-card">
-        <div class="inspector-header">
-          <div class="inspector-number-badge" style="background-color: ${catColor.bg};">
-            <span>${pub.number}</span>
-          </div>
-          <div class="inspector-title-area">
-            <div class="inspector-meta-row">
-              <span class="inspector-category" style="color: ${catColor.bg}; font-weight: 700;">${pub.categoryLabel}</span>
-              <span class="inspector-sep">·</span>
-              <span class="inspector-status status-${pub.status}">
-                <span class="status-dot-inline" style="background-color: ${statusInfo.dot};"></span>
-                ${pub.statusLabel}
-              </span>
-              <span class="inspector-sep">·</span>
-              <span class="inspector-date">${this.formatDateFull(pub.date)}</span>
-            </div>
-            <h3 class="inspector-title">${pub.title}</h3>
-          </div>
-        </div>
-
-        <div class="inspector-body">
-          <div class="inspector-venue-box">
-            <span class="inspector-venue-label">Venue / Publication Channel:</span>
-            <strong class="inspector-venue">${pub.venue}</strong>
-          </div>
-          
-          ${pub.impactNote ? `<p class="inspector-note">${pub.impactNote}</p>` : ''}
-
-          <div class="inspector-keywords">
-            ${pub.keywords.map((k) => `<span class="inspector-keyword-tag">${k}</span>`).join('')}
-          </div>
-        </div>
-
-        <div class="inspector-actions">
-          ${
-            pub.url
-              ? `<a href="${pub.url}" target="_blank" rel="noreferrer" class="inspector-btn inspector-btn-link">
-                  Read Paper / Dataset <span class="pixel-arrow-icon">↗</span>
-                </a>`
-              : `<span class="inspector-pending-badge">Full text indexing in progress</span>`
-          }
-          <button type="button" class="inspector-btn inspector-btn-bibtex" data-bib-id="${pub.bibId}">
-            <span>📋</span> Copy BibTeX
-          </button>
-          <button type="button" class="inspector-btn inspector-btn-locate" data-locate="${pub.number}">
-            <span>↓</span> View In Research Log
-          </button>
-        </div>
-      </div>
-    `;
-
-    // Bind BibTeX button in inspector
-    const bibBtn = this.inspectorEl.querySelector<HTMLButtonElement>('.inspector-btn-bibtex');
-    if (bibBtn) {
-      bibBtn.addEventListener('click', async () => {
-        const bibId = bibBtn.dataset.bibId;
-        const scriptWin = window as unknown as { bibtexDatabase?: Record<string, string> };
-        const bibtexDatabase = scriptWin.bibtexDatabase || {};
-        const citation = bibId ? bibtexDatabase[bibId] : '';
-
-        if (citation) {
-          try {
-            await navigator.clipboard.writeText(citation);
-            bibBtn.innerHTML = '<span>✓</span> Copied to Clipboard!';
-            bibBtn.classList.add('copied');
-            setTimeout(() => {
-              bibBtn.innerHTML = '<span>📋</span> Copy BibTeX';
-              bibBtn.classList.remove('copied');
-            }, 2500);
-          } catch {
-            bibBtn.innerHTML = '<span>✕</span> Copy failed';
-          }
-        }
-      });
-    }
-
-    // Bind Locate in Research Log button
-    const locateBtn = this.inspectorEl.querySelector<HTMLButtonElement>('.inspector-btn-locate');
-    if (locateBtn) {
-      locateBtn.addEventListener('click', () => {
-        const writingSection = document.getElementById('writing');
-        if (writingSection) {
-          writingSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          this.highlightMainPublicationCard(pub.number);
-        }
-      });
-    }
-  }
-
   private showTooltip(pub: PublicationItem, event: MouseEvent) {
     const statusInfo = STATUS_COLORS[pub.status] || STATUS_COLORS.published;
     const catColor = CATEGORY_COLORS[pub.category] || CATEGORY_COLORS.vision;
@@ -1249,7 +1140,7 @@ export class ResearchTimelineComponent {
         <div class="tooltip-venue">${pub.venue}</div>
         <div class="tooltip-footer">
           <span class="tooltip-date">${this.formatDateFull(pub.date)}</span>
-          <span class="tooltip-prompt">Click node to inspect ↗</span>
+          <span class="tooltip-prompt">Click to view in Research Log ↗</span>
         </div>
       </div>
     `;
@@ -1331,10 +1222,6 @@ export class ResearchTimelineComponent {
       mutations.forEach((mutation) => {
         if (mutation.type === 'attributes' && mutation.attributeName === 'data-theme') {
           this.render();
-          if (this.selectedPubId) {
-            const pub = RESEARCH_PUBLICATIONS.find((p) => p.id === this.selectedPubId);
-            if (pub) this.updateInspector(pub);
-          }
         }
       });
     });
