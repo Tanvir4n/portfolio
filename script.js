@@ -489,6 +489,7 @@ const bibtexDatabase = {
   year         = {2026}
 }`
 };
+window.bibtexDatabase = bibtexDatabase;
 
 const bibtexButtons = document.querySelectorAll('.bibtex-button');
 bibtexButtons.forEach((btn) => {

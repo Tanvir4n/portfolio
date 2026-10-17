@@ -290,7 +290,7 @@
               <div class="project-award-tag champion-award-tag">&#127942; Champion &ndash; Hackathon Winner (100+ Teams)</div>
               <h3>NeuralSched</h3>
               <p>Adaptive deep reinforcement learning for predictive failure detection and carbon-aware GPU job routing. Champion project among 100+ competing teams.</p>
-              <a href="#writing" class="text-link">Read the thinking <svg class="pixel-arrow" viewBox="0 0 90 90" aria-hidden="true"><g fill="currentColor" stroke="rgba(255,255,255,0.35)" stroke-width="0.8"><polygon points="10,10 20,20 10,30 0,20"/><polygon points="30,10 40,20 30,30 20,20"/><polygon points="50,10 60,20 50,30 40,20"/><polygon points="70,30 80,40 70,50 60,40"/><polygon points="70,50 80,60 70,70 60,60"/><polygon points="70,70 80,80 70,90 60,80"/><polygon points="80,0 90,10 80,20 70,10"/><polygon points="70,10 80,20 70,30 60,20"/><polygon points="60,20 70,30 60,40 50,30"/><polygon points="50,30 60,40 50,50 40,40"/><polygon points="40,40 50,50 40,60 30,50"/><polygon points="30,50 40,60 30,70 20,60"/><polygon points="20,60 30,70 20,80 10,70"/><polygon points="10,70 20,80 10,90 0,80"/></g></svg></a>
+              <a href="https://neuralsched.vercel.app/" target="_blank" rel="noreferrer" class="text-link" title="Open live NeuralSched platform">Launch live system <svg class="pixel-arrow" viewBox="0 0 90 90" aria-hidden="true"><g fill="currentColor" stroke="rgba(255,255,255,0.35)" stroke-width="0.8"><polygon points="10,10 20,20 10,30 0,20"/><polygon points="30,10 40,20 30,30 20,20"/><polygon points="50,10 60,20 50,30 40,20"/><polygon points="70,30 80,40 70,50 60,40"/><polygon points="70,50 80,60 70,70 60,60"/><polygon points="70,70 80,80 70,90 60,80"/><polygon points="80,0 90,10 80,20 70,10"/><polygon points="70,10 80,20 70,30 60,20"/><polygon points="60,20 70,30 60,40 50,30"/><polygon points="50,30 60,40 50,50 40,40"/><polygon points="40,40 50,50 40,60 30,50"/><polygon points="30,50 40,60 30,70 20,60"/><polygon points="20,60 30,70 20,80 10,70"/><polygon points="10,70 20,80 10,90 0,80"/></g></svg></a>
             </article>
             <article class="project-card project-secondary">
               <div class="project-visual visual-lexsecure"><span>LEX<br />SECURE</span><i>02</i><div class="lex-lines"></div></div>
@@ -1204,6 +1204,66 @@
           </div>
         </section>
 
+        <section class="timeline-section section-rule" id="research-timeline">
+          <div class="section-heading timeline-heading">
+            <div class="section-lead-col">
+              <p class="section-index">02.1 / CHRONOLOGICAL TIMELINE</p>
+              <div class="timeline-summary-stats">
+                <div class="tstat-item">
+                  <strong class="tstat-num">16</strong>
+                  <span class="tstat-label">Total Works</span>
+                </div>
+                <div class="tstat-item">
+                  <strong class="tstat-num">05</strong>
+                  <span class="tstat-label">Published</span>
+                </div>
+                <div class="tstat-item">
+                  <strong class="tstat-num">08</strong>
+                  <span class="tstat-label">Accepted / Review</span>
+                </div>
+                <div class="tstat-item">
+                  <strong class="tstat-num">03</strong>
+                  <span class="tstat-label">Investigations</span>
+                </div>
+              </div>
+            </div>
+            <div class="writing-title-wrap">
+              <h2>Research<br /><span>trajectory.</span></h2>
+              <span class="writing-tag writing-tag-research" data-depth="2.2" aria-hidden="true">Chronology</span>
+              <span class="writing-tag writing-tag-ongoing" data-depth="2.2" aria-hidden="true">Milestones</span>
+              <span class="writing-tag writing-tag-impact" data-depth="2.2" aria-hidden="true">D3.js</span>
+            </div>
+            <p class="section-note">Interactive horizontal timeline visualizing research milestones, publications, datasets, and ongoing investigations from 2024 through 2026.</p>
+          </div>
+
+          <div class="d3-timeline-container">
+            <div id="d3-timeline-mount" class="d3-timeline-mount">
+              <!-- Rendered dynamically by D3.js -->
+            </div>
+
+            <div class="timeline-legend-bar">
+              <div class="legend-group">
+                <span class="legend-title">Domains:</span>
+                <span class="legend-item"><span class="legend-color-dot" style="background:#ff6545;"></span>Vision + xAI</span>
+                <span class="legend-item"><span class="legend-color-dot" style="background:#6e8cff;"></span>Systems</span>
+                <span class="legend-item"><span class="legend-color-dot" style="background:#a855f7;"></span>Security</span>
+                <span class="legend-item"><span class="legend-color-dot" style="background:#0969da;"></span>Datasets</span>
+              </div>
+              <div class="legend-group">
+                <span class="legend-title">Status:</span>
+                <span class="legend-item"><span class="legend-status-ring ring-published"></span>Published</span>
+                <span class="legend-item"><span class="legend-status-ring ring-accepted"></span>Accepted</span>
+                <span class="legend-item"><span class="legend-status-ring ring-review"></span>Under Review</span>
+                <span class="legend-item"><span class="legend-status-ring ring-ongoing"></span>Ongoing</span>
+              </div>
+            </div>
+
+            <div id="timeline-inspector" class="timeline-inspector" aria-live="polite">
+              <!-- Rendered dynamically upon node selection -->
+            </div>
+          </div>
+        </section>
+
         <section class="education-section section-rule" id="education">
           <div class="section-heading education-heading">
             <p class="section-index">03 / Education</p>
@@ -1309,7 +1369,7 @@
             </article>
             <article class="activity-entry">
               <div class="activity-date">January 2026</div>
-              <div class="activity-detail"><h3>&#127942; Champion &ndash; Hackathon Winner (100+ Teams)</h3><p>Secured 1st Place / Champion among 100+ competing teams with <strong>NeuralSched</strong> &mdash; Adaptive deep reinforcement learning for predictive failure detection &amp; carbon-aware GPU job routing.</p></div>
+              <div class="activity-detail"><h3>&#127942; Champion &ndash; Hackathon Winner (100+ Teams)</h3><p>Secured 1st Place / Champion among 100+ competing teams with <strong>NeuralSched</strong> (<a href="https://neuralsched.vercel.app/" target="_blank" rel="noreferrer" class="activity-link">neuralsched.vercel.app ↗</a>) &mdash; Adaptive deep reinforcement learning for predictive failure detection &amp; carbon-aware GPU job routing.</p></div>
             </article>
             <article class="activity-entry">
               <div class="activity-date">February 2026</div>
@@ -1352,5 +1412,6 @@
     <div class="toast" role="status" aria-live="polite">Email copied to clipboard</div>
     <script type="module" src="script.js"></script>
     <script type="module" src="/src/mount-astronaut.tsx"></script>
+    <script type="module" src="/src/research-timeline.ts"></script>
   </body>
 </html>
