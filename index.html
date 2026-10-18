@@ -9,6 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <script>document.documentElement.dataset.theme = localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');</script>
+    <script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
@@ -1407,7 +1408,6 @@
     </button>
     <div class="toast" role="status" aria-live="polite">Email copied to clipboard</div>
     <script type="module" src="./script.js"></script>
-    <script type="module" src="./src/mount-astronaut.tsx"></script>
-    <script type="module" src="./src/research-timeline.ts"></script>
+    <script type="module" src="./research-timeline.js"></script>
   </body>
 </html>

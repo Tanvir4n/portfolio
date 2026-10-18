@@ -908,4 +908,51 @@ function setupStatsScramble() {
 
 setupStatsScramble();
 
+function setupAstronautInteraction() {
+  const root = document.getElementById('astronaut-root');
+  if (!root) return;
+
+  const missionStages = [
+    { action: 'celebrate', mood: 'happy', say: 'Mission successful!' },
+    { action: 'wave', mood: 'happy', say: 'Greetings from Dhaka Analog Base!' },
+    { action: 'scan', mood: 'focused', say: 'HUD LIDAR: Terrain analog confirmed.' },
+    { action: 'drill', mood: 'focused', say: 'Extracting subterranean core sample.' },
+    { action: 'flag', mood: 'happy', say: 'Permanent lunar base perimeter set!' },
+    { action: 'sample', mood: 'wow', say: 'Basaltic mineral sample secured.' },
+    { action: 'walk', mood: 'neutral', say: 'EVA survey trek across terrain.' },
+    { action: 'idle', mood: 'neutral', say: "Hi, I'm Astra! Orbiting Earth & Mars." },
+  ];
+
+  let stageIdx = 0;
+  const speechText = root.querySelector('.astro-speech-text');
+  const astroTagText = root.querySelector('.celestial-astro-tag span:last-child');
+  const svgAstro = root.querySelector('.astro');
+
+  const cycleNext = () => {
+    stageIdx = (stageIdx + 1) % missionStages.length;
+    const stage = missionStages[stageIdx];
+    if (speechText) speechText.textContent = stage.say;
+    if (astroTagText) astroTagText.textContent = 'ASTRA // ' + stage.action.toUpperCase();
+    if (svgAstro) {
+      svgAstro.setAttribute('data-action', stage.action);
+      svgAstro.setAttribute('data-mood', stage.mood);
+    }
+  };
+
+  root.addEventListener('click', (e) => {
+    e.stopPropagation();
+    cycleNext();
+  });
+
+  root.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      cycleNext();
+    }
+  });
+}
+
+setupAstronautInteraction();
+
+
 
