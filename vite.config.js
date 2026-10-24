@@ -3,6 +3,11 @@ import { defineConfig } from 'vite';
 
 export default defineConfig({
   base: './',
+  resolve: {
+    alias: {
+      '@': resolve(__dirname, 'src'),
+    },
+  },
   esbuild: {
     jsx: 'automatic',
   },

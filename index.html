@@ -9,7 +9,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <script>document.documentElement.dataset.theme = localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');</script>
-    <script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
@@ -17,6 +16,7 @@
       <header class="topbar">
         <a class="wordmark" href="#top" aria-label="Tanvir Hasan home">TH<span>.</span></a>
         <nav class="nav-links" id="primary-navigation" aria-label="Primary navigation">
+          <a href="#workbench">workbench <span>00</span></a>
           <a href="#work">work <span>01</span></a>
           <a href="#writing">writing <span>02</span></a>
           <a href="#education">education <span>03</span></a>
@@ -75,6 +75,23 @@
         <section class="ticker" aria-label="Areas of practice">
           <div class="ticker-track">
             <span>DEEP LEARNING</span><b>✳</b><span>CYBERSECURITY</span><b>✳</b><span>DISTRIBUTED SYSTEMS</span><b>✳</b><span>EXPLAINABLE AI</span><b>✳</b><span>DEEP LEARNING</span><b>✳</b><span>CYBERSECURITY</span><b>✳</b>
+          </div>
+        </section>
+
+        <section class="workbench-section section-rule" id="workbench" aria-label="Interactive Developer Workbench">
+          <div class="workbench-heading">
+            <div class="workbench-meta">
+              <p class="section-index">00 / The Workbench</p>
+              <div class="workbench-status-badge">
+                <span class="workbench-ping-dot" aria-hidden="true"></span>
+                <span>RETRO-FUTURIST TYPING TERMINAL</span>
+              </div>
+            </div>
+            <h2>Building<br /><span>in real-time.</span></h2>
+            <p class="section-note">An isometric 3D mechanical keyboard running hardware keystroke emulation. Click keys or type on your keyboard to interact with the CRT display.</p>
+          </div>
+          <div id="keyboard-root" class="keyboard-mount-box">
+            <!-- Rendered dynamically via React TypingKeyboard -->
           </div>
         </section>
 
@@ -1065,7 +1082,7 @@
               <div class="project-award-tag space-award-tag">&#128640; NASA Space Apps Challenge 2026 &middot; Local Event: Dhaka, Bangladesh</div>
               <h3>ShadowAstra Atlas</h3>
               <p>Challenge: <em>Identify Earth Locations that Analog the Permanent Moon Base Locations and Mars</em>. Geospatial AI &amp; terrain comparative framework matching extreme terrestrial environments (geology, thermal cycles, radiation analogs) to sustainable permanent lunar bases and martian habitats.</p>
-              <a href="https://www.spaceappschallenge.org/" target="_blank" rel="noreferrer" class="text-link" title="NASA Space Apps Challenge Global Event">Explore Challenge <svg class="pixel-arrow" viewBox="0 0 90 90" aria-hidden="true"><g fill="currentColor" stroke="rgba(255,255,255,0.35)" stroke-width="0.8"><polygon points="10,10 20,20 10,30 0,20"/><polygon points="30,10 40,20 30,30 20,20"/><polygon points="50,10 60,20 50,30 40,20"/><polygon points="70,30 80,40 70,50 60,40"/><polygon points="70,50 80,60 70,70 60,60"/><polygon points="70,70 80,80 70,90 60,80"/><polygon points="80,0 90,10 80,20 70,10"/><polygon points="70,10 80,20 70,30 60,20"/><polygon points="60,20 70,30 60,40 50,30"/><polygon points="50,30 60,40 50,50 40,40"/><polygon points="40,40 50,50 40,60 30,50"/><polygon points="30,50 40,60 30,70 20,60"/><polygon points="20,60 30,70 20,80 10,70"/><polygon points="10,70 20,80 10,90 0,80"/></g></svg></a>
+              <a href="https://shadowastra-atlas.vercel.app/" target="_blank" rel="noreferrer" class="text-link" title="Open live ShadowAstra Atlas platform">Launch live system <svg class="pixel-arrow" viewBox="0 0 90 90" aria-hidden="true"><g fill="currentColor" stroke="rgba(255,255,255,0.35)" stroke-width="0.8"><polygon points="10,10 20,20 10,30 0,20"/><polygon points="30,10 40,20 30,30 20,20"/><polygon points="50,10 60,20 50,30 40,20"/><polygon points="70,30 80,40 70,50 60,40"/><polygon points="70,50 80,60 70,70 60,60"/><polygon points="70,70 80,80 70,90 60,80"/><polygon points="80,0 90,10 80,20 70,10"/><polygon points="70,10 80,20 70,30 60,20"/><polygon points="60,20 70,30 60,40 50,30"/><polygon points="50,30 60,40 50,50 40,40"/><polygon points="40,40 50,50 40,60 30,50"/><polygon points="30,50 40,60 30,70 20,60"/><polygon points="20,60 30,70 20,80 10,70"/><polygon points="10,70 20,80 10,90 0,80"/></g></svg></a>
             </article>
           </div>
         </section>
@@ -1103,10 +1120,10 @@
                     </span>
                     <svg class="pixel-arrow pixel-arrow-orange" viewBox="0 0 90 90" aria-hidden="true"><g fill="currentColor" stroke="rgba(255,255,255,0.35)" stroke-width="0.8"><polygon points="10,10 20,20 10,30 0,20"/><polygon points="30,10 40,20 30,30 20,20"/><polygon points="50,10 60,20 50,30 40,20"/><polygon points="70,30 80,40 70,50 60,40"/><polygon points="70,50 80,60 70,70 60,60"/><polygon points="70,70 80,80 70,90 60,80"/><polygon points="80,0 90,10 80,20 70,10"/><polygon points="70,10 80,20 70,30 60,20"/><polygon points="60,20 70,30 60,40 50,30"/><polygon points="50,30 60,40 50,50 40,40"/><polygon points="40,40 50,50 40,60 30,50"/><polygon points="30,50 40,60 30,70 20,60"/><polygon points="20,60 30,70 20,80 10,70"/><polygon points="10,70 20,80 10,90 0,80"/></g></svg>
                   </a>
-                  <a href="https://www.researchgate.net/profile/Md-Tanvir-Hasan-13" target="_blank" rel="noreferrer" class="vertical-profile-item" id="rg-profile-link" title="ResearchGate (4 Citations)">
+                  <a href="https://www.researchgate.net/profile/Md-Tanvir-Hasan-13" target="_blank" rel="noreferrer" class="vertical-profile-item" id="rg-profile-link" title="ResearchGate (3 Citations)">
                     <span class="vpi-meta">
                       <strong class="vpi-name">Researchgate</strong>
-                      <span class="vpi-info">(4 Citations &middot; Md-Tanvir-Hasan-13)</span>
+                      <span class="vpi-info">(3 Citations &middot; Md-Tanvir-Hasan-13)</span>
                     </span>
                     <svg class="pixel-arrow pixel-arrow-orange" viewBox="0 0 90 90" aria-hidden="true"><g fill="currentColor" stroke="rgba(255,255,255,0.35)" stroke-width="0.8"><polygon points="10,10 20,20 10,30 0,20"/><polygon points="30,10 40,20 30,30 20,20"/><polygon points="50,10 60,20 50,30 40,20"/><polygon points="70,30 80,40 70,50 60,40"/><polygon points="70,50 80,60 70,70 60,60"/><polygon points="70,70 80,80 70,90 60,80"/><polygon points="80,0 90,10 80,20 70,10"/><polygon points="70,10 80,20 70,30 60,20"/><polygon points="60,20 70,30 60,40 50,30"/><polygon points="50,30 60,40 50,50 40,40"/><polygon points="40,40 50,50 40,60 30,50"/><polygon points="30,50 40,60 30,70 20,60"/><polygon points="20,60 30,70 20,80 10,70"/><polygon points="10,70 20,80 10,90 0,80"/></g></svg>
                   </a>
@@ -1374,7 +1391,7 @@
             </article>
             <article class="activity-entry">
               <div class="activity-date">October 2026</div>
-              <div class="activity-detail"><h3>NASA Space Apps Challenge 2026 &ndash; Dhaka, Bangladesh</h3><p>Global Hackathon &middot; Challenge: <em>Identify Earth Locations that Analog the Permanent Moon Base Locations and Mars</em> &middot; Project <strong>ShadowAstra Atlas</strong></p></div>
+              <div class="activity-detail"><h3>NASA Space Apps Challenge 2026 &ndash; Dhaka, Bangladesh</h3><p>Global Hackathon &middot; Challenge: <em>Identify Earth Locations that Analog the Permanent Moon Base Locations and Mars</em> &middot; Project <strong>ShadowAstra Atlas</strong> (<a href="https://shadowastra-atlas.vercel.app/" target="_blank" rel="noreferrer" class="activity-link">shadowastra-atlas.vercel.app ↗</a>)</p></div>
             </article>
             <article class="activity-entry">
               <div class="activity-date">March 2026</div>
@@ -1407,7 +1424,9 @@
       </svg>
     </button>
     <div class="toast" role="status" aria-live="polite">Email copied to clipboard</div>
-    <script type="module" src="./script.js"></script>
-    <script type="module" src="./research-timeline.js"></script>
+    <script type="module" src="script.js"></script>
+    <script type="module" src="/src/mount-astronaut.tsx"></script>
+    <script type="module" src="/src/mount-keyboard.tsx"></script>
+    <script type="module" src="/src/research-timeline.ts"></script>
   </body>
 </html>

@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 805 812" width="805" height="812">
+  <rect width="805" height="812" fill="#6e8cff" />
+  <!-- Marks -->
+  <path d="M106 708V732M94 720H118" stroke="#171717" stroke-width="5" stroke-linecap="square" />
+  <path d="M720 323V347M708 335H732" stroke="#171717" stroke-width="5" stroke-linecap="square" />
+  <!-- Sun -->
+  <circle cx="323" cy="176" r="176" fill="#ff6545" />
+  <!-- Green body & neck group -->
+  <g transform="rotate(-4.2, 435, 560)">
+    <path d="M 215 830 L 215 532 A 217.5 217.5 0 0 1 650 532 L 650 830 Z" fill="#d9f44b" stroke="#171717" stroke-width="4.5" stroke-linejoin="round" />
+    <rect x="462" y="295" width="106" height="200" fill="#f0b889" stroke="#171717" stroke-width="4.5" stroke-linejoin="round" />
+  </g>
+  <!-- Black oval arm -->
+  <ellipse cx="567" cy="291" rx="163" ry="62" transform="rotate(-48.6, 567, 291)" fill="#171717" />
+  <!-- Head circle -->
+  <circle cx="546" cy="129" r="111" fill="#f0b889" stroke="#171717" stroke-width="4.5" />
+</svg>

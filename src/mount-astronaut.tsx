@@ -53,36 +53,10 @@ export const SpaceSceneAstronaut: React.FC = () => {
   );
 };
 
-export function mountAstronaut(): boolean {
-  const rootEl = document.getElementById('astronaut-root');
-  if (!rootEl) return false;
-  if (rootEl.hasAttribute('data-astra-mounted')) return true;
-
-  try {
-    rootEl.setAttribute('data-astra-mounted', 'true');
-    const root = ReactDOM.createRoot(rootEl);
-    root.render(<SpaceSceneAstronaut />);
-    return true;
-  } catch (err) {
-    console.error('[Astra] Error mounting astronaut:', err);
-    rootEl.removeAttribute('data-astra-mounted');
-    return false;
-  }
+const rootEl = document.getElementById('astronaut-root');
+if (rootEl) {
+  const root = ReactDOM.createRoot(rootEl);
+  root.render(<SpaceSceneAstronaut />);
 }
-
-if (document.readyState === 'interactive' || document.readyState === 'complete') {
-  mountAstronaut();
-} else {
-  document.addEventListener('DOMContentLoaded', () => mountAstronaut());
-}
-window.addEventListener('load', () => mountAstronaut());
-
-let astraAttempts = 0;
-const astraTimer = setInterval(() => {
-  astraAttempts++;
-  if (mountAstronaut() || astraAttempts >= 30) {
-    clearInterval(astraTimer);
-  }
-}, 100);
 
 export default SpaceSceneAstronaut;

@@ -416,7 +416,7 @@ export class ResearchTimelineComponent {
       tip.className = 'timeline-tooltip';
       tip.setAttribute('role', 'tooltip');
       tip.setAttribute('aria-hidden', 'true');
-      (document.body || this.container).appendChild(tip);
+      document.body.appendChild(tip);
     }
     this.tooltipEl = tip;
   }
@@ -1238,54 +1238,10 @@ export class ResearchTimelineComponent {
   }
 }
 
-// Auto-mount when DOM is ready with multi-stage fallback
-export function mountResearchTimeline(): boolean {
+// Auto-mount when DOM is ready
+document.addEventListener('DOMContentLoaded', () => {
   const mountPoint = document.getElementById('d3-timeline-mount');
-  if (!mountPoint) {
-    return false;
-  }
-  if (mountPoint.hasAttribute('data-timeline-mounted')) {
-    return true;
-  }
-
-  try {
-    mountPoint.setAttribute('data-timeline-mounted', 'true');
+  if (mountPoint) {
     new ResearchTimelineComponent('d3-timeline-mount');
-    return true;
-  } catch (err) {
-    console.error('[Timeline] Failed to initialize timeline:', err);
-    mountPoint.removeAttribute('data-timeline-mounted');
-    return false;
   }
-}
-
-// Global exposure for debugging or manual re-trigger
-if (typeof window !== 'undefined') {
-  (window as unknown as { mountResearchTimeline: typeof mountResearchTimeline }).mountResearchTimeline = mountResearchTimeline;
-  (window as unknown as { ResearchTimelineComponent: typeof ResearchTimelineComponent }).ResearchTimelineComponent = ResearchTimelineComponent;
-}
-
-// 1. If DOM is already interactive or complete, mount immediately
-if (document.readyState === 'interactive' || document.readyState === 'complete') {
-  mountResearchTimeline();
-} else {
-  // 2. Otherwise listen for DOMContentLoaded
-  document.addEventListener('DOMContentLoaded', () => {
-    mountResearchTimeline();
-  });
-}
-
-// 3. Fallback on window load in case DOMContentLoaded was missed
-window.addEventListener('load', () => {
-  mountResearchTimeline();
 });
-
-// 4. Polling fallback (up to 3 seconds) for any deferred/slow bundle execution
-let pollAttempts = 0;
-const pollTimer = setInterval(() => {
-  pollAttempts++;
-  if (mountResearchTimeline() || pollAttempts >= 30) {
-    clearInterval(pollTimer);
-  }
-}, 100);
-

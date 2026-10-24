@@ -4626,3 +4626,97 @@ html[data-theme=dark] .timeline-tooltip {
     padding: 5px 8px;
   }
 }
+
+/* ==========================================================================
+   00: The Workbench (Interactive 3D Typing Terminal)
+   ========================================================================== */
+.workbench-section {
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  background: var(--paper);
+  position: relative;
+  overflow: hidden;
+}
+
+.workbench-heading {
+  padding: 44px 36px;
+  border-right: var(--line);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 18px;
+  background: var(--paper);
+}
+
+.workbench-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.workbench-status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 10px;
+  background: rgba(23, 23, 23, 0.05);
+  border: 1px solid var(--soft-line);
+  font-family: var(--mono);
+  font-size: 10.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 700;
+  color: var(--ink);
+  width: fit-content;
+}
+
+html[data-theme=dark] .workbench-status-badge {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.16);
+  color: #fff;
+}
+
+.workbench-ping-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: var(--coral, #ff6545);
+  box-shadow: 0 0 6px var(--coral, #ff6545);
+  animation: wb-pulse-ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+@keyframes wb-pulse-ping {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.85); }
+}
+
+.keyboard-mount-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 560px;
+  background: radial-gradient(circle at center, rgba(59, 130, 246, 0.03) 0%, transparent 70%);
+  padding: 16px;
+  position: relative;
+  overflow: hidden;
+}
+
+html[data-theme=dark] .keyboard-mount-box {
+  background: radial-gradient(circle at center, rgba(59, 130, 246, 0.08) 0%, rgba(0, 0, 0, 0.25) 75%);
+}
+
+@media (max-width: 980px) {
+  .workbench-section {
+    grid-template-columns: 1fr;
+  }
+  .workbench-heading {
+    border-right: none;
+    border-bottom: var(--line);
+    padding: 32px 24px;
+  }
+  .keyboard-mount-box {
+    min-height: 440px;
+    padding: 8px;
+  }
+}
+
