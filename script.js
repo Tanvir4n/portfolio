@@ -933,25 +933,31 @@ function initTypingKeyboard() {
     if (!mainAssembly || !kbRoot) return;
     const w = kbRoot.clientWidth || window.innerWidth;
     let s = 0.82;
-    let y = 40;
-    if (w < 380) {
-      s = Math.min(0.38, Math.max(0.30, (w - 14) / 800));
+    let y = 45;
+    if (w < 340) {
+      s = 0.34;
       y = 12;
+    } else if (w < 380) {
+      s = 0.39;
+      y = 15;
     } else if (w < 480) {
-      s = Math.min(0.46, Math.max(0.36, (w - 16) / 800));
-      y = 16;
+      s = Math.min(0.46, Math.max(0.39, (w - 16) / 800));
+      y = 18;
     } else if (w < 640) {
-      s = 0.55;
-      y = 22;
+      s = 0.52;
+      y = 25;
     } else if (w < 820) {
-      s = 0.68;
+      s = 0.66;
       y = 30;
     } else if (w < 1024) {
-      s = 0.78;
+      s = 0.74;
       y = 36;
+    } else {
+      s = 0.82;
+      y = 45;
     }
-    mainAssembly.style.transform = `scale(${s}) translateY(${y}px)`;
-    mainAssembly.style.webkitTransform = `scale(${s}) translateY(${y}px)`;
+    mainAssembly.style.setProperty('transform', `scale(${s}) translateY(${y}px)`, 'important');
+    mainAssembly.style.setProperty('-webkit-transform', `scale(${s}) translateY(${y}px)`, 'important');
   }
   updateResponsiveScale();
   window.addEventListener('resize', updateResponsiveScale);

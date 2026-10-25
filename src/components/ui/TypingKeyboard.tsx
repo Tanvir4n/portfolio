@@ -82,6 +82,7 @@ export function TypingKeyboard({
   const [activeAccent, setActiveAccent] = useState(accentColor);
   const [activeSecondary, setActiveSecondary] = useState(secondaryAccent);
   const [effectiveScale, setEffectiveScale] = useState(scale ?? 0.82);
+  const [effectiveTranslateY, setEffectiveTranslateY] = useState(45);
   const [isTypingManual, setIsTypingManual] = useState(false);
   const [sfxEnabled, setSfxEnabled] = useState(true);
   const [isInViewport, setIsInViewport] = useState(false);
@@ -184,17 +185,28 @@ export function TypingKeyboard({
     const updateScale = () => {
       if (!containerRef.current) return;
       const w = containerRef.current.clientWidth || window.innerWidth;
-      if (w < 480) {
-        const mobileScale = Math.min(0.46, Math.max(0.33, (w - 16) / 800));
+      if (w < 340) {
+        setEffectiveScale(0.34);
+        setEffectiveTranslateY(12);
+      } else if (w < 380) {
+        setEffectiveScale(0.39);
+        setEffectiveTranslateY(15);
+      } else if (w < 480) {
+        const mobileScale = Math.min(0.46, Math.max(0.39, (w - 16) / 800));
         setEffectiveScale(mobileScale);
+        setEffectiveTranslateY(18);
       } else if (w < 640) {
-        setEffectiveScale(0.55);
+        setEffectiveScale(0.52);
+        setEffectiveTranslateY(25);
       } else if (w < 820) {
-        setEffectiveScale(0.68);
+        setEffectiveScale(0.66);
+        setEffectiveTranslateY(30);
       } else if (w < 1024) {
-        setEffectiveScale(0.78);
+        setEffectiveScale(0.74);
+        setEffectiveTranslateY(36);
       } else {
-        setEffectiveScale(0.85);
+        setEffectiveScale(0.82);
+        setEffectiveTranslateY(45);
       }
     };
     updateScale();
@@ -386,6 +398,8 @@ export function TypingKeyboard({
         }
         .tk-container {
           width: 100%;
+          max-width: 100%;
+          box-sizing: border-box;
           height: 520px;
           display: flex;
           justify-content: center;
@@ -408,14 +422,17 @@ export function TypingKeyboard({
           min-height: 560px !important;
           flex-shrink: 0 !important;
           flex-grow: 0 !important;
-          position: relative;
+          position: absolute !important;
+          left: 50% !important;
+          top: 50% !important;
+          margin-left: -400px !important;
+          margin-top: -230px !important;
           cursor: pointer;
-          transform: scale(${effectiveScale}) translateY(40px);
-          -webkit-transform: scale(${effectiveScale}) translateY(40px);
+          transform: scale(${effectiveScale}) translateY(${effectiveTranslateY}px);
+          -webkit-transform: scale(${effectiveScale}) translateY(${effectiveTranslateY}px);
           transform-origin: center center;
           -webkit-transform-origin: center center;
           transition: transform 0.25s ease-out;
-          margin-top: 30px;
           overflow: visible !important;
         }
         .tk-flex { display: flex; justify-content: center; align-items: center; }
@@ -767,6 +784,92 @@ export function TypingKeyboard({
           box-shadow: 2px 2px 0 #000;
           color: #fff;
         }
+
+        /* Responsive Mobile Styling */
+        @media (max-width: 1024px) {
+          .tk-main {
+            margin-top: -235px !important;
+          }
+        }
+        @media (max-width: 820px) {
+          .tk-main {
+            margin-top: -240px !important;
+          }
+        }
+        @media (max-width: 640px) {
+          .tk-top-bar {
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: center !important;
+            justify-content: center !important;
+            gap: 8px !important;
+            margin-bottom: 12px !important;
+            padding: 0 4px !important;
+            width: 100% !important;
+          }
+          .tk-controls {
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            flex-wrap: wrap !important;
+            gap: 6px !important;
+            font-size: 10px !important;
+          }
+          .tk-main {
+            margin-top: -245px !important;
+          }
+          .tk-container {
+            height: 380px !important;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .tk-top-bar {
+            font-size: 9px !important;
+            gap: 6px !important;
+            margin-bottom: 8px !important;
+          }
+          .tk-hint-pill {
+            padding: 3px 8px !important;
+            font-size: 9.5px !important;
+          }
+          .tk-controls {
+            gap: 5px !important;
+            font-size: 8.5px !important;
+          }
+          .tk-sfx-toggle {
+            font-size: 8.5px !important;
+            padding: 2.5px 6px !important;
+          }
+          .tk-palette-btn {
+            width: 16px !important;
+            height: 16px !important;
+          }
+          .tk-main {
+            margin-top: -250px !important;
+          }
+          .tk-container {
+            height: 340px !important;
+          }
+        }
+
+        @media (max-width: 380px) {
+          .tk-main {
+            margin-top: -255px !important;
+          }
+          .tk-container {
+            height: 310px !important;
+          }
+        }
+
+        @media (max-width: 340px) {
+          .tk-main {
+            margin-top: -260px !important;
+          }
+          .tk-container {
+            height: 280px !important;
+          }
+        }
       `}</style>
 
       {showControls && (
@@ -844,6 +947,7 @@ export function TypingKeyboard({
       <div className="tk-container">
         <div
           className="tk-main tk-flex"
+          id="tk-main-assembly"
           ref={mainRef}
           onClick={() => {
             const sampleKeys = [65, 83, 68, 70, 74, 75, 76, 32, 13];
