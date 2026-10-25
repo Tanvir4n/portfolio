@@ -908,4 +908,256 @@ function setupStatsScramble() {
 
 setupStatsScramble();
 
+// ==========================================================================
+// 3D Isometric Mechanical Keyboard & CRT Terminal Engine
+// ==========================================================================
+function initTypingKeyboard() {
+  const kbRoot = document.getElementById('keyboard-root');
+  if (!kbRoot) return;
+
+  const kbBody = document.getElementById('tk-keyboard-body');
+  const screenText = document.getElementById('tk-screen-text');
+  const scrollBox = document.getElementById('tk-screen-scrollbox');
+  const sfxBtn = document.getElementById('tk-sfx-btn');
+  const paletteBtns = kbRoot.querySelectorAll('.tk-palette-btn');
+  const mainAssembly = document.getElementById('tk-main-assembly');
+
+  if (!kbBody || !screenText) return;
+
+  // Set fixed isometric perspective with WebKit vendor prefix
+  kbBody.style.transform = 'perspective(10000px) rotateX(55deg) rotateZ(-30deg)';
+  kbBody.style.webkitTransform = 'perspective(10000px) rotateX(55deg) rotateZ(-30deg)';
+
+  // Continuous responsive scale calculation for all phone screens
+  function updateResponsiveScale() {
+    if (!mainAssembly || !kbRoot) return;
+    const w = kbRoot.clientWidth || window.innerWidth;
+    let s = 0.82;
+    let y = 40;
+    if (w < 380) {
+      s = Math.min(0.38, Math.max(0.30, (w - 14) / 800));
+      y = 12;
+    } else if (w < 480) {
+      s = Math.min(0.46, Math.max(0.36, (w - 16) / 800));
+      y = 16;
+    } else if (w < 640) {
+      s = 0.55;
+      y = 22;
+    } else if (w < 820) {
+      s = 0.68;
+      y = 30;
+    } else if (w < 1024) {
+      s = 0.78;
+      y = 36;
+    }
+    mainAssembly.style.transform = `scale(${s}) translateY(${y}px)`;
+    mainAssembly.style.webkitTransform = `scale(${s}) translateY(${y}px)`;
+  }
+  updateResponsiveScale();
+  window.addEventListener('resize', updateResponsiveScale);
+
+  const allKeys = kbBody.querySelectorAll('.tk-key');
+
+  const KC_MAP = {
+    81: 15, 87: 16, 69: 17, 82: 18, 84: 19, 89: 20, 85: 21, 73: 22, 79: 23, 80: 24,
+    65: 29, 83: 30, 68: 31, 70: 32, 71: 33, 72: 34, 74: 35, 75: 36, 76: 37,
+    90: 41, 88: 42, 67: 43, 86: 44, 66: 45, 78: 46, 77: 47,
+    32: 56, 13: 39, 8: 13,
+  };
+
+  const autoTypeText = "Hi, I’m Tanvir. A curious developer, passionate about AI, and obsessed with building things that matter. Crafted with ambition, driven by curiosity, and always building something new.";
+  const typingSpeed = [35, 95];
+
+  let sfxEnabled = true;
+  let isInViewport = false;
+  let isTypingManual = false;
+  let manualTimer = null;
+  let sharedAudioCtx = null;
+
+  function getAudioContext() {
+    try {
+      if (!sharedAudioCtx) {
+        const AudioCtx = window.AudioContext || window.webkitAudioContext;
+        if (!AudioCtx) return null;
+        sharedAudioCtx = new AudioCtx();
+      }
+      if (sharedAudioCtx.state === 'suspended') {
+        sharedAudioCtx.resume();
+      }
+      return sharedAudioCtx;
+    } catch {
+      return null;
+    }
+  }
+
+  function playClickSound() {
+    if (!sfxEnabled || !isInViewport || document.hidden) return;
+    try {
+      const ctx = getAudioContext();
+      if (!ctx) return;
+      if (ctx.state === 'suspended') {
+        ctx.resume();
+      }
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      const now = ctx.currentTime;
+      osc.type = 'sine';
+      const freq = 600 + (Math.random() - 0.5) * 160;
+      osc.frequency.setValueAtTime(freq, now);
+      osc.frequency.exponentialRampToValueAtTime(140, now + 0.028);
+
+      gain.gain.setValueAtTime(0.06, now);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.028);
+
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start(now);
+      osc.stop(now + 0.03);
+    } catch {}
+  }
+
+  // Viewport tracking for sound
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        isInViewport = entry.isIntersecting && entry.intersectionRatio > 0.1;
+        updateSfxUI();
+      });
+    }, { threshold: [0, 0.1, 0.3] });
+    observer.observe(kbRoot);
+  } else {
+    isInViewport = true;
+  }
+
+  function updateSfxUI() {
+    if (!sfxBtn) return;
+    const icon = sfxBtn.querySelector('.tk-sfx-icon');
+    const label = sfxBtn.querySelector('.tk-sfx-label');
+    if (icon && label) {
+      icon.textContent = sfxEnabled ? (isInViewport ? '🔊' : '🔈') : '🔇';
+      label.textContent = sfxEnabled ? (isInViewport ? 'SFX: ON' : 'STANDBY') : 'SFX: OFF';
+    }
+  }
+
+  if (sfxBtn) {
+    sfxBtn.addEventListener('click', () => {
+      sfxEnabled = !sfxEnabled;
+      if (sfxEnabled) {
+        const ctx = getAudioContext();
+        if (ctx && ctx.state === 'suspended') ctx.resume();
+      }
+      updateSfxUI();
+    });
+  }
+
+  // Palette buttons
+  paletteBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const accent = btn.dataset.accent;
+      const secondary = btn.dataset.secondary;
+      if (accent) document.documentElement.style.setProperty('--tk-accent', accent);
+      if (secondary) document.documentElement.style.setProperty('--tk-secondary', secondary);
+    });
+  });
+
+  function pressKey(kc) {
+    const domIdx = KC_MAP[kc];
+    if (domIdx !== undefined && allKeys[domIdx]) {
+      const el = allKeys[domIdx];
+      el.classList.add('tk-key--down');
+      playClickSound();
+      setTimeout(() => el.classList.remove('tk-key--down'), 90);
+    }
+  }
+
+  // Auto-typing loop
+  let charIdx = 0;
+  screenText.textContent = '';
+
+  function typeNext() {
+    if (isTypingManual) {
+      setTimeout(typeNext, 500);
+      return;
+    }
+    const char = autoTypeText[charIdx];
+    if (char !== undefined) {
+      const kc = char === ' ' ? 32 : char.toUpperCase().charCodeAt(0);
+      pressKey(kc);
+      screenText.textContent += char;
+      if (scrollBox) scrollBox.scrollTop = scrollBox.scrollHeight;
+    }
+    charIdx++;
+    if (charIdx >= autoTypeText.length) {
+      setTimeout(() => {
+        screenText.textContent = '';
+        charIdx = 0;
+        setTimeout(typeNext, 1200);
+      }, 3000);
+    } else {
+      const delay = typingSpeed[0] + Math.random() * (typingSpeed[1] - typingSpeed[0]);
+      setTimeout(typeNext, delay);
+    }
+  }
+
+  setTimeout(typeNext, 1000);
+
+  // Key press listener
+  window.addEventListener('keydown', (e) => {
+    const tag = e.target && e.target.tagName ? e.target.tagName.toLowerCase() : '';
+    if (tag === 'input' || tag === 'textarea') return;
+    const kc = e.keyCode || e.which;
+    if (KC_MAP[kc] !== undefined) {
+      pressKey(kc);
+      isTypingManual = true;
+      if (kc === 8) {
+        screenText.textContent = screenText.textContent.slice(0, -1);
+      } else if (kc === 13) {
+        screenText.innerHTML += '<br/>';
+      } else if (kc === 32) {
+        screenText.textContent += ' ';
+      } else if (e.key && e.key.length === 1) {
+        screenText.textContent += e.key;
+      }
+      if (scrollBox) scrollBox.scrollTop = scrollBox.scrollHeight;
+      clearTimeout(manualTimer);
+      manualTimer = setTimeout(() => { isTypingManual = false; }, 5000);
+    }
+  });
+
+  // Click or touch on keyboard to trigger random key or specific clicked key
+  if (mainAssembly) {
+    const handleKeyInteraction = (e) => {
+      const keyEl = e.target.closest('.tk-key');
+      if (keyEl) {
+        keyEl.classList.add('tk-key--down');
+        playClickSound();
+        setTimeout(() => keyEl.classList.remove('tk-key--down'), 90);
+      } else {
+        const sampleKeys = [65, 83, 68, 70, 74, 75, 76, 32, 13];
+        const rand = sampleKeys[Math.floor(Math.random() * sampleKeys.length)];
+        pressKey(rand);
+      }
+    };
+    mainAssembly.addEventListener('click', handleKeyInteraction);
+    mainAssembly.addEventListener('touchend', (e) => {
+      handleKeyInteraction(e);
+    }, { passive: true });
+  }
+
+  // Audio unlock listener
+  const unlockAudio = () => {
+    if (sharedAudioCtx && sharedAudioCtx.state === 'suspended') {
+      sharedAudioCtx.resume();
+    }
+  };
+  window.addEventListener('click', unlockAudio, { once: true });
+  window.addEventListener('touchstart', unlockAudio, { once: true });
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initTypingKeyboard);
+} else {
+  initTypingKeyboard();
+}
+
 

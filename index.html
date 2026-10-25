@@ -91,7 +91,142 @@
             <p class="section-note">An isometric 3D mechanical keyboard running hardware keystroke emulation. Click keys or type on your keyboard to interact with the CRT display.</p>
           </div>
           <div id="keyboard-root" class="keyboard-mount-box">
-            <!-- Rendered dynamically via React TypingKeyboard -->
+            <div class="tk-wrapper">
+              <div class="tk-top-bar">
+                <div class="tk-hint-pill">
+                  <span style="color: var(--tk-accent, #3b82f6)">●</span>
+                  <span class="tk-status-text">LIVE ISOMETRIC TERMINAL</span>
+                </div>
+                <div class="tk-controls">
+                  <button type="button" class="tk-sfx-toggle" id="tk-sfx-btn" title="Toggle Mechanical Key Sounds">
+                    <span class="tk-sfx-icon">🔊</span>
+                    <span class="tk-sfx-label">SFX: ON</span>
+                  </button>
+                  <span>THEME:</span>
+                  <button type="button" class="tk-palette-btn" style="background-color: #3b82f6" data-accent="#3b82f6" data-secondary="#ff6545" title="Cobalt Blue HUD"></button>
+                  <button type="button" class="tk-palette-btn" style="background-color: #10b981" data-accent="#10b981" data-secondary="#dbfe38" title="Matrix Cyber Green"></button>
+                  <button type="button" class="tk-palette-btn" style="background-color: #a855f7" data-accent="#a855f7" data-secondary="#ff6545" title="Neon Violet"></button>
+                  <button type="button" class="tk-palette-btn" style="background-color: #ff6545" data-accent="#ff6545" data-secondary="#3b82f6" title="Amber Solar Coral"></button>
+                </div>
+              </div>
+
+              <div class="tk-container">
+                <div class="tk-main tk-flex" id="tk-main-assembly" title="Click keys or type on your keyboard!">
+                  <div class="tk-desk-shadow"></div>
+                  <div class="tk-keyboard tk-flex" id="tk-keyboard-body">
+                    <!-- Monitor Screen -->
+                    <div class="tk-screen" id="tk-screen-monitor">
+                      <div class="tk-screen-glass"></div>
+                      <div class="tk-screen-scanlines"></div>
+                      <div class="tk-screen-header">
+                        <div class="tk-screen-dots">
+                          <span class="tk-dot tk-dot-red"></span>
+                          <span class="tk-dot tk-dot-yellow"></span>
+                          <span class="tk-dot tk-dot-green"></span>
+                        </div>
+                        <span class="tk-screen-title">TTY1 // TANVIR_KERNEL</span>
+                        <span class="tk-screen-badge">REC ●</span>
+                      </div>
+                      <div class="tk-screen-body" id="tk-screen-scrollbox">
+                        <span class="tk-prompt">tanvir@core:~$ </span>
+                        <span class="tk-screen-text" id="tk-screen-text">Hi, I’m Tanvir. A curious developer, passionate about AI...</span>
+                        <span class="tk-cursor">█</span>
+                      </div>
+                    </div>
+
+                    <div class="tk-keyboard__front tk-face"></div>
+                    <div class="tk-keyboard__back tk-face"></div>
+                    <div class="tk-keyboard__right tk-face"></div>
+                    <div class="tk-keyboard__left tk-face"></div>
+                    <div class="tk-keyboard__top tk-face">
+                      <!-- Row 1: 14 keys -->
+                      <div class="tk-keys">
+                        <div class="tk-key tk-flex"><div class="tk-key__front tk-face tk-face--b3"></div><div class="tk-key__back tk-face tk-face--b1"></div><div class="tk-key__right tk-face tk-face--b1"></div><div class="tk-key__left tk-face tk-face--b2"></div><div class="tk-key__top tk-face tk-face--b1"><span class="tk-key__legend"><span class="tk-key__main-label">ESC</span></span></div><div class="tk-key__bottom tk-face tk-face--b2"></div></div>
+                        <div class="tk-key tk-flex"><div class="tk-key__front tk-face"></div><div class="tk-key__back tk-face"></div><div class="tk-key__right tk-face"></div><div class="tk-key__left tk-face"></div><div class="tk-key__top tk-face"><span class="tk-key__legend"><span class="tk-key__sublegend">!</span><span class="tk-key__main-label">1</span></span></div><div class="tk-key__bottom tk-face"></div></div>
+                        <div class="tk-key tk-flex"><div class="tk-key__front tk-face"></div><div class="tk-key__back tk-face"></div><div class="tk-key__right tk-face"></div><div class="tk-key__left tk-face"></div><div class="tk-key__top tk-face"><span class="tk-key__legend"><span class="tk-key__sublegend">@</span><span class="tk-key__main-label">2</span></span></div><div class="tk-key__bottom tk-face"></div></div>
+                        <div class="tk-key tk-flex"><div class="tk-key__front tk-face"></div><div class="tk-key__back tk-face"></div><div class="tk-key__right tk-face"></div><div class="tk-key__left tk-face"></div><div class="tk-key__top tk-face"><span class="tk-key__legend"><span class="tk-key__sublegend">#</span><span class="tk-key__main-label">3</span></span></div><div class="tk-key__bottom tk-face"></div></div>
+                        <div class="tk-key tk-flex"><div class="tk-key__front tk-face"></div><div class="tk-key__back tk-face"></div><div class="tk-key__right tk-face"></div><div class="tk-key__left tk-face"></div><div class="tk-key__top tk-face"><span class="tk-key__legend"><span class="tk-key__sublegend">$</span><span class="tk-key__main-label">4</span></span></div><div class="tk-key__bottom tk-face"></div></div>
+                        <div class="tk-key tk-flex"><div class="tk-key__front tk-face"></div><div class="tk-key__back tk-face"></div><div class="tk-key__right tk-face"></div><div class="tk-key__left tk-face"></div><div class="tk-key__top tk-face"><span class="tk-key__legend"><span class="tk-key__sublegend">%</span><span class="tk-key__main-label">5</span></span></div><div class="tk-key__bottom tk-face"></div></div>
+                        <div class="tk-key tk-flex"><div class="tk-key__front tk-face"></div><div class="tk-key__back tk-face"></div><div class="tk-key__right tk-face"></div><div class="tk-key__left tk-face"></div><div class="tk-key__top tk-face"><span class="tk-key__legend"><span class="tk-key__sublegend">^</span><span class="tk-key__main-label">6</span></span></div><div class="tk-key__bottom tk-face"></div></div>
+                        <div class="tk-key tk-flex"><div class="tk-key__front tk-face"></div><div class="tk-key__back tk-face"></div><div class="tk-key__right tk-face"></div><div class="tk-key__left tk-face"></div><div class="tk-key__top tk-face"><span class="tk-key__legend"><span class="tk-key__sublegend">&amp;</span><span class="tk-key__main-label">7</span></span></div><div class="tk-key__bottom tk-face"></div></div>
+                        <div class="tk-key tk-flex"><div class="tk-key__front tk-face"></div><div class="tk-key__back tk-face"></div><div class="tk-key__right tk-face"></div><div class="tk-key__left tk-face"></div><div class="tk-key__top tk-face"><span class="tk-key__legend"><span class="tk-key__sublegend">*</span><span class="tk-key__main-label">8</span></span></div><div class="tk-key__bottom tk-face"></div></div>
+                        <div class="tk-key tk-flex"><div class="tk-key__front tk-face"></div><div class="tk-key__back tk-face"></div><div class="tk-key__right tk-face"></div><div class="tk-key__left tk-face"></div><div class="tk-key__top tk-face"><span class="tk-key__legend"><span class="tk-key__sublegend">(</span><span class="tk-key__main-label">9</span></span></div><div class="tk-key__bottom tk-face"></div></div>
+                        <div class="tk-key tk-flex"><div class="tk-key__front tk-face"></div><div class="tk-key__back tk-face"></div><div class="tk-key__right tk-face"></div><div class="tk-key__left tk-face"></div><div class="tk-key__top tk-face"><span class="tk-key__legend"><span class="tk-key__sublegend">)</span><span class="tk-key__main-label">0</span></span></div><div class="tk-key__bottom tk-face"></div></div>
+                        <div class="tk-key tk-flex"><div class="tk-key__front tk-face"></div><div class="tk-key__back tk-face"></div><div class="tk-key__right tk-face"></div><div class="tk-key__left tk-face"></div><div class="tk-key__top tk-face"><span class="tk-key__legend"><span class="tk-key__sublegend">_</span><span class="tk-key__main-label">-</span></span></div><div class="tk-key__bottom tk-face"></div></div>
+                        <div class="tk-key tk-flex"><div class="tk-key__front tk-face"></div><div class="tk-key__back tk-face"></div><div class="tk-key__right tk-face"></div><div class="tk-key__left tk-face"></div><div class="tk-key__top tk-face"><span class="tk-key__legend"><span class="tk-key__sublegend">+</span><span class="tk-key__main-label">=</span></span></div><div class="tk-key__bottom tk-face"></div></div>
+                        <div class="tk-key tk-flex tk-key--w2"><div class="tk-key__front tk-face tk-key__front--w2 tk-face--b3"></div><div class="tk-key__back tk-face tk-key__back--w2 tk-face--b1"></div><div class="tk-key__right tk-face tk-key__right--w2 tk-face--b1"></div><div class="tk-key__left tk-face tk-key__left--w2 tk-face--b2"></div><div class="tk-key__top tk-face tk-key__top--w2 tk-face--b1"><span class="tk-key__legend"><span class="tk-key__main-label">BSPC</span></span></div><div class="tk-key__bottom tk-face tk-key__bottom--w2 tk-face--b2"></div></div>
+                      </div>
+
+                      <!-- Row 2: 14 keys -->
+                      <div class="tk-keys">
+                        <div class="tk-key tk-flex tk-key--w2"><div class="tk-key__front tk-face tk-key__front--w2 tk-face--b3"></div><div class="tk-key__back tk-face tk-key__back--w2 tk-face--b1"></div><div class="tk-key__right tk-face tk-key__right--w2 tk-face--b1"></div><div class="tk-key__left tk-face tk-key__left--w2 tk-face--b2"></div><div class="tk-key__top tk-face tk-key__top--w2 tk-face--b1"><span class="tk-key__legend"><span class="tk-key__main-label">TAB</span></span></div><div class="tk-key__bottom tk-face tk-key__bottom--w2 tk-face--b2"></div></div>
+                        <div class="tk-key tk-flex"><div class="tk-key__front tk-face"></div><div class="tk-key__back tk-face"></div><div class="tk-key__right tk-face"></div><div class="tk-key__left tk-face"></div><div class="tk-key__top tk-face"><span class="tk-key__legend"><span class="tk-key__main-label">Q</span></span></div><div class="tk-key__bottom tk-face"></div></div>
+                        <div class="tk-key tk-flex"><div class="tk-key__front tk-face"></div><div class="tk-key__back tk-face"></div><div class="tk-key__right tk-face"></div><div class="tk-key__left tk-face"></div><div class="tk-key__top tk-face"><span class="tk-key__legend"><span class="tk-key__main-label">W</span></span></div><div class="tk-key__bottom tk-face"></div></div>
+                        <div class="tk-key tk-flex"><div class="tk-key__front tk-face"></div><div class="tk-key__back tk-face"></div><div class="tk-key__right tk-face"></div><div class="tk-key__left tk-face"></div><div class="tk-key__top tk-face"><span class="tk-key__legend"><span class="tk-key__main-label">E</span></span></div><div class="tk-key__bottom tk-face"></div></div>
+                        <div class="tk-key tk-flex"><div class="tk-key__front tk-face"></div><div class="tk-key__back tk-face"></div><div class="tk-key__right tk-face"></div><div class="tk-key__left tk-face"></div><div class="tk-key__top tk-face"><span class="tk-key__legend"><span class="tk-key__main-label">R</span></span></div><div class="tk-key__bottom tk-face"></div></div>
+                        <div class="tk-key tk-flex"><div class="tk-key__front tk-face"></div><div class="tk-key__back tk-face"></div><div class="tk-key__right tk-face"></div><div class="tk-key__left tk-face"></div><div class="tk-key__top tk-face"><span class="tk-key__legend"><span class="tk-key__main-label">T</span></span></div><div class="tk-key__bottom tk-face"></div></div>
+                        <div class="tk-key tk-flex"><div class="tk-key__front tk-face"></div><div class="tk-key__back tk-face"></div><div class="tk-key__right tk-face"></div><div class="tk-key__left tk-face"></div><div class="tk-key__top tk-face"><span class="tk-key__legend"><span class="tk-key__main-label">Y</span></span></div><div class="tk-key__bottom tk-face"></div></div>
+                        <div class="tk-key tk-flex"><div class="tk-key__front tk-face"></div><div class="tk-key__back tk-face"></div><div class="tk-key__right tk-face"></div><div class="tk-key__left tk-face"></div><div class="tk-key__top tk-face"><span class="tk-key__legend"><span class="tk-key__main-label">U</span></span></div><div class="tk-key__bottom tk-face"></div></div>
+                        <div class="tk-key tk-flex"><div class="tk-key__front tk-face"></div><div class="tk-key__back tk-face"></div><div class="tk-key__right tk-face"></div><div class="tk-key__left tk-face"></div><div class="tk-key__top tk-face"><span class="tk-key__legend"><span class="tk-key__main-label">I</span></span></div><div class="tk-key__bottom tk-face"></div></div>
+                        <div class="tk-key tk-flex"><div class="tk-key__front tk-face"></div><div class="tk-key__back tk-face"></div><div class="tk-key__right tk-face"></div><div class="tk-key__left tk-face"></div><div class="tk-key__top tk-face"><span class="tk-key__legend"><span class="tk-key__main-label">O</span></span></div><div class="tk-key__bottom tk-face"></div></div>
+                        <div class="tk-key tk-flex"><div class="tk-key__front tk-face"></div><div class="tk-key__back tk-face"></div><div class="tk-key__right tk-face"></div><div class="tk-key__left tk-face"></div><div class="tk-key__top tk-face"><span class="tk-key__legend"><span class="tk-key__main-label">P</span></span></div><div class="tk-key__bottom tk-face"></div></div>
+                        <div class="tk-key tk-flex"><div class="tk-key__front tk-face"></div><div class="tk-key__back tk-face"></div><div class="tk-key__right tk-face"></div><div class="tk-key__left tk-face"></div><div class="tk-key__top tk-face"><span class="tk-key__legend"><span class="tk-key__sublegend">{</span><span class="tk-key__main-label">[</span></span></div><div class="tk-key__bottom tk-face"></div></div>
+                        <div class="tk-key tk-flex"><div class="tk-key__front tk-face"></div><div class="tk-key__back tk-face"></div><div class="tk-key__right tk-face"></div><div class="tk-key__left tk-face"></div><div class="tk-key__top tk-face"><span class="tk-key__legend"><span class="tk-key__sublegend">}</span><span class="tk-key__main-label">]</span></span></div><div class="tk-key__bottom tk-face"></div></div>
+                        <div class="tk-key tk-flex"><div class="tk-key__front tk-face tk-face--b3"></div><div class="tk-key__back tk-face tk-face--b1"></div><div class="tk-key__right tk-face tk-face--b1"></div><div class="tk-key__left tk-face tk-face--b2"></div><div class="tk-key__top tk-face tk-face--b1"><span class="tk-key__legend"><span class="tk-key__sublegend">|</span><span class="tk-key__main-label">\</span></span></div><div class="tk-key__bottom tk-face tk-face--b2"></div></div>
+                      </div>
+
+                      <!-- Row 3: 12 keys -->
+                      <div class="tk-keys">
+                        <div class="tk-key tk-flex tk-key--w3"><div class="tk-key__front tk-face tk-key__front--w3 tk-face--b3"></div><div class="tk-key__back tk-face tk-key__back--w3 tk-face--b1"></div><div class="tk-key__right tk-face tk-key__right--w3 tk-face--b1"></div><div class="tk-key__left tk-face tk-key__left--w3 tk-face--b2"></div><div class="tk-key__top tk-face tk-key__top--w3 tk-face--b1"><span class="tk-key__legend"><span class="tk-key__main-label">CAPS</span></span></div><div class="tk-key__bottom tk-face tk-key__bottom--w3 tk-face--b2"></div></div>
+                        <div class="tk-key tk-flex"><div class="tk-key__front tk-face"></div><div class="tk-key__back tk-face"></div><div class="tk-key__right tk-face"></div><div class="tk-key__left tk-face"></div><div class="tk-key__top tk-face"><span class="tk-key__legend"><span class="tk-key__main-label">A</span></span></div><div class="tk-key__bottom tk-face"></div></div>
+                        <div class="tk-key tk-flex"><div class="tk-key__front tk-face"></div><div class="tk-key__back tk-face"></div><div class="tk-key__right tk-face"></div><div class="tk-key__left tk-face"></div><div class="tk-key__top tk-face"><span class="tk-key__legend"><span class="tk-key__main-label">S</span></span></div><div class="tk-key__bottom tk-face"></div></div>
+                        <div class="tk-key tk-flex"><div class="tk-key__front tk-face"></div><div class="tk-key__back tk-face"></div><div class="tk-key__right tk-face"></div><div class="tk-key__left tk-face"></div><div class="tk-key__top tk-face"><span class="tk-key__legend"><span class="tk-key__main-label">D</span></span></div><div class="tk-key__bottom tk-face"></div></div>
+                        <div class="tk-key tk-flex"><div class="tk-key__front tk-face"></div><div class="tk-key__back tk-face"></div><div class="tk-key__right tk-face"></div><div class="tk-key__left tk-face"></div><div class="tk-key__top tk-face"><span class="tk-key__legend"><span class="tk-key__main-label">F</span><span class="tk-key__homing-notch"></span></span></div><div class="tk-key__bottom tk-face"></div></div>
+                        <div class="tk-key tk-flex"><div class="tk-key__front tk-face"></div><div class="tk-key__back tk-face"></div><div class="tk-key__right tk-face"></div><div class="tk-key__left tk-face"></div><div class="tk-key__top tk-face"><span class="tk-key__legend"><span class="tk-key__main-label">G</span></span></div><div class="tk-key__bottom tk-face"></div></div>
+                        <div class="tk-key tk-flex"><div class="tk-key__front tk-face"></div><div class="tk-key__back tk-face"></div><div class="tk-key__right tk-face"></div><div class="tk-key__left tk-face"></div><div class="tk-key__top tk-face"><span class="tk-key__legend"><span class="tk-key__main-label">H</span></span></div><div class="tk-key__bottom tk-face"></div></div>
+                        <div class="tk-key tk-flex"><div class="tk-key__front tk-face"></div><div class="tk-key__back tk-face"></div><div class="tk-key__right tk-face"></div><div class="tk-key__left tk-face"></div><div class="tk-key__top tk-face"><span class="tk-key__legend"><span class="tk-key__main-label">J</span><span class="tk-key__homing-notch"></span></span></div><div class="tk-key__bottom tk-face"></div></div>
+                        <div class="tk-key tk-flex"><div class="tk-key__front tk-face"></div><div class="tk-key__back tk-face"></div><div class="tk-key__right tk-face"></div><div class="tk-key__left tk-face"></div><div class="tk-key__top tk-face"><span class="tk-key__legend"><span class="tk-key__main-label">K</span></span></div><div class="tk-key__bottom tk-face"></div></div>
+                        <div class="tk-key tk-flex"><div class="tk-key__front tk-face"></div><div class="tk-key__back tk-face"></div><div class="tk-key__right tk-face"></div><div class="tk-key__left tk-face"></div><div class="tk-key__top tk-face"><span class="tk-key__legend"><span class="tk-key__main-label">L</span></span></div><div class="tk-key__bottom tk-face"></div></div>
+                        <div class="tk-key tk-flex"><div class="tk-key__front tk-face"></div><div class="tk-key__back tk-face"></div><div class="tk-key__right tk-face"></div><div class="tk-key__left tk-face"></div><div class="tk-key__top tk-face"><span class="tk-key__legend"><span class="tk-key__sublegend">:</span><span class="tk-key__main-label">;</span></span></div><div class="tk-key__bottom tk-face"></div></div>
+                        <div class="tk-key tk-flex tk-key--w2"><div class="tk-key__front tk-face tk-key__front--w2 tk-face--o3"></div><div class="tk-key__back tk-face tk-key__back--w2 tk-face--o1"></div><div class="tk-key__right tk-face tk-key__right--w2 tk-face--o1"></div><div class="tk-key__left tk-face tk-key__left--w2 tk-face--o2"></div><div class="tk-key__top tk-face tk-key__top--w2 tk-face--o1"><span class="tk-key__legend"><span class="tk-key__main-label">ENTER</span></span></div><div class="tk-key__bottom tk-face tk-key__bottom--w2 tk-face--o2"></div></div>
+                      </div>
+
+                      <!-- Row 4: 13 keys -->
+                      <div class="tk-keys">
+                        <div class="tk-key tk-flex tk-key--w2"><div class="tk-key__front tk-face tk-key__front--w2 tk-face--b3"></div><div class="tk-key__back tk-face tk-key__back--w2 tk-face--b1"></div><div class="tk-key__right tk-face tk-key__right--w2 tk-face--b1"></div><div class="tk-key__left tk-face tk-key__left--w2 tk-face--b2"></div><div class="tk-key__top tk-face tk-key__top--w2 tk-face--b1"><span class="tk-key__legend"><span class="tk-key__main-label">SHIFT</span></span></div><div class="tk-key__bottom tk-face tk-key__bottom--w2 tk-face--b2"></div></div>
+                        <div class="tk-key tk-flex"><div class="tk-key__front tk-face"></div><div class="tk-key__back tk-face"></div><div class="tk-key__right tk-face"></div><div class="tk-key__left tk-face"></div><div class="tk-key__top tk-face"><span class="tk-key__legend"><span class="tk-key__main-label">Z</span></span></div><div class="tk-key__bottom tk-face"></div></div>
+                        <div class="tk-key tk-flex"><div class="tk-key__front tk-face"></div><div class="tk-key__back tk-face"></div><div class="tk-key__right tk-face"></div><div class="tk-key__left tk-face"></div><div class="tk-key__top tk-face"><span class="tk-key__legend"><span class="tk-key__main-label">X</span></span></div><div class="tk-key__bottom tk-face"></div></div>
+                        <div class="tk-key tk-flex"><div class="tk-key__front tk-face"></div><div class="tk-key__back tk-face"></div><div class="tk-key__right tk-face"></div><div class="tk-key__left tk-face"></div><div class="tk-key__top tk-face"><span class="tk-key__legend"><span class="tk-key__main-label">C</span></span></div><div class="tk-key__bottom tk-face"></div></div>
+                        <div class="tk-key tk-flex"><div class="tk-key__front tk-face"></div><div class="tk-key__back tk-face"></div><div class="tk-key__right tk-face"></div><div class="tk-key__left tk-face"></div><div class="tk-key__top tk-face"><span class="tk-key__legend"><span class="tk-key__main-label">V</span></span></div><div class="tk-key__bottom tk-face"></div></div>
+                        <div class="tk-key tk-flex"><div class="tk-key__front tk-face"></div><div class="tk-key__back tk-face"></div><div class="tk-key__right tk-face"></div><div class="tk-key__left tk-face"></div><div class="tk-key__top tk-face"><span class="tk-key__legend"><span class="tk-key__main-label">B</span></span></div><div class="tk-key__bottom tk-face"></div></div>
+                        <div class="tk-key tk-flex"><div class="tk-key__front tk-face"></div><div class="tk-key__back tk-face"></div><div class="tk-key__right tk-face"></div><div class="tk-key__left tk-face"></div><div class="tk-key__top tk-face"><span class="tk-key__legend"><span class="tk-key__main-label">N</span></span></div><div class="tk-key__bottom tk-face"></div></div>
+                        <div class="tk-key tk-flex"><div class="tk-key__front tk-face"></div><div class="tk-key__back tk-face"></div><div class="tk-key__right tk-face"></div><div class="tk-key__left tk-face"></div><div class="tk-key__top tk-face"><span class="tk-key__legend"><span class="tk-key__main-label">M</span></span></div><div class="tk-key__bottom tk-face"></div></div>
+                        <div class="tk-key tk-flex"><div class="tk-key__front tk-face"></div><div class="tk-key__back tk-face"></div><div class="tk-key__right tk-face"></div><div class="tk-key__left tk-face"></div><div class="tk-key__top tk-face"><span class="tk-key__legend"><span class="tk-key__sublegend">&lt;</span><span class="tk-key__main-label">,</span></span></div><div class="tk-key__bottom tk-face"></div></div>
+                        <div class="tk-key tk-flex"><div class="tk-key__front tk-face"></div><div class="tk-key__back tk-face"></div><div class="tk-key__right tk-face"></div><div class="tk-key__left tk-face"></div><div class="tk-key__top tk-face"><span class="tk-key__legend"><span class="tk-key__sublegend">&gt;</span><span class="tk-key__main-label">.</span></span></div><div class="tk-key__bottom tk-face"></div></div>
+                        <div class="tk-key tk-flex"><div class="tk-key__front tk-face"></div><div class="tk-key__back tk-face"></div><div class="tk-key__right tk-face"></div><div class="tk-key__left tk-face"></div><div class="tk-key__top tk-face"><span class="tk-key__legend"><span class="tk-key__sublegend">?</span><span class="tk-key__main-label">/</span></span></div><div class="tk-key__bottom tk-face"></div></div>
+                        <div class="tk-key tk-flex tk-key--w3"><div class="tk-key__front tk-face tk-key__front--w3 tk-face--b3"></div><div class="tk-key__back tk-face tk-key__back--w3 tk-face--b1"></div><div class="tk-key__right tk-face tk-key__right--w3 tk-face--b1"></div><div class="tk-key__left tk-face tk-key__left--w3 tk-face--b2"></div><div class="tk-key__top tk-face tk-key__top--w3 tk-face--b1"><span class="tk-key__legend"><span class="tk-key__main-label">SHIFT</span></span></div><div class="tk-key__bottom tk-face tk-key__bottom--w3 tk-face--b2"></div></div>
+                        <div class="tk-key tk-flex"><div class="tk-key__front tk-face tk-face--b3"></div><div class="tk-key__back tk-face tk-face--b1"></div><div class="tk-key__right tk-face tk-face--b1"></div><div class="tk-key__left tk-face tk-face--b2"></div><div class="tk-key__top tk-face tk-face--b1"><span class="tk-key__legend"><span class="tk-key__main-label">▲</span></span></div><div class="tk-key__bottom tk-face tk-face--b2"></div></div>
+                      </div>
+
+                      <!-- Row 5: 10 keys -->
+                      <div class="tk-keys">
+                        <div class="tk-key tk-flex"><div class="tk-key__front tk-face tk-face--b3"></div><div class="tk-key__back tk-face tk-face--b1"></div><div class="tk-key__right tk-face tk-face--b1"></div><div class="tk-key__left tk-face tk-face--b2"></div><div class="tk-key__top tk-face tk-face--b1"><span class="tk-key__legend"><span class="tk-key__main-label">CTRL</span></span></div><div class="tk-key__bottom tk-face tk-face--b2"></div></div>
+                        <div class="tk-key tk-flex"><div class="tk-key__front tk-face tk-face--o3"></div><div class="tk-key__back tk-face tk-face--o1"></div><div class="tk-key__right tk-face tk-face--o1"></div><div class="tk-key__left tk-face tk-face--o2"></div><div class="tk-key__top tk-face tk-face--o1"><span class="tk-key__legend"><span class="tk-key__main-label">❖</span></span></div><div class="tk-key__bottom tk-face tk-face--o2"></div></div>
+                        <div class="tk-key tk-flex"><div class="tk-key__front tk-face tk-face--b3"></div><div class="tk-key__back tk-face tk-face--b1"></div><div class="tk-key__right tk-face tk-face--b1"></div><div class="tk-key__left tk-face tk-face--b2"></div><div class="tk-key__top tk-face tk-face--b1"><span class="tk-key__legend"><span class="tk-key__main-label">ALT</span></span></div><div class="tk-key__bottom tk-face tk-face--b2"></div></div>
+                        <div class="tk-key tk-flex tk-key--w6"><div class="tk-key__front tk-face tk-key__front--w6"></div><div class="tk-key__back tk-face tk-key__back--w6"></div><div class="tk-key__right tk-face tk-key__right--w6"></div><div class="tk-key__left tk-face tk-key__left--w6"></div><div class="tk-key__top tk-face tk-key__top--w6"><span class="tk-key__legend"><span class="tk-key__main-label">—</span></span></div><div class="tk-key__bottom tk-face tk-key__bottom--w6"></div></div>
+                        <div class="tk-key tk-flex"><div class="tk-key__front tk-face tk-face--b3"></div><div class="tk-key__back tk-face tk-face--b1"></div><div class="tk-key__right tk-face tk-face--b1"></div><div class="tk-key__left tk-face tk-face--b2"></div><div class="tk-key__top tk-face tk-face--b1"><span class="tk-key__legend"><span class="tk-key__main-label">ALT</span></span></div><div class="tk-key__bottom tk-face tk-face--b2"></div></div>
+                        <div class="tk-key tk-flex"><div class="tk-key__front tk-face tk-face--b3"></div><div class="tk-key__back tk-face tk-face--b1"></div><div class="tk-key__right tk-face tk-face--b1"></div><div class="tk-key__left tk-face tk-face--b2"></div><div class="tk-key__top tk-face tk-face--b1"><span class="tk-key__legend"><span class="tk-key__main-label">FN</span></span></div><div class="tk-key__bottom tk-face tk-face--b2"></div></div>
+                        <div class="tk-key tk-flex"><div class="tk-key__front tk-face tk-face--b3"></div><div class="tk-key__back tk-face tk-face--b1"></div><div class="tk-key__right tk-face tk-face--b1"></div><div class="tk-key__left tk-face tk-face--b2"></div><div class="tk-key__top tk-face tk-face--b1"><span class="tk-key__legend"><span class="tk-key__main-label">CTRL</span></span></div><div class="tk-key__bottom tk-face tk-face--b2"></div></div>
+                        <div class="tk-key tk-flex"><div class="tk-key__front tk-face tk-face--b3"></div><div class="tk-key__back tk-face tk-face--b1"></div><div class="tk-key__right tk-face tk-face--b1"></div><div class="tk-key__left tk-face tk-face--b2"></div><div class="tk-key__top tk-face tk-face--b1"><span class="tk-key__legend"><span class="tk-key__main-label">◄</span></span></div><div class="tk-key__bottom tk-face tk-face--b2"></div></div>
+                        <div class="tk-key tk-flex"><div class="tk-key__front tk-face tk-face--b3"></div><div class="tk-key__back tk-face tk-face--b1"></div><div class="tk-key__right tk-face tk-face--b1"></div><div class="tk-key__left tk-face tk-face--b2"></div><div class="tk-key__top tk-face tk-face--b1"><span class="tk-key__legend"><span class="tk-key__main-label">▼</span></span></div><div class="tk-key__bottom tk-face tk-face--b2"></div></div>
+                        <div class="tk-key tk-flex"><div class="tk-key__front tk-face tk-face--b3"></div><div class="tk-key__back tk-face tk-face--b1"></div><div class="tk-key__right tk-face tk-face--b1"></div><div class="tk-key__left tk-face tk-face--b2"></div><div class="tk-key__top tk-face tk-face--b1"><span class="tk-key__legend"><span class="tk-key__main-label">►</span></span></div><div class="tk-key__bottom tk-face tk-face--b2"></div></div>
+                      </div>
+                    </div>
+                    <div class="tk-keyboard__bottom tk-face"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
 
@@ -1092,17 +1227,17 @@
             <strong class="scramble-text" data-scramble="16+">16+</strong>
             <span>research publications</span>
           </div>
-          <div class="stat-box" tabindex="0" role="button" aria-label="03 ResearchGate citations">
-            <strong class="scramble-text" data-scramble="03">03</strong>
+          <div class="stat-box" tabindex="0" role="button" aria-label="04 ResearchGate citations">
+            <strong class="scramble-text" data-scramble="04">04</strong>
             <span>ResearchGate citations</span>
+          </div>
+          <div class="stat-box" tabindex="0" role="button" aria-label="01 Google Scholar citation">
+            <strong class="scramble-text" data-scramble="01">01</strong>
+            <span>Google Scholar citation</span>
           </div>
           <div class="stat-box" tabindex="0" role="button" aria-label="Champion Hackathon Winner (100+ Teams)">
             <strong class="scramble-text" data-scramble="Champion">Champion</strong>
             <span>Hackathon Winner (100+ Teams)</span>
-          </div>
-          <div class="stat-box" tabindex="0" role="button" aria-label="03 hackathons and challenges">
-            <strong class="scramble-text" data-scramble="03">03</strong>
-            <span>hackathons &amp; challenges</span>
           </div>
         </section>
 
@@ -1113,17 +1248,17 @@
               <div class="research-profiles-vertical" id="research-profiles">
                 <span class="vertical-profiles-label">RESEARCHER PROFILE</span>
                 <div class="vertical-profiles-list">
-                  <a href="https://scholar.google.com/citations?user=7cmF4AkAAAAJ&amp;hl=en" target="_blank" rel="noreferrer" class="vertical-profile-item" id="scholar-profile-link" title="Google Scholar">
+                  <a href="https://scholar.google.com/citations?user=7cmF4AkAAAAJ&amp;hl=en" target="_blank" rel="noreferrer" class="vertical-profile-item" id="scholar-profile-link" title="Google Scholar (1 Citation)">
                     <span class="vpi-meta">
                       <strong class="vpi-name">Scholar</strong>
-                      <span class="vpi-info">(7cmF4AkAAAAJ)</span>
+                      <span class="vpi-info">(1 Citation &middot; 7cmF4AkAAAAJ)</span>
                     </span>
                     <svg class="pixel-arrow pixel-arrow-orange" viewBox="0 0 90 90" aria-hidden="true"><g fill="currentColor" stroke="rgba(255,255,255,0.35)" stroke-width="0.8"><polygon points="10,10 20,20 10,30 0,20"/><polygon points="30,10 40,20 30,30 20,20"/><polygon points="50,10 60,20 50,30 40,20"/><polygon points="70,30 80,40 70,50 60,40"/><polygon points="70,50 80,60 70,70 60,60"/><polygon points="70,70 80,80 70,90 60,80"/><polygon points="80,0 90,10 80,20 70,10"/><polygon points="70,10 80,20 70,30 60,20"/><polygon points="60,20 70,30 60,40 50,30"/><polygon points="50,30 60,40 50,50 40,40"/><polygon points="40,40 50,50 40,60 30,50"/><polygon points="30,50 40,60 30,70 20,60"/><polygon points="20,60 30,70 20,80 10,70"/><polygon points="10,70 20,80 10,90 0,80"/></g></svg>
                   </a>
-                  <a href="https://www.researchgate.net/profile/Md-Tanvir-Hasan-13" target="_blank" rel="noreferrer" class="vertical-profile-item" id="rg-profile-link" title="ResearchGate (3 Citations)">
+                  <a href="https://www.researchgate.net/profile/Md-Tanvir-Hasan-13" target="_blank" rel="noreferrer" class="vertical-profile-item" id="rg-profile-link" title="ResearchGate (4 Citations)">
                     <span class="vpi-meta">
                       <strong class="vpi-name">Researchgate</strong>
-                      <span class="vpi-info">(3 Citations &middot; Md-Tanvir-Hasan-13)</span>
+                      <span class="vpi-info">(4 Citations &middot; Md-Tanvir-Hasan-13)</span>
                     </span>
                     <svg class="pixel-arrow pixel-arrow-orange" viewBox="0 0 90 90" aria-hidden="true"><g fill="currentColor" stroke="rgba(255,255,255,0.35)" stroke-width="0.8"><polygon points="10,10 20,20 10,30 0,20"/><polygon points="30,10 40,20 30,30 20,20"/><polygon points="50,10 60,20 50,30 40,20"/><polygon points="70,30 80,40 70,50 60,40"/><polygon points="70,50 80,60 70,70 60,60"/><polygon points="70,70 80,80 70,90 60,80"/><polygon points="80,0 90,10 80,20 70,10"/><polygon points="70,10 80,20 70,30 60,20"/><polygon points="60,20 70,30 60,40 50,30"/><polygon points="50,30 60,40 50,50 40,40"/><polygon points="40,40 50,50 40,60 30,50"/><polygon points="30,50 40,60 30,70 20,60"/><polygon points="20,60 30,70 20,80 10,70"/><polygon points="10,70 20,80 10,90 0,80"/></g></svg>
                   </a>
