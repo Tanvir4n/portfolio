@@ -572,7 +572,8 @@ export class ResearchTimelineComponent {
       .attr('class', 'timeline-bg-catch')
       .attr('width', this.width)
       .attr('height', this.height)
-      .attr('fill', 'transparent');
+      .attr('fill', 'none')
+      .attr('pointer-events', 'all');
 
     this.svg = svg;
     this.mainGroup = svg.append('g').attr('class', 'timeline-main-group');
@@ -1238,10 +1239,43 @@ export class ResearchTimelineComponent {
   }
 }
 
-// Auto-mount when DOM is ready
-document.addEventListener('DOMContentLoaded', () => {
+// Robust auto-mount that runs whether DOMContentLoaded has fired or not
+export function mountResearchTimeline(): ResearchTimelineComponent | null {
   const mountPoint = document.getElementById('d3-timeline-mount');
-  if (mountPoint) {
-    new ResearchTimelineComponent('d3-timeline-mount');
+  if (!mountPoint) {
+    return null;
   }
-});
+  if (mountPoint.hasAttribute('data-timeline-initialized')) {
+    return null;
+  }
+  mountPoint.setAttribute('data-timeline-initialized', 'true');
+  try {
+    const timeline = new ResearchTimelineComponent('d3-timeline-mount');
+    return timeline;
+  } catch (error) {
+    console.error('[ResearchTimeline] Initialization error:', error);
+    mountPoint.removeAttribute('data-timeline-initialized');
+    return null;
+  }
+}
+
+// Global exposure for cross-script invocation
+if (typeof window !== 'undefined') {
+  (window as unknown as { mountResearchTimeline: typeof mountResearchTimeline }).mountResearchTimeline = mountResearchTimeline;
+}
+
+// Immediate execution if DOM is ready, otherwise listen for readiness
+if (typeof document !== 'undefined') {
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => mountResearchTimeline());
+  } else {
+    // DOM already parsed (interactive or complete state)
+    mountResearchTimeline();
+  }
+
+  // Backup listeners to guarantee mount across all loading cascades
+  window.addEventListener('load', () => mountResearchTimeline());
+  setTimeout(() => mountResearchTimeline(), 50);
+  setTimeout(() => mountResearchTimeline(), 300);
+}
+

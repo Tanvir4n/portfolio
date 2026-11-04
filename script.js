@@ -1161,9 +1161,18 @@ function initTypingKeyboard() {
 }
 
 if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initTypingKeyboard);
+  document.addEventListener('DOMContentLoaded', () => {
+    initTypingKeyboard();
+    if (typeof window !== 'undefined' && typeof window.mountResearchTimeline === 'function') {
+      window.mountResearchTimeline();
+    }
+  });
 } else {
   initTypingKeyboard();
+  if (typeof window !== 'undefined' && typeof window.mountResearchTimeline === 'function') {
+    window.mountResearchTimeline();
+  }
 }
+
 
 

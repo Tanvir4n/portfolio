@@ -4242,6 +4242,12 @@ html[data-theme=dark] .d3-timeline-container {
   border-color: var(--ink);
 }
 
+.d3-timeline-mount {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
 /* Timeline Toolbar */
 .timeline-toolbar {
   padding: 18px 24px;
