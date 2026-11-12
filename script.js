@@ -1191,6 +1191,10 @@ function initAstronautInteraction() {
 function initAlumniCard() {
   const alumniScene = document.getElementById('alumni-interactive-scene');
   const toast = document.getElementById('alumni-toast');
+  const writeBtn = document.getElementById('alumni-write-btn');
+  const actionFlow = alumniScene ? alumniScene.querySelector('.alumni-action-flow') : null;
+  const mentorSub = alumniScene ? alumniScene.querySelector('.alumni-mentor-sub') : null;
+  const mentorPill = alumniScene ? alumniScene.querySelector('.user-alumni') : null;
   if (!alumniScene || !toast) return;
 
   const messages = [
@@ -1200,6 +1204,15 @@ function initAlumniCard() {
     'DIU DOMAIN VETTED (@diu.edu.bd)',
     'MYSQL 8 & SQLITE DUAL-ENGINE COMMITTED'
   ];
+
+  const mentorResponses = [
+    '“Referral dispatched to engineering team”',
+    '“Mentorship scheduled for Friday 4 PM”',
+    '“Profile vetted: DIU SWE Lead reviewing”',
+    '“Internal job ticket generated & sent”',
+    '“Confirmed: Resume forwarded to hiring manager”'
+  ];
+
   let msgIdx = 0;
   let toastTimer = null;
 
@@ -1214,6 +1227,23 @@ function initAlumniCard() {
     toastTimer = setTimeout(() => {
       toast.classList.remove('show');
     }, 2200);
+
+    // Dynamic mentor response update
+    if (mentorSub) {
+      mentorSub.textContent = mentorResponses[msgIdx];
+    }
+
+    // Visual ripple on connection beam & mentor node
+    if (actionFlow) {
+      actionFlow.classList.remove('dispatched');
+      void actionFlow.offsetWidth; // trigger reflow
+      actionFlow.classList.add('dispatched');
+    }
+    if (mentorPill) {
+      mentorPill.classList.remove('highlight');
+      void mentorPill.offsetWidth;
+      mentorPill.classList.add('highlight');
+    }
 
     // Audio chime feedback if browser audio is available
     try {
@@ -1243,6 +1273,13 @@ function initAlumniCard() {
     if (e.target.closest('a')) return;
     triggerToast();
   });
+
+  if (writeBtn) {
+    writeBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      triggerToast();
+    });
+  }
 
   alumniScene.addEventListener('keydown', (e) => {
     if (e.key === 'Enter' || e.key === ' ') {
