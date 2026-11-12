@@ -1160,19 +1160,114 @@ function initTypingKeyboard() {
   window.addEventListener('touchstart', unlockAudio, { once: true });
 }
 
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', () => {
-    initTypingKeyboard();
-    if (typeof window !== 'undefined' && typeof window.mountResearchTimeline === 'function') {
-      window.mountResearchTimeline();
+function initAstronautInteraction() {
+  const astroRoot = document.getElementById('astronaut-root');
+  if (!astroRoot) return;
+  const bubbleText = astroRoot.querySelector('.astro-speech-text');
+  const astroSvg = astroRoot.querySelector('.astro');
+  const stages = [
+    { action: 'celebrate', mood: 'happy', say: 'Mission successful!' },
+    { action: 'wave', mood: 'happy', say: 'Greetings from Dhaka Analog Base!' },
+    { action: 'scan', mood: 'focused', say: 'HUD LIDAR: Terrain analog confirmed.' },
+    { action: 'drill', mood: 'focused', say: 'Extracting subterranean core sample.' },
+    { action: 'flag', mood: 'happy', say: 'Permanent lunar base perimeter set!' },
+    { action: 'sample', mood: 'wow', say: 'Basaltic mineral sample secured.' },
+    { action: 'walk', mood: 'neutral', say: 'EVA survey trek across terrain.' },
+    { action: 'idle', mood: 'neutral', say: "Hi, I'm Astra! Orbiting Earth & Mars." },
+  ];
+  let stageIdx = 0;
+  astroRoot.addEventListener('click', (e) => {
+    e.stopPropagation();
+    stageIdx = (stageIdx + 1) % stages.length;
+    const stage = stages[stageIdx];
+    if (bubbleText) bubbleText.textContent = stage.say;
+    if (astroSvg) {
+      astroSvg.setAttribute('data-action', stage.action);
+      astroSvg.setAttribute('data-mood', stage.mood);
     }
   });
-} else {
+}
+
+function initAlumniCard() {
+  const alumniScene = document.getElementById('alumni-interactive-scene');
+  const toast = document.getElementById('alumni-toast');
+  if (!alumniScene || !toast) return;
+
+  const messages = [
+    'CONNECTED TO VERIFIED ALUMNUS',
+    '1-ON-1 MENTORSHIP SESSION CONFIRMED (CAP 3/5)',
+    'REFERRAL DISPATCH SUBMITTED TO TECH LEAD',
+    'DIU DOMAIN VETTED (@diu.edu.bd)',
+    'MYSQL 8 & SQLITE DUAL-ENGINE COMMITTED'
+  ];
+  let msgIdx = 0;
+  let toastTimer = null;
+
+  const triggerToast = () => {
+    msgIdx = (msgIdx + 1) % messages.length;
+    const toastLabel = toast.querySelector('.toast-label') || toast.querySelector('span:last-child');
+    if (toastLabel) {
+      toastLabel.textContent = messages[msgIdx];
+    }
+    toast.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => {
+      toast.classList.remove('show');
+    }, 2200);
+
+    // Audio chime feedback if browser audio is available
+    try {
+      const AudioCtx = window.AudioContext || window.webkitAudioContext;
+      if (AudioCtx) {
+        const ctx = new AudioCtx();
+        if (ctx.state === 'suspended') {
+          ctx.resume();
+        }
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        const now = ctx.currentTime;
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(587.33, now); // D5
+        osc.frequency.exponentialRampToValueAtTime(1174.66, now + 0.1); // D6
+        gain.gain.setValueAtTime(0.04, now);
+        gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.12);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(now);
+        osc.stop(now + 0.13);
+      }
+    } catch {}
+  };
+
+  alumniScene.addEventListener('click', (e) => {
+    if (e.target.closest('a')) return;
+    triggerToast();
+  });
+
+  alumniScene.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      triggerToast();
+    }
+  });
+}
+
+function initAllComponents() {
   initTypingKeyboard();
+  initAstronautInteraction();
+  initAlumniCard();
   if (typeof window !== 'undefined' && typeof window.mountResearchTimeline === 'function') {
     window.mountResearchTimeline();
   }
 }
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initAllComponents);
+} else {
+  initAllComponents();
+}
+window.addEventListener('load', initAllComponents);
+
 
 
 
