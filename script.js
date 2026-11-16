@@ -913,7 +913,8 @@ setupStatsScramble();
 // ==========================================================================
 function initTypingKeyboard() {
   const kbRoot = document.getElementById('keyboard-root');
-  if (!kbRoot) return;
+  if (!kbRoot || kbRoot.dataset.tkInitialized === '1') return;
+  kbRoot.dataset.tkInitialized = '1';
 
   const kbBody = document.getElementById('tk-keyboard-body');
   const screenText = document.getElementById('tk-screen-text');
@@ -1076,13 +1077,21 @@ function initTypingKeyboard() {
     }
   }
 
-  // Auto-typing loop
+  // Auto-typing loop (single-instance timer guarded)
   let charIdx = 0;
+  let autoTypeTimer = null;
   screenText.textContent = '';
+
+  function scheduleAutoType(fn, delay) {
+    if (autoTypeTimer !== null) {
+      clearTimeout(autoTypeTimer);
+    }
+    autoTypeTimer = setTimeout(fn, delay);
+  }
 
   function typeNext() {
     if (isTypingManual) {
-      setTimeout(typeNext, 500);
+      scheduleAutoType(typeNext, 500);
       return;
     }
     const char = autoTypeText[charIdx];
@@ -1094,18 +1103,18 @@ function initTypingKeyboard() {
     }
     charIdx++;
     if (charIdx >= autoTypeText.length) {
-      setTimeout(() => {
+      scheduleAutoType(() => {
         screenText.textContent = '';
         charIdx = 0;
-        setTimeout(typeNext, 1200);
+        scheduleAutoType(typeNext, 1200);
       }, 3000);
     } else {
       const delay = typingSpeed[0] + Math.random() * (typingSpeed[1] - typingSpeed[0]);
-      setTimeout(typeNext, delay);
+      scheduleAutoType(typeNext, delay);
     }
   }
 
-  setTimeout(typeNext, 1000);
+  scheduleAutoType(typeNext, 1000);
 
   // Key press listener
   window.addEventListener('keydown', (e) => {
@@ -1162,7 +1171,8 @@ function initTypingKeyboard() {
 
 function initAstronautInteraction() {
   const astroRoot = document.getElementById('astronaut-root');
-  if (!astroRoot) return;
+  if (!astroRoot || astroRoot.dataset.astroInit === '1') return;
+  astroRoot.dataset.astroInit = '1';
   const bubbleText = astroRoot.querySelector('.astro-speech-text');
   const astroSvg = astroRoot.querySelector('.astro');
   const stages = [
@@ -1195,7 +1205,8 @@ function initAlumniCard() {
   const actionFlow = alumniScene ? alumniScene.querySelector('.alumni-action-flow') : null;
   const mentorSub = alumniScene ? alumniScene.querySelector('.alumni-mentor-sub') : null;
   const mentorPill = alumniScene ? alumniScene.querySelector('.user-alumni') : null;
-  if (!alumniScene || !toast) return;
+  if (!alumniScene || !toast || alumniScene.dataset.alumniInit === '1') return;
+  alumniScene.dataset.alumniInit = '1';
 
   const messages = [
     'CONNECTED TO VERIFIED ALUMNUS',
@@ -1289,7 +1300,10 @@ function initAlumniCard() {
   });
 }
 
+let allComponentsInitialized = false;
 function initAllComponents() {
+  if (allComponentsInitialized) return;
+  allComponentsInitialized = true;
   initTypingKeyboard();
   initAstronautInteraction();
   initAlumniCard();
@@ -1299,11 +1313,10 @@ function initAllComponents() {
 }
 
 if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initAllComponents);
+  document.addEventListener('DOMContentLoaded', initAllComponents, { once: true });
 } else {
   initAllComponents();
 }
-window.addEventListener('load', initAllComponents);
 
 
 
