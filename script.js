@@ -1300,6 +1300,137 @@ function initAlumniCard() {
   });
 }
 
+function initKrishiGuardCard() {
+  const krishiScene = document.getElementById('krishi-interactive-scene');
+  const toast = document.getElementById('krishi-toast');
+  if (!krishiScene || !toast || krishiScene.dataset.krishiInit === '1') return;
+  krishiScene.dataset.krishiInit = '1';
+
+  const cropBadge = document.getElementById('krishi-crop-badge');
+  const detectPill = document.getElementById('krishi-detect-pill');
+  const diagTitle = document.getElementById('krishi-diag-title');
+  const diagPct = document.getElementById('krishi-diag-pct');
+  const meterFill = document.getElementById('krishi-meter-fill');
+  const actionTip = document.getElementById('krishi-action-tip');
+  const chip1Title = document.getElementById('krishi-chip1-title');
+  const chip1Sub = document.getElementById('krishi-chip1-sub');
+  const chip2Title = document.getElementById('krishi-chip2-title');
+  const chip2Sub = document.getElementById('krishi-chip2-sub');
+
+  const scenarios = [
+    {
+      crop: 'আলু · ৪৫ দিন',
+      detect: 'লেট ব্লাইট · ৮৭%',
+      title: 'আলুর মড়ক রোগ',
+      pct: '৮৭%',
+      width: '87%',
+      tip: '১. আক্রান্ত পাতা তুলে ফেলুন',
+      c1t: 'Rain in 30h',
+      c1s: 'Wait adding urea',
+      c2t: '12 farms warned',
+      c2s: 'Village alert',
+      toast: 'POTATO BLIGHT · 87% CONFIDENCE'
+    },
+    {
+      crop: 'ধান · ৬২ দিন',
+      detect: 'ব্লাস্ট ঝুঁকি · ৯২%',
+      title: 'ধানের ব্লাস্ট রোগ',
+      pct: '৯২%',
+      width: '92%',
+      tip: 'অফলাইন মডেল · BARI নির্দেশিকা',
+      c1t: 'Works Offline',
+      c1s: 'On-device AI',
+      c2t: 'BARI · BRRI',
+      c2s: 'Verified guide',
+      toast: 'OFFLINE RICE BLAST · BARI VERIFIED'
+    },
+    {
+      crop: 'টমেটো · ৩৮ দিন',
+      detect: 'অনিশ্চিত · ৫৪%',
+      title: 'দ্বিতীয় ছবি প্রয়োজন',
+      pct: '৫৪%',
+      width: '54%',
+      tip: 'সন্দেহ হলে ১৬১২৩ হেল্পলাইন',
+      c1t: 'Safety Check',
+      c1s: '2–3 paths shown',
+      c2t: '16123 Expert',
+      c2s: 'Human helpline',
+      toast: 'SAFETY GATE · 16123 EXPERT READY'
+    },
+    {
+      crop: 'ভুট্টা · ৫০ দিন',
+      detect: 'পাতা পোড়া · ৮৯%',
+      title: 'বৃষ্টি পূর্ব সতর্কতা',
+      pct: '৮৯%',
+      width: '89%',
+      tip: '২. বৃষ্টি আসছে, ইউরিয়া দেবেন না',
+      c1t: 'NASA POWER',
+      c1s: 'Storm telemetry',
+      c2t: 'Sentinel-2',
+      c2s: 'Crop health map',
+      toast: 'SATELLITE & WEATHER FUSION · READY'
+    }
+  ];
+
+  let idx = 0;
+  let toastTimer = null;
+
+  const cycleScenario = () => {
+    idx = (idx + 1) % scenarios.length;
+    const s = scenarios[idx];
+    if (cropBadge) cropBadge.textContent = s.crop;
+    if (detectPill) detectPill.textContent = s.detect;
+    if (diagTitle) diagTitle.textContent = s.title;
+    if (diagPct) diagPct.textContent = s.pct;
+    if (meterFill) meterFill.style.width = s.width;
+    if (actionTip) actionTip.textContent = s.tip;
+    if (chip1Title) chip1Title.textContent = s.c1t;
+    if (chip1Sub) chip1Sub.textContent = s.c1s;
+    if (chip2Title) chip2Title.textContent = s.c2t;
+    if (chip2Sub) chip2Sub.textContent = s.c2s;
+
+    const toastLabel = toast.querySelector('.toast-label');
+    if (toastLabel) toastLabel.textContent = s.toast;
+    toast.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => {
+      toast.classList.remove('show');
+    }, 2200);
+
+    try {
+      const AudioCtx = window.AudioContext || window.webkitAudioContext;
+      if (AudioCtx) {
+        const ctx = new AudioCtx();
+        if (ctx.state === 'suspended') ctx.resume();
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        const now = ctx.currentTime;
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(523.25, now); // C5
+        osc.frequency.exponentialRampToValueAtTime(783.99, now + 0.09); // G5
+        gain.gain.setValueAtTime(0.035, now);
+        gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.11);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(now);
+        osc.stop(now + 0.12);
+      }
+    } catch {}
+  };
+
+  krishiScene.addEventListener('click', (e) => {
+    if (e.target.closest('a')) return;
+    cycleScenario();
+  });
+
+  krishiScene.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      cycleScenario();
+    }
+  });
+}
+
 let allComponentsInitialized = false;
 function initAllComponents() {
   if (allComponentsInitialized) return;
@@ -1307,6 +1438,7 @@ function initAllComponents() {
   initTypingKeyboard();
   initAstronautInteraction();
   initAlumniCard();
+  initKrishiGuardCard();
   if (typeof window !== 'undefined' && typeof window.mountResearchTimeline === 'function') {
     window.mountResearchTimeline();
   }

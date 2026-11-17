@@ -1307,6 +1307,125 @@
                 <a href="https://alumnilink.social/" target="_blank" rel="noreferrer" class="text-link alumni-primary-btn" title="Open live AlumniLink platform">Launch live platform <svg class="pixel-arrow" viewBox="0 0 90 90" aria-hidden="true"><g fill="currentColor" stroke="rgba(255,255,255,0.35)" stroke-width="0.8"><polygon points="10,10 20,20 10,30 0,20"/><polygon points="30,10 40,20 30,30 20,20"/><polygon points="50,10 60,20 50,30 40,20"/><polygon points="70,30 80,40 70,50 60,40"/><polygon points="70,50 80,60 70,70 60,60"/><polygon points="70,70 80,80 70,90 60,80"/><polygon points="80,0 90,10 80,20 70,10"/><polygon points="70,10 80,20 70,30 60,20"/><polygon points="60,20 70,30 60,40 50,30"/><polygon points="50,30 60,40 50,50 40,40"/><polygon points="40,40 50,50 40,60 30,50"/><polygon points="30,50 40,60 30,70 20,60"/><polygon points="20,60 30,70 20,80 10,70"/><polygon points="10,70 20,80 10,90 0,80"/></g></svg></a>
               </div>
             </article>
+
+            <!-- Card 07: KrishiGuard AI (Bangla Crop Doctor & Farm Adviser) -->
+            <article class="project-card project-septenary project-krishiguard">
+              <div class="project-visual visual-krishiguard">
+                <span>KRISHI<br />GUARD</span>
+                <i>07</i>
+
+                <!-- Topographic Contours & Botanical Leaf Watermark -->
+                <svg class="krishi-bg-botanical" viewBox="0 0 400 400" preserveAspectRatio="none" aria-hidden="true">
+                  <path d="M -20,120 Q 110,85 220,135 T 420,115" fill="none" stroke="rgba(245, 196, 81, 0.08)" stroke-width="1"/>
+                  <path d="M -20,210 Q 130,170 245,225 T 420,205" fill="none" stroke="rgba(245, 196, 81, 0.07)" stroke-width="1"/>
+                  <path d="M -20,300 Q 140,265 260,315 T 420,295" fill="none" stroke="rgba(245, 196, 81, 0.06)" stroke-width="1"/>
+                  <circle cx="315" cy="185" r="128" fill="none" stroke="rgba(245, 196, 81, 0.14)" stroke-width="1" stroke-dasharray="3 5"/>
+                  <path d="M 330,380 C 310,310 335,245 385,195 M 352,265 C 325,255 312,235 322,218 C 342,226 355,244 352,265 Z M 332,315 C 302,308 288,288 300,270 C 322,278 336,295 332,315 Z" fill="none" stroke="rgba(245, 196, 81, 0.16)" stroke-width="1.2"/>
+                </svg>
+
+                <div class="krishi-scene" id="krishi-interactive-scene" tabindex="0" role="img" aria-label="KrishiGuard AI - Interactive Bangla crop doctor, offline leaf disease scanner, weather alert, and village warning system">
+                  <!-- Left Column: Floating Contextual Telemetry & Alert Chips -->
+                  <div class="krishi-alerts-col">
+                    <div class="krishi-float-chip chip-weather">
+                      <span class="krishi-chip-icon icon-weather" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/></svg>
+                      </span>
+                      <div class="krishi-chip-copy">
+                        <strong id="krishi-chip1-title">Rain in 30h</strong>
+                        <span id="krishi-chip1-sub">Wait adding urea</span>
+                      </div>
+                      <span class="krishi-signal-beam" aria-hidden="true"></span>
+                    </div>
+
+                    <div class="krishi-float-chip chip-village">
+                      <span class="krishi-chip-icon icon-village" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                      </span>
+                      <div class="krishi-chip-copy">
+                        <strong id="krishi-chip2-title">12 farms warned</strong>
+                        <span id="krishi-chip2-sub">Village alert</span>
+                      </div>
+                      <span class="krishi-signal-beam beam-alt" aria-hidden="true"></span>
+                    </div>
+
+                    <div class="krishi-offline-pill">
+                      <span class="krishi-live-dot" aria-hidden="true"></span>
+                      <span>OFFLINE · DINOv2</span>
+                    </div>
+                  </div>
+
+                  <!-- Right Column: Animated Mobile Crop Doctor Card -->
+                  <div class="krishi-phone-card">
+                    <div class="krishi-phone-top">
+                      <span class="krishi-brand-bn">কৃষিগার্ড</span>
+                      <span class="krishi-crop-badge" id="krishi-crop-badge">আলু · ৪৫ দিন</span>
+                    </div>
+
+                    <!-- Leaf Vision Scanner Frame -->
+                    <div class="krishi-scan-lens">
+                      <svg class="krishi-leaf-svg" viewBox="0 0 140 90" fill="none" aria-hidden="true">
+                        <!-- Organic Potato Leaf Silhouette -->
+                        <path d="M 18,74 C 32,26 76,8 118,16 C 114,58 78,80 18,74 Z" fill="#4f7c46" stroke="#84b572" stroke-width="1.2"/>
+                        <path d="M 12,78 C 44,54 78,34 114,18" stroke="#a6cf93" stroke-width="1.6" stroke-linecap="round"/>
+                        <path d="M 48,55 L 40,36 M 68,42 L 62,23 M 88,31 L 84,18 M 56,51 L 78,60 M 76,38 L 96,46" stroke="#a6cf93" stroke-width="1" stroke-linecap="round" opacity="0.65"/>
+                        <!-- Late Blight Disease Spots -->
+                        <circle cx="72" cy="39" r="7.5" fill="#4e3015" stroke="#eab308" stroke-width="1" stroke-opacity="0.75"/>
+                        <circle cx="88" cy="27" r="4.5" fill="#3e240e"/>
+                        <circle cx="64" cy="54" r="5" fill="#5c391a" opacity="0.9"/>
+                      </svg>
+
+                      <!-- Animated Target Lock Reticle -->
+                      <div class="krishi-reticle" aria-hidden="true">
+                        <span class="reticle-corner tl"></span>
+                        <span class="reticle-corner tr"></span>
+                        <span class="reticle-corner bl"></span>
+                        <span class="reticle-corner br"></span>
+                      </div>
+
+                      <!-- Sweeping AI Laser Scan Line -->
+                      <div class="krishi-scan-beam" aria-hidden="true"></div>
+
+                      <!-- Confidence Pill Overlay -->
+                      <div class="krishi-detect-pill" id="krishi-detect-pill">লেট ব্লাইট · ৮৭%</div>
+                    </div>
+
+                    <!-- Diagnosis Meter & Action Guidance -->
+                    <div class="krishi-diagnosis-body">
+                      <div class="krishi-diag-row">
+                        <strong class="krishi-diag-title" id="krishi-diag-title">আলুর মড়ক রোগ</strong>
+                        <span class="krishi-diag-pct" id="krishi-diag-pct">৮৭%</span>
+                      </div>
+                      <div class="krishi-meter-track" aria-hidden="true">
+                        <div class="krishi-meter-fill" id="krishi-meter-fill"></div>
+                      </div>
+                      <div class="krishi-action-tip" id="krishi-action-tip">১. আক্রান্ত পাতা তুলে ফেলুন</div>
+                    </div>
+
+                    <!-- Bangla Voice Output Strip -->
+                    <div class="krishi-voice-bar">
+                      <span class="krishi-mic-badge" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 14a3 3 0 0 0 3-3V5a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3zm5-3a5 5 0 0 1-10 0H5a7 7 0 0 0 6 6.92V21h2v-3.08A7 7 0 0 0 19 11h-2z"/></svg>
+                      </span>
+                      <span class="krishi-voice-text">বাংলায় প্রশ্ন করুন</span>
+                      <span class="krishi-eq" aria-hidden="true">
+                        <i></i><i></i><i></i><i></i>
+                      </span>
+                    </div>
+                  </div>
+
+                  <!-- Interactive Toast Feedback -->
+                  <div class="krishi-toast-chip" id="krishi-toast" aria-live="polite">
+                    <span class="toast-check">&#10003;</span>
+                    <span class="toast-label">POTATO BLIGHT · 87% CONFIDENCE</span>
+                  </div>
+                </div>
+              </div>
+              <div class="project-meta"><span>07 / Edge AI &middot; AgriTech</span><span>2026</span></div>
+              <div class="project-award-tag krishi-award-tag">&#127806; AI Battle &middot; Agriculture &amp; Rural Livelihood Track &middot; Team Shadow Warriors</div>
+              <h3>KrishiGuard AI</h3>
+              <p>A Bangla-first crop doctor, weather-aware farm adviser, and offline village disease alert system. Distills DINOv2/CLIP teacher vision models into an on-device mobile AI fusing leaf scans, OpenWeatherMap &amp; NASA POWER weather, Sentinel-2 satellite crops, and BARI/BRRI/DAE guides with 16123 human expert escalation.</p>
+              <a href="https://krishiloop.vercel.app/" target="_blank" rel="noreferrer" class="text-link krishi-primary-btn" title="Open live KrishiGuard AI system">Launch live system <svg class="pixel-arrow" viewBox="0 0 90 90" aria-hidden="true"><g fill="currentColor" stroke="rgba(255,255,255,0.35)" stroke-width="0.8"><polygon points="10,10 20,20 10,30 0,20"/><polygon points="30,10 40,20 30,30 20,20"/><polygon points="50,10 60,20 50,30 40,20"/><polygon points="70,30 80,40 70,50 60,40"/><polygon points="70,50 80,60 70,70 60,60"/><polygon points="70,70 80,80 70,90 60,80"/><polygon points="80,0 90,10 80,20 70,10"/><polygon points="70,10 80,20 70,30 60,20"/><polygon points="60,20 70,30 60,40 50,30"/><polygon points="50,30 60,40 50,50 40,40"/><polygon points="40,40 50,50 40,60 30,50"/><polygon points="30,50 40,60 30,70 20,60"/><polygon points="20,60 30,70 20,80 10,70"/><polygon points="10,70 20,80 10,90 0,80"/></g></svg></a>
+            </article>
           </div>
         </section>
 
